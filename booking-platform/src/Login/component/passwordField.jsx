@@ -8,11 +8,14 @@ export default function PasswordField({ label, error }) {
       sx={{
         display: "flex",
         alignItems: `${error ? "center" : "flex-end"}`,
+        // backgroundColor: "red",
+        height: "calc(max-content + 1em)",
       }}
     >
       <PasswordIcon
         sx={{ color: "action.active", mr: 1, my: 0.5 }}
         style={{
+          alignSelf: `${error ? 'center' : 'end'}`,
           color: `${error ? "action.error" : ""}`,
         }}
       />

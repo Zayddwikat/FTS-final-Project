@@ -1,4 +1,4 @@
-import UserNameField from "./userName";
+import UserNameField from "../component/userName";
 
 export default {
   title: "UserNameField",
@@ -15,6 +15,6 @@ export const errorUserName = {
   title: "UserNameField",
   args: {
     label: "User name",
-    error: true,
+    error: 'Inter valid email',
   },
 };

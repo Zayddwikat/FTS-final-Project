@@ -11,6 +11,7 @@ export default function UserNameField({ label, error }) {
         label={label}
         error={error ? error : null}
         variant="standard"
+        helperText={error ? error : ""}
       />
     </Box>
   );
@@ -18,5 +19,5 @@ export default function UserNameField({ label, error }) {
 }
 UserNameField.propTypes = {
   label: PropTypes.string.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.string,
 };
