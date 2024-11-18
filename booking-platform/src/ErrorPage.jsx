@@ -6,7 +6,7 @@ export default function ErrorPage() {
   return (
     <div
       id="error-page"
-      className="w-screen flex flex-row place-items-start justify-center gap-4"
+      className="error-page w-screen flex flex-row place-items-start justify-center items-center gap-4"
     >
       <icon>
         <ErrorOutlineIcon sx={{ fontSize: "5em" }} />

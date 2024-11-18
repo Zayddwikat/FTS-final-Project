@@ -1,4 +1,4 @@
-import PasswordField from "./passwordField";
+import PasswordField from "../component/passwordField";
 
 export default {
   title: "PasswordField",

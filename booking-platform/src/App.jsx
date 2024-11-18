@@ -1,9 +1,11 @@
-import LoginForm from "./Login/LoginForm";
+import LoginPage from "./Login/LoginPage";
 
 function App() {
   return (
     <>
-      <LoginForm />
+    
+        <LoginPage />
+     
     </>
   );
 }
