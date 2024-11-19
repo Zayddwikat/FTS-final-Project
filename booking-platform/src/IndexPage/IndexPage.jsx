@@ -1,14 +1,20 @@
 import HomeIcon from "@mui/icons-material/Home";
 // import list from "./List";
-import hotelImage from "./assets/HotelImage.jpg";
-import desktopImage from "./assets/desktopImage.jpg";
+import { Link } from "react-router-dom";
+import LoginIcon from "@mui/icons-material/Login";
+import MainPage from "./component/MainPage";
+import Footer from "./component/Footer";
 const Header = () => {
   return (
-    <header className=" flex flex-col gap-2 bg-blue-300 p-4 ">
-      <a href="/" className="text-xl font-bold  flex items-center gap-2">
+    <header className=" flex flex-row items-center  justify-between gap-2  p-10 ">
+      <a href="/" className="text-2xl font-bold flex items-center gap-2">
         <HomeIcon fontSize="large" />
         VBook
       </a>
+      <Link className="text-xl flex  items-center gap-2" to={`/login`}>
+        Login
+        <LoginIcon />
+      </Link>
     </header>
   );
 };
@@ -16,10 +22,11 @@ const Header = () => {
 const Main = () => {
   return (
     <main className="flex flex-col items-start my-8">
-      <h1 className="text-2xl font-bold self-center mx-2 my-4">
+      <h1 className="animated text-3xl text-slate-200 font-bold self-center mx-2 my-4">
+        <span>Welcome to </span>
         <i className="font-extrabold">VBook</i> <span>Hotel Booking </span>
       </h1>
-      <div className=" w-11/12 mx-4 ">
+      {/* <div className=" w-11/12 mx-4 ">
         <picture className="w-full h-96 object-cover">
           <source media="(max-width: 799px)" srcSet={`${desktopImage} 800w`} />
           <source media="(min-width: 800px)" srcSet={`${hotelImage} 400w`} />
@@ -29,16 +36,13 @@ const Main = () => {
             alt="Chris standing up holding his daughter Elva"
           />
         </picture>
-      </div>
+      </div> */}
 
-      <article className="my-8">
-        <h2 className="text-2xl mx-2">What do we offer?</h2>
-        <p className="text-md mx-2 ">
-          <i>
-            Our company build for help people and decrease the effort and time
-            on searching for Hotels in Wild World.{" "}
-          </i>
-        </p>
+      <article className="my-20 mx-8">
+        <h2 className="text-3xl mx-10 mt-20 font-bold">
+          No Matter where you're going to,
+          <br /> we'll take you there
+        </h2>
       </article>
     </main>
   );
@@ -46,11 +50,18 @@ const Main = () => {
 
 export default function IndexPage() {
   return (
-    <div className=" flex flex-col ">
-      <Header />
-      <Main />
-
-      <footer></footer>
-    </div>
+    <main>
+      <div className="flex flex-col text-slate-50 ">
+        <div className="img-cart h-screen">
+          {" "}
+          <Header />
+          <Main />
+        </div>
+      </div>
+      <div className="h-[100dvh] flex flex-col items-center justify-center">
+        <MainPage />
+        <Footer />
+      </div>
+    </main>
   );
 }

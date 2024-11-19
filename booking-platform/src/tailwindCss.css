@@ -7,6 +7,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   box-sizing: border-box;
+  /* overflow-x: hidden; */
+  /* color: whitesmoke; */
 }
 .error-page {
   min-width: 320px;
@@ -18,8 +20,8 @@ body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-h1 {
-  color: hsl(0, 0%, 28%);
+.animated {
+  /* color: hsl(0, 0%, 28%); */
   font-size: 50px;
   font-weight: bold;
   font-family: monospace;
@@ -27,22 +29,30 @@ h1 {
   cursor: pointer;
 }
 
-h1 span {
+.animated span {
   transition: 0.5s ease-out;
 }
-h1:hover span:nth-child(1) {
-  margin-left: 5px;
+.animated:hover span:nth-child(1) {
+  margin-right: 5px;
 }
 
-h1:hover span:nth-child(2) {
+.animated:hover span:nth-child(2) {
   margin-left: 30px;
 }
-h1:hover {
+.animated:hover {
   transition: 0.5s ease-out;
-  margin-left: 300px;
+  margin-left: 100px;
 }
-h1:hover span {
-  color: #fff;
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+.animated:hover span {
+  color: transparent;
+  /* text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff; */
 }
 
+.img-cart {
+  background-image: url("./IndexPage/assets/background2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: bottom;
+  margin: 0;
+}
