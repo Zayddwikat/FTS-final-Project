@@ -6,13 +6,13 @@ export const LoginProvider = ({ children }) => {
   const Login = async ({ email, password }) => {
     try {
       const res = await fetch(
-        "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/cities/2?includeHotels=true",
+        "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/auth/authenticate",
         {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ userName: email, password: password }),
         }
       );
 

@@ -1,31 +1,24 @@
 import PropTypes from "prop-types";
-import { useLoginContext } from "../utils/LoginContext";
 
-export default function Button({ color }) {
-  const { Login } = useLoginContext(); // Destructure Login from the context
-
-  const handleClickedButton = async () => {
-    try {
-      const data = await Login({ email: "Zayd", password: "123456789" });
-      console.log("Login successful!");
-      console.log(data);
-    } catch (error) {
-      console.error("Error during login:", error.message);
-    }
-  };
-
+export default function Button({ color, isSubmitting, size }) {
   return (
     <div className="flex flex-row items-center justify-center mt-4">
-      <input
+      <button
         type="submit"
         value="Login"
-        onClick={handleClickedButton}
-        className={`px-4 w-6/12 border bg-${color}-300 rounded`}
-      />
+        className={`px-4  ${
+          size === "large" ? "w-6/12" : size === "small" ? "w-3/12" : "w-4/12"
+        }  border bg-${color}-300 rounded`}
+        disabled={isSubmitting}
+      >
+        Login
+      </button>
     </div>
   );
 }
 
 Button.propTypes = {
   color: PropTypes.string.isRequired, // Ensure color is passed and is a string
+  isSubmitting: PropTypes.bool,
+  size: PropTypes.string.isRequired,
 };

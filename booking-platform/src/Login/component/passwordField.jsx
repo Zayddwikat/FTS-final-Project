@@ -3,9 +3,7 @@ import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import PasswordIcon from "@mui/icons-material/Password";
 
-
-
-export default function PasswordField({ label, error }) {
+export default function PasswordField({ label, error, formik }) {
   return (
     <Box
       sx={{
@@ -26,10 +24,12 @@ export default function PasswordField({ label, error }) {
       <TextField
         className="w-[70dvw] md:w-[20dvw]"
         type="password"
-        id="input-with-sx"
+        id="password"
+        name="password"
         label={label}
         error={error ? error : null}
         variant="standard"
+        onChange={formik.handleChange}
         helperText={error ? "incorrect password" : ""}
       />
     </Box>
@@ -39,4 +39,5 @@ export default function PasswordField({ label, error }) {
 PasswordField.propTypes = {
   label: PropTypes.string.isRequired,
   error: PropTypes.bool,
+  formik: PropTypes.any,
 };
