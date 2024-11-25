@@ -4,9 +4,10 @@ import { useFormik } from "formik";
 import "../../tailwindCss.css";
 import Button from "./LoginButton";
 import PropTypes from "prop-types";
-import { useLoginContext } from "../utils/LoginContext";
-
+import { useLoginContext } from "../Context/LoginContext";
+import { useNavigate } from "react-router-dom";
 export default function LoginForm({ passwordError }) {
+  const navigate = useNavigate();
   const { Login } = useLoginContext();
   const formik = useFormik({
     initialValues: {
@@ -21,8 +22,9 @@ export default function LoginForm({ passwordError }) {
           email: values.userName,
           password: values.password,
         });
-        console.log("Login successful!");
-        console.log(data);
+        (await data.userType) === "User"
+          ? navigate("/Home")
+          : alert("Invalid Credentials");
       } catch (error) {
         console.error("Error during login:", error.message);
       }

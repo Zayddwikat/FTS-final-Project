@@ -19,7 +19,10 @@
     "formik": "^2.4.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "react-rating-stars-component": "^2.2.0",
+    "react-router-dom": "^6.28.0",
+    "react-simple-star-rating": "^5.1.7",
+    "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",

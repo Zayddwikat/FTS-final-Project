@@ -1,5 +1,4 @@
 import HomeIcon from "@mui/icons-material/Home";
-// import list from "./List";
 import { Link } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import MainPage from "./component/MainPage";
