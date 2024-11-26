@@ -57,7 +57,7 @@ export default function IndexPage() {
           <Main />
         </div>
       </div>
-      <div className="h-[100dvh] flex flex-col items-center justify-center">
+      <div className="h-[100dvh] flex flex-col  justify-center">
         <MainPage />
         <Footer />
       </div>
