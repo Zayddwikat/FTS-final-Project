@@ -56,3 +56,7 @@ body {
   background-position: bottom;
   margin: 0;
 }
+
+.text-field::placeholder {
+  color: black;
+}
