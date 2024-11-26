@@ -6,6 +6,8 @@ export const SearchContext = createContext();
 export const SearchProvider = ({ children }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [featuredDeals, setFeaturedDeals] = useState([]);
+  const [recentHotels, setRecentHotels] = useState([]);
+  const [trendingHotels, setTrendingHotels] = useState([]);
   const onSearch = async ({
     checkIn,
     checkOut,
@@ -50,7 +52,7 @@ export const SearchProvider = ({ children }) => {
   };
   const onFeaturedDeals = async () => {
     try {
-      await fetch(
+      const data = await fetch(
         "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/home/featured-deals",
         {
           method: "GET",
@@ -58,14 +60,47 @@ export const SearchProvider = ({ children }) => {
             "Content-Type": "application/json",
           },
         }
-      )
-        .then(async (res) => await res.json())
-        .then((jsonResult) => {
-          setFeaturedDeals(jsonResult);
-        });
-      return featuredDeals;
+      ).then(async (res) => await res.json());
+      setFeaturedDeals(data);
+      return data;
     } catch (error) {
       throw new Error("Error in fetching Deals", error);
+    }
+  };
+  const onRecentHotels = async ({ userID }) => {
+    try {
+      await fetch(
+        `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/home/users/${userID}/recent-hotels`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((result) => setRecentHotels(result));
+      return recentHotels;
+    } catch (error) {
+      throw new Error("Error in fetching data from the server", error);
+    }
+  };
+  const onDestinationTrending = async () => {
+    try {
+      const data = await fetch(
+        "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/home/destinations/trending",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then(async (res) => await res.json());
+      setTrendingHotels(data);
+      console.log("Log", data);
+      return data;
+    } catch (error) {
+      throw new Error("Error in fetching data from the server", error);
     }
   };
 
@@ -77,6 +112,10 @@ export const SearchProvider = ({ children }) => {
         setSearchResult,
         onFeaturedDeals,
         featuredDeals,
+        onRecentHotels,
+        recentHotels,
+        onDestinationTrending,
+        trendingHotels,
       }}
     >
       {children}
