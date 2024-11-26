@@ -6,9 +6,9 @@ import IndexPage from "./IndexPage/IndexPage.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./ErrorPage.jsx";
 import HomePage from "./user/HomePage/HomePage.jsx";
-import { useSearchContext } from "./user/Context/SearchContextApi.jsx";
 import SearchResult from "./user/HomePage/component/SearchResult.jsx";
 import { SearchProvider } from "./user/Context/SearchContextApi.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -40,11 +40,14 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
 ]);
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LoginProvider>
-      <RouterProvider router={router} />
-    </LoginProvider>
+    <QueryClientProvider client={queryClient}>
+      <LoginProvider>
+        <RouterProvider router={router} />
+      </LoginProvider>
+    </QueryClientProvider>
   </StrictMode>
 );
