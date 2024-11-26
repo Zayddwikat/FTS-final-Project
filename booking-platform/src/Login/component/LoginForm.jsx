@@ -40,7 +40,14 @@ export default function LoginForm({ passwordError }) {
           error={passwordError ? passwordError : false}
           formik={formik}
         />{" "}
-        <Button color="orange" size="large" isSubmitting={false} />
+        <div className="flex w-full flex-row items-center justify-center">
+          <Button
+            color="orange"
+            size="large"
+            value="Login"
+            isSubmitting={false}
+          />
+        </div>
       </form>
     </main>
   );

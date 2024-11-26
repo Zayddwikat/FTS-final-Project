@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 export const LoginContext = createContext();
 
 export const LoginProvider = ({ children }) => {
+  const [userData, setUserData] = useState({});
   const Login = async ({ email, password }) => {
     try {
       const res = await fetch(
@@ -21,6 +22,7 @@ export const LoginProvider = ({ children }) => {
       }
 
       const data = await res.json();
+      setUserData(data);
       return data;
     } catch (error) {
       console.error("Error during login:", error.message);
@@ -29,7 +31,9 @@ export const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ Login }}>{children}</LoginContext.Provider>
+    <LoginContext.Provider value={{ Login, userData }}>
+      {children}
+    </LoginContext.Provider>
   );
 };
 
