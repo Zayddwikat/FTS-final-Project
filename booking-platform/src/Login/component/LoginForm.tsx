@@ -1,12 +1,17 @@
-import PasswordField from "./passwordField";
-import UserNameField from "./userName";
+import { PasswordField } from "./passwordField";
+import { UserNameField } from "./userName";
 import { useFormik } from "formik";
 import "../../tailwindCss.css";
-import Button from "./LoginButton";
+import { Button } from "./LoginButton";
 import PropTypes from "prop-types";
 import { useLoginContext } from "../Context/LoginContext";
 import { useNavigate } from "react-router-dom";
-export default function LoginForm({ passwordError }) {
+
+interface ButtonProps {
+  passwordError: boolean;
+}
+
+export const LoginForm: React.FC<ButtonProps> = ({ passwordError }) => {
   const navigate = useNavigate();
   const { Login } = useLoginContext();
   const formik = useFormik({
@@ -25,7 +30,7 @@ export default function LoginForm({ passwordError }) {
         (await data.userType) === "User"
           ? navigate("/Home")
           : alert("Invalid Credentials");
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error during login:", error.message);
       }
       setSubmitting(false);
@@ -42,18 +47,15 @@ export default function LoginForm({ passwordError }) {
         />{" "}
         <div className="flex w-full flex-row items-center justify-center">
           <Button
-            color="orange"
+            handleClick={() => {}}
+            color="blue"
             size="large"
             value="Login"
             isSubmitting={false}
+            className=""
           />
         </div>
       </form>
     </main>
   );
-}
-
-LoginForm.propTypes = {
-  emailError: PropTypes.string,
-  passwordError: PropTypes.bool,
 };

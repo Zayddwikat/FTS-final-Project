@@ -2,7 +2,7 @@ import TripImg from "../../../assets/TripImg.jpg";
 
 export default function Slider() {
   return (
-    <main className="w-full h-[60dvh] flex flex-row items-center justify-between ">
+    <main className="w-[80dvw] h-[60dvh] flex flex-row items-center justify-between ">
       <div className="relative w-full h-full relative overflow-hidden ">
         <img
           src={TripImg}

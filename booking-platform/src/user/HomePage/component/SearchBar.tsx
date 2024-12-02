@@ -1,88 +1,102 @@
 import { useFormik } from "formik";
 // import ReactStars from "react-rating-stars-component";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useSearchContext } from "../../Context/SearchContextApi";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../Login/component/LoginButton";
+import { Button } from "../../../Login/component/LoginButton";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useState } from "react";
-import PopOver from "./PopOverCalender";
+import { PopOver } from "./PopOverCalender";
 import BedIcon from "@mui/icons-material/Bed";
 import PersonIcon from "@mui/icons-material/Person";
+import { StepperTextInput } from "./StepperTextInput";
 
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
-export default function SearchBar() {
+interface DataObjectInfo {
+  adult: number;
+  children: number;
+  city: string;
+  rooms: number;
+  CheckIn: Date;
+  CheckOut: Date;
+  Rate: number;
+}
+interface SearchBarProps {
+  data: DataObjectInfo;
+}
+
+export const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
 
-  const [calenderOption, setCalenderOption] = useState(null);
-  const [roomOptions, setRoomOption] = useState(null);
+  const [calenderOption, setCalenderOption] =
+    useState<HTMLButtonElement | null>(null);
+  const [roomOptions, setRoomOption] = useState<HTMLButtonElement | null>(null);
 
-  // const openCalenderOption = Boolean(calenderOption);
-  // const idCalenderOption = openCalenderOption ? "simple-popover" : undefined;
-
-  const handleCalenderOption = (event) => {
+  const handleCalenderOption = (event: React.MouseEvent<HTMLButtonElement>) => {
     setCalenderOption(event.currentTarget);
   };
 
   const handleClosePopOverCalender = () => {
     console.log("Button Clicked");
-    setCalenderOption(null); // Reset anchor element to null to close the popover
+    setCalenderOption(null);
   };
 
   const openRoomsOption = Boolean(roomOptions);
   const idRoomsOption = openRoomsOption ? "simple-popover" : undefined;
 
-  const handleRoomElement = (event) => {
+  const handleRoomElement = (event: React.MouseEvent<HTMLButtonElement>) => {
     setRoomOption(roomOptions ? null : event.currentTarget);
   };
   const handleClosePopOverRooms = () => {
-    setRoomOption(null); // Reset anchor element to null to close the popover
+    setRoomOption(null);
   };
 
   const navigation = useNavigate();
 
-  const { onSearch, searchResult, setSearchResult } = useSearchContext();
+  const { onSearch, setSearchResult } = useSearchContext();
 
   //   const [rooms, setRoomsNum] = useState(1);
   //   const [startRate, setStarRate] = useState(0);
   const formik = useFormik({
     initialValues: {
-      adult: 2,
-      children: 0,
-      city: "",
-      rooms: 1,
-      CheckIn: new Date().toISOString().split("T")[0],
-      CheckOut: new Date(Date.now() + 86400000).toISOString().split("T")[0],
-      Rate: 4,
+      adult: data?.adult ?? 2,
+      children: data?.children ?? 0,
+      city: data?.city ?? "",
+      rooms: data?.rooms ?? 1,
+      CheckIn: data?.CheckIn ?? new Date().toISOString().split("T")[0],
+      CheckOut:
+        data?.CheckOut ??
+        new Date(Date.now() + 86400000).toISOString().split("T")[0],
+      Rate: data?.Rate ?? 4,
     },
+
     onSubmit: async (values) => {
-      alert(JSON.stringify(values, null, 2));
-      const data = await onSearch({
+      const searchData = await onSearch({
         adults: values.adult,
         childrenWithAdults: values.children,
         city: values.city,
         numOfRooms: values.rooms,
         checkIn: values.CheckIn,
         checkOut: values.CheckOut,
-        starRate: 4,
+        starRate: values.Rate,
       });
 
-      console.table(data);
-      setSearchResult(data);
-      alert(JSON.stringify(searchResult));
-
-      if (data) {
-        // <SearchResult values={searchResult} />;
-        navigation("/searchResult");
+      console.table(searchData);
+      setSearchResult(searchData);
+      if (searchData) {
+        navigation("/search-result", {
+          state: {
+            data: searchData,
+            valuesOfSearchBar: values,
+          },
+        });
       }
     },
   });
@@ -103,7 +117,7 @@ export default function SearchBar() {
                     new Date(newValue + 86400000).toISOString().split("T")[0]
                   )
                 }
-                label="Basic date picker"
+                label="Check IN"
               />
             </DemoContainer>
           </LocalizationProvider>
@@ -126,7 +140,7 @@ export default function SearchBar() {
                     new Date(newValue + 86400000).toISOString().split("T")[0]
                   )
                 }
-                label="Basic date picker"
+                label="Check Out"
               />
             </DemoContainer>
           </LocalizationProvider>
@@ -135,87 +149,33 @@ export default function SearchBar() {
           ) : null}
         </div>
       </main>
-
-      <Button
-        size="small"
-        color="orange"
-        value="Done"
-        handleClick={() => handleClosePopOverCalender()}
-      />
+      <div className="flex flex-row items-center justify-center">
+        <Button
+          size="thick"
+          color="blue"
+          value="Done"
+          handleClick={() => handleClosePopOverCalender()}
+        />
+      </div>
     </div>
   );
   const roomsChildrenAdult = (
-    <>
-      <div className=" w-full flex items-center my-2 gap-2">
-        <div className="flex flex-row items-center gap-2  px-2 ">
-          <label htmlFor="numberOfRooms">Rooms</label>
-          <input
-            onChange={formik.handleChange}
-            value={formik.values.rooms}
-            className="w-2/12 bg-transparent"
-            name="rooms"
-            id="numberOfRooms"
-          />
-          <div className="flex flex-col">
-            <button type="button">
-              <ArrowUpwardIcon
-                fontSize="small"
-                onClick={() => {
-                  formik.setFieldValue("rooms", formik.values.rooms + 1);
-                }}
-              />
-            </button>
-            <button type="button">
-              <ArrowDownwardIcon
-                fontSize="small"
-                onClick={() => {
-                  if (formik.values.rooms > 1)
-                    formik.setFieldValue("rooms", formik.values.rooms - 1);
-                }}
-              />
-            </button>
-          </div>
-        </div>
+    <main>
+      <div className="flex flex-row gap-2 items-start justify-between">
+        <StepperTextInput elem="adult" formik={formik} />
+        <StepperTextInput elem="children" formik={formik} />
       </div>
 
-      <div className="flex flex-row gap-2 items-start">
-        <div className="flex flex-col">
-          <label htmlFor="adult" className="text-sm">
-            Adults
-          </label>
-          <input
-            onChange={formik.handleChange}
-            className="rounded p-2 border border-black w-11/12"
-            type="number"
-            name="adult"
-            id="adult"
-            min={0}
-            value={formik.values.adult}
-            placeholder="Adults Number"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="children" className="text-sm">
-            Children
-          </label>
-          <input
-            onChange={formik.handleChange}
-            className="rounded p-2 border border-black w-11/12"
-            type="number"
-            name="children"
-            id="children"
-            value={formik.values.children}
-            min={0}
-            placeholder="Children Number"
-          />
-        </div>
+      <div className=" w-full flex items-center my-2 gap-2">
+        <StepperTextInput elem="room" formik={formik} />
+        <StepperTextInput elem="Rate" formik={formik} />
       </div>
-    </>
+    </main>
   );
   const CheckInCheckOutComponent = (
     <TextField
       onClick={handleCalenderOption}
-      className="bg-white w-[30%] text-field"
+      className="bg-white w-full md:w-[30%] text-field"
       disabled={true}
       placeholder={
         "In " +
@@ -229,7 +189,7 @@ export default function SearchBar() {
         input: {
           startAdornment: (
             <InputAdornment position="start">
-              <CalendarMonthIcon />
+              <CalendarMonthIcon fontSize="large" />
             </InputAdornment>
           ),
         },
@@ -241,7 +201,7 @@ export default function SearchBar() {
       <TextField
         onClick={handleRoomElement}
         aria-describedby={idRoomsOption}
-        className="bg-white w-[30%] text-field"
+        className="bg-white w-full md:w-[30%] text-field"
         disabled={true}
         placeholder={
           formik.values.adult +
@@ -265,20 +225,21 @@ export default function SearchBar() {
   );
 
   return (
-    <main className="flex flex-row flex-wrap items-center mx-8 justify-center">
+    <main className="flex flex-row flex-wrap w-full items-center mx-8 justify-center">
       <form
-        className="flex flex-row flex-wrap lg:w-[70dvw] md:w-[70dvw] items-start justify-start  border border-black rounded-md  m-4"
+        className="flex md:flex-row flex-col w-full  flex-wrap lg:w-[80dvw] md:w-[80dvw] p-1 gap-1 md:items-start md:justify-start border border-black rounded-md m-4 items-center justify-center"
         onSubmit={formik.handleSubmit}
       >
         <TextField
-          className="bg-white w-[30%]"
-          disabled={true}
-          placeholder="City"
+          name="city"
+          onChange={formik.handleChange}
+          className="bg-white w-full md:w-[30%]"
+          placeholder={formik.values.city || "City"}
           slotProps={{
             input: {
               startAdornment: (
                 <InputAdornment position="start">
-                  <BedIcon />
+                  <BedIcon fontSize="large" />
                 </InputAdornment>
               ),
             },
@@ -303,8 +264,15 @@ export default function SearchBar() {
           </PopOver>
         </>
 
-        <Button size="thick" value="Search" color="orange" />
+        <Button
+          handleClick={() => {}}
+          isSubmitting={false}
+          size="thick"
+          className="self-stretch md:self-stretch lg:self-stretch"
+          value="Search"
+          color="blue"
+        />
       </form>
     </main>
   );
-}
+};

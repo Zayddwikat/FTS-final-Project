@@ -1,31 +1,48 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { createContext, useContext } from "react";
-export const SearchContext = createContext();
 
-export const SearchProvider = ({ children }) => {
-  const [searchResult, setSearchResult] = useState([]);
-  const [featuredDeals, setFeaturedDeals] = useState([]);
-  const [recentHotels, setRecentHotels] = useState([]);
-  const [trendingHotels, setTrendingHotels] = useState([]);
-  const onSearch = async ({
-    checkIn,
-    checkOut,
-    city,
-    starRate,
-    numOfRooms,
-    adults,
-    childrenWithAdults,
-  }) => {
+interface SearchParams {
+  checkIn: string;
+  checkOut: string;
+  city: string;
+  starRate?: number;
+  numOfRooms?: number;
+  adults?: number;
+  childrenWithAdults?: number;
+}
+interface SearchContextProps {
+  onSearch: (params: SearchParams) => Promise<object>;
+  onFeaturedDeals: () => Promise<object>;
+  onRecentHotels: (userID: string) => Promise<object>;
+  onDestinationTrending: () => Promise<object>;
+  searchResult: object | null;
+  featuredDeals: object | null;
+  recentHotels: object | null;
+  trendingHotels: object | null;
+  setSearchResult: Function;
+}
+
+export const SearchContext = createContext<SearchContextProps | undefined>(
+  undefined
+);
+
+export const SearchProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [searchResult, setSearchResult] = useState<object | null>([]);
+  const [featuredDeals, setFeaturedDeals] = useState<object | null>([]);
+  const [recentHotels, setRecentHotels] = useState<object | null>([]);
+  const [trendingHotels, setTrendingHotels] = useState<object | null>([]);
+  const onSearch: SearchContextProps["onSearch"] = async (params) => {
     try {
       const queryParams = new URLSearchParams({
-        checkInDate: checkIn,
-        checkOutDate: checkOut,
-        starRate: starRate?.toString(),
-        city: city,
-        numberOfRooms: numOfRooms?.toString(),
-        children: childrenWithAdults?.toString(),
-        adults: adults?.toString(),
+        checkInDate: params.checkIn,
+        checkOutDate: params.checkOut,
+        starRate: params.starRate?.toString() ?? "",
+        city: params.city,
+        numberOfRooms: params.numOfRooms?.toString() ?? "",
+        children: params.childrenWithAdults?.toString() ?? "",
+        adults: params.adults?.toString() ?? "",
       });
       const res = await fetch(
         `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/home/search?${queryParams}`,
@@ -45,7 +62,7 @@ export const SearchProvider = ({ children }) => {
       setSearchResult(data);
       console.log(searchResult);
       return data;
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error during login:", error.message);
       throw error;
     }
@@ -67,7 +84,7 @@ export const SearchProvider = ({ children }) => {
       throw new Error("Error in fetching Deals", error);
     }
   };
-  const onRecentHotels = async ({ userID }) => {
+  const onRecentHotels = async (userId: string): Promise<object> => {
     try {
       await fetch(
         `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/home/users/${userID}/recent-hotels`,
@@ -124,7 +141,4 @@ export const SearchProvider = ({ children }) => {
 };
 export const useSearchContext = () => {
   return useContext(SearchContext);
-};
-SearchProvider.propTypes = {
-  children: PropTypes.node.isRequired, // Validates that 'children' is required and a valid React node
 };

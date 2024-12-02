@@ -1,7 +1,17 @@
 import PropTypes from "prop-types";
 
-export default function TrendingPost({ post }) {
-  const handleClickedDeals = (post) => {
+interface PostInformation {
+  thumbnailUrl: string;
+  cityName: string;
+  countryName: string;
+  description: string;
+}
+
+interface TrendingPostProps {
+  post: PostInformation;
+}
+export const TrendingPost: React.FC<TrendingPostProps> = ({post}) => {
+  const handleClickedDeals = (post: PostInformation) => {
     console.log("clicked", post.cityName);
   };
   return (
@@ -32,8 +42,4 @@ export default function TrendingPost({ post }) {
       </div>
     </div>
   );
-}
-
-TrendingPost.propTypes = {
-  post: PropTypes.object.isRequired,
 };

@@ -2,7 +2,17 @@ import PropTypes from "prop-types";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 
-export default function PopOver({ anchorElement, setAnchorElement, children }) {
+interface PopOverProps {
+  children: React.ReactNode;
+  anchorElement: HTMLButtonElement | null;
+  setAnchorElement: (params: HTMLButtonElement | null) => void;
+}
+
+export const PopOver: React.FC<PopOverProps> = ({
+  anchorElement,
+  setAnchorElement,
+  children,
+}) => {
   const open = Boolean(anchorElement);
   const id = open ? "simple-popover" : undefined;
   const handleClose = () => {
@@ -24,9 +34,4 @@ export default function PopOver({ anchorElement, setAnchorElement, children }) {
       <Typography sx={{ p: 2 }}>{children}</Typography>
     </Popover>
   );
-}
-PopOver.propTypes = {
-  anchorElement: PropTypes.object,
-  children: PropTypes.node.isRequired,
-  setAnchorElement: PropTypes.func.isRequired,
 };

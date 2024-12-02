@@ -1,10 +1,26 @@
 import PropTypes from "prop-types";
-import { createContext, useContext, useState } from "react";
-export const LoginContext = createContext();
+import React, { createContext, ReactNode, useContext, useState } from "react";
 
-export const LoginProvider = ({ children }) => {
+interface LoginContextProp {
+  Login: (params: { email: string; password: string }) => Promise<any>;
+  userData: object;
+}
+
+export const LoginContext = createContext<LoginContextProp | undefined>(
+  undefined
+);
+
+export const LoginProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [userData, setUserData] = useState({});
-  const Login = async ({ email, password }) => {
+  const Login = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
     try {
       const res = await fetch(
         "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/auth/authenticate",
@@ -24,7 +40,7 @@ export const LoginProvider = ({ children }) => {
       const data = await res.json();
       setUserData(data);
       return data;
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error during login:", error.message);
       throw error;
     }
@@ -39,8 +55,4 @@ export const LoginProvider = ({ children }) => {
 
 export const useLoginContext = () => {
   return useContext(LoginContext);
-};
-
-LoginProvider.propTypes = {
-  children: PropTypes.node.isRequired, // Validates that 'children' is required and a valid React node
 };

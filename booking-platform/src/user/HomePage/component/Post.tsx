@@ -1,16 +1,23 @@
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 
-export default function Post({ post }) {
-  const handleClickedDeals = (post) => {
+interface PostObjectInformation {
+  cityName: string;
+}
+
+interface PostProps {
+  post: PostObjectInformation;
+}
+
+export const Post: React.FC<PostProps> = ({post}) => {
+  const handleClickedDeals = (post: PostObjectInformation) => {
     console.log("clicked", post.cityName);
   };
   return (
     <div
       onClick={() => handleClickedDeals(post)}
-      className="border  border-black shadow hover:shadow-black rounded-md lg:w-[18dvw] md:w-[70dvw] md:flex-wrap  "
+      className="border border-black w-[90dvw] shadow hover:shadow-lg rounded-md lg:w-[15dvw] md:w-full md:flex-wrap  "
     >
-      <div className=" w-full  md:flex-wrap h-[50dvh] ">
+      <div className=" w-full md:flex-wrap h-[50dvh] ">
         <img
           style={{
             width: "100%",
@@ -25,11 +32,20 @@ export default function Post({ post }) {
             <p className="text-sm">{post.cityName}</p>
           </Box>
           <div className="flex flex-row items-center justify-start w-full">
-            <p className="text-md border text-white bg-orange-700 p-0.5 rounded-md">
-              {post.hotelStarRating * 2} /10
+            <p className="text-md border text-white bg-blue-700 p-0.5 rounded-md">
+              {post.starRating ? post.starRating * 2 : post.hotelStarRating * 2}{" "}
+              /10
             </p>
             <p className="text-sm  px-2 rounded-md">
-              {post.hotelStarRating * 2 > 9.5
+              {post.starRating
+                ? post.starRating * 2 > 9.5
+                  ? "Excellent"
+                  : post.starRating * 2 > 8
+                  ? "Very Good"
+                  : post.starRating * 2 > 6
+                  ? "Good"
+                  : "Traditional"
+                : post.hotelStarRating * 2 > 9.5
                 ? "Excellent"
                 : post.hotelStarRating * 2 > 8
                 ? "Very Good"
@@ -40,12 +56,14 @@ export default function Post({ post }) {
           </div>
           <div className="flex flex-row items-center justify-end gap-4 w-full">
             <div className="flex flex-row items-center gap-2">
-              <p className="text-sm line-through line-clamp-2 text-orange-600 ">
-                <i className="text-xs"> 1 Night </i> {post.originalRoomPrice}
+              <p className="text-sm line-through line-clamp-2 text-blue-600 ">
+                <i className="text-xs"> 1 Night </i>{" "}
+                {post.roomPrice ? post.roomPrice : post.originalRoomPrice}
               </p>
               <p className="  text-lg bold-lg">
                 {" "}
-                <i>{"US$ " + post.finalPrice}</i>
+                <i>{"US$ "}</i>
+                <i>{post.roomPrice ?? post.finalPrice}</i>
               </p>
             </div>
           </div>
@@ -53,8 +71,4 @@ export default function Post({ post }) {
       </div>
     </div>
   );
-}
-
-Post.propTypes = {
-  post: PropTypes.object.isRequired,
 };

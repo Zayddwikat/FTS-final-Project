@@ -2,8 +2,19 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import PasswordIcon from "@mui/icons-material/Password";
+import { FormikProps } from "formik";
 
-export default function PasswordField({ label, error, formik }) {
+interface PasswordFieldProps {
+  label: string;
+  error?: boolean;
+  formik: FormikProps<any>;
+}
+
+export const PasswordField: React.FC<PasswordFieldProps> = ({
+  label,
+  error,
+  formik,
+}) => {
   return (
     <Box
       sx={{
@@ -27,7 +38,7 @@ export default function PasswordField({ label, error, formik }) {
         id="password"
         name="password"
         label={label}
-        error={error ? error : null}
+        error={error ? true : false}
         variant="standard"
         onChange={formik.handleChange}
         helperText={error ? "incorrect password" : ""}
@@ -35,9 +46,4 @@ export default function PasswordField({ label, error, formik }) {
     </Box>
   );
   //   return <TextField id="outlined-basic" label="Outlined" variant="outlined" />;
-}
-PasswordField.propTypes = {
-  label: PropTypes.string.isRequired,
-  error: PropTypes.bool,
-  formik: PropTypes.any,
 };

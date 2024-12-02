@@ -3,7 +3,7 @@ import { useSearchContext } from "../../Context/SearchContextApi";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-import TrendingPost from "./TrendingPost";
+import { TrendingPost } from "./TrendingPost";
 
 export default function TrendingHotels() {
   const { onDestinationTrending } = useSearchContext();
@@ -37,8 +37,8 @@ export default function TrendingHotels() {
   if (HotelsTrending.isError)
     return <pre>{JSON.stringify(HotelsTrending.error)}</pre>;
   return (
-    <main className="my-4 mx-2">
-      <header className="flex flex-row  items-center  w-full  justify-between  ">
+    <main className="my-4 w-full mx-2">
+      <header className="flex flex-row items-center w-full justify-between  ">
         <h1 className="text-3xl">Trending</h1>
         <Link className="self-end mx-12" to={"/Show-more"}>
           <h1 className="text-sm text-blue-600 underline">show more</h1>

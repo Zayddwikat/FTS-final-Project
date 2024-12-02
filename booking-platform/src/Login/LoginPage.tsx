@@ -1,4 +1,4 @@
-import LoginForm from "./component/LoginForm";
+import {LoginForm} from "./component/LoginForm";
 import HomeIcon from "@mui/icons-material/Home";
 
 function LoginPage() {
@@ -20,7 +20,7 @@ function LoginPage() {
               You can sign in using VBook account to access our service.
             </p>
           </article>
-          <LoginForm />
+          <LoginForm passwordError={false} />
         </div>
       </main>
     </main>
