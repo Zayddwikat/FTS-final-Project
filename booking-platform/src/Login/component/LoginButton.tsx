@@ -7,6 +7,7 @@ interface ButtonProps {
   isSubmitting: boolean;
   handleClick: () => void;
   className: string;
+  children: React.ReactNode;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -16,6 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   value,
   handleClick,
   className,
+  children,
 }) => {
   return (
     <button
@@ -27,7 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
           size === "large"
             ? `w-full`
             : size === "small"
-            ? "w-[5dvw]"
+            ? ""
             : size === "thick"
             ? "w-[6.99dvw] "
             : "w-[10dvw]"
@@ -35,6 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
       }
       disabled={isSubmitting}
     >
+      {children}
       {value}
     </button>
   );
