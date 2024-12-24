@@ -9,21 +9,29 @@ interface userNameFieldProp {
   label: string;
   error?: string;
   formik: FormikProps<any>;
+  primary?: boolean;
+  id: string;
 }
 
 export const UserNameField: React.FC<userNameFieldProp> = ({
   label,
   error,
   formik,
+  primary,
+  id,
 }) => {
   return (
     <Box sx={{ display: "flex", alignItems: "flex-end", gap: "5px" }}>
-      <BadgeIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+      {primary ? (
+        <BadgeIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+      ) : (
+        <></>
+      )}
       <TextField
-        className="input-with-sx w-[70dvw] md:w-[20dvw]"
-        id="userName"
+        className="input-with-sx w-[70dvw] md:w-full"
+        id={id}
         label={label}
-        name="userName"
+        name={id}
         error={error ? true : false}
         variant="standard"
         onChange={formik.handleChange}

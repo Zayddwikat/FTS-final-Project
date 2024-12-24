@@ -5,9 +5,10 @@ interface ButtonProps {
   size: string;
   value: string;
   isSubmitting: boolean;
-  handleClick: () => void;
+  handleClick: () => any;
   className: string;
   children: React.ReactNode;
+  primary: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ export const Button: React.FC<ButtonProps> = ({
   handleClick,
   className,
   children,
+  primary,
 }) => {
   return (
     <button
@@ -33,7 +35,11 @@ export const Button: React.FC<ButtonProps> = ({
             : size === "thick"
             ? "w-[6.99dvw] "
             : "w-[10dvw]"
-        }  border bg-blue-300 rounded` + className
+        } ${
+          primary
+            ? `border bg-blue-300 rounded`
+            : `underline text-blue-500`
+        } ` + className
       }
       disabled={isSubmitting}
     >

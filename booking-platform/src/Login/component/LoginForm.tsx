@@ -20,16 +20,21 @@ export const LoginForm: React.FC<ButtonProps> = ({ passwordError }) => {
       password: "",
     },
     onSubmit: async (values, { setSubmitting }) => {
-      alert(JSON.stringify(values, null, 2));
       try {
         console.log(values);
         const data = await Login({
           email: values.userName,
           password: values.password,
         });
-        (await data.userType) === "User"
-          ? navigate("/Home")
-          : alert("Invalid Credentials");
+        if ((await data.userType) === "User") {
+          navigate("/Home");
+          localStorage.setItem("USER_TOKEN", data.authentication);
+        } else if ((await data.userType) === "Admin") {
+          navigate("/AdminHome");
+          localStorage.setItem("ADMIN_TOKEN", data.authentication);
+        } else {
+          alert("Invalid Credentials");
+        }
       } catch (error: any) {
         console.error("Error during login:", error.message);
       }
@@ -39,7 +44,12 @@ export const LoginForm: React.FC<ButtonProps> = ({ passwordError }) => {
   return (
     <main className="">
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2 ">
-        <UserNameField label="User Name" formik={formik} />
+        <UserNameField
+          id="userName"
+          label="User Name"
+          formik={formik}
+          primary
+        />
         <PasswordField
           label="Password"
           error={passwordError ? passwordError : false}
@@ -47,12 +57,14 @@ export const LoginForm: React.FC<ButtonProps> = ({ passwordError }) => {
         />{" "}
         <div className="flex w-full flex-row items-center justify-center">
           <Button
+            primary
             handleClick={() => {}}
             color="blue"
             size="large"
             value="Login"
             isSubmitting={false}
             className=""
+            children={undefined}
           />
         </div>
       </form>
