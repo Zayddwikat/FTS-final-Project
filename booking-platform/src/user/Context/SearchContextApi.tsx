@@ -1,5 +1,7 @@
+import { any } from "prop-types";
 import { ReactNode, useState } from "react";
 import { createContext, useContext } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 interface SearchParams {
   checkIn: string;
@@ -10,21 +12,19 @@ interface SearchParams {
   adults?: number;
   childrenWithAdults?: number;
 }
-interface SearchContextProps {
+export interface SearchContextProps {
   onSearch: (params: SearchParams) => Promise<object>;
   onFeaturedDeals: () => Promise<object>;
-  onRecentHotels: (userID: string) => Promise<object>;
+  onRecentHotels: (userID: string) => Promise<object | null>;
   onDestinationTrending: () => Promise<object>;
   searchResult: object | null;
   featuredDeals: object | null;
   recentHotels: object | null;
   trendingHotels: object | null;
-  setSearchResult: Function;
+  setSearchResult: Dispatch<SetStateAction<object | null>>;
 }
 
-export const SearchContext = createContext<SearchContextProps | undefined>(
-  undefined
-);
+export const SearchContext = createContext<SearchContextProps | any>(any);
 
 export const SearchProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -33,7 +33,8 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
   const [featuredDeals, setFeaturedDeals] = useState<object | null>([]);
   const [recentHotels, setRecentHotels] = useState<object | null>([]);
   const [trendingHotels, setTrendingHotels] = useState<object | null>([]);
-  const onSearch: SearchContextProps["onSearch"] = async (params) => {
+  // const [searchParams, setSearchParams] = useState<object | null>({});
+  const onSearch: any = async (params: any) => {
     try {
       const queryParams = new URLSearchParams({
         checkInDate: params.checkIn,
@@ -61,6 +62,7 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
       const data = await res.json();
       setSearchResult(data);
       console.log(searchResult);
+      // setSearchParams(params);
       return data;
     } catch (error: any) {
       console.error("Error during login:", error.message);
@@ -80,25 +82,26 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
       ).then(async (res) => await res.json());
       setFeaturedDeals(data);
       return data;
-    } catch (error) {
+    } catch (error: any) {
       throw new Error("Error in fetching Deals", error);
     }
   };
-  const onRecentHotels = async (userId: string): Promise<object> => {
+  const onRecentHotels = async (userID: number): Promise<object | null> => {
+    const token = process.env.USER_TOKEN;
     try {
-      await fetch(
+      console.log("userID is : ", userID);
+      const data = await fetch(
         `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/home/users/${userID}/recent-hotels`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
-      )
-        .then((res) => res.json())
-        .then((result) => setRecentHotels(result));
-      return recentHotels;
-    } catch (error) {
+      ).then((res) => res.json());
+      return data;
+    } catch (error: any) {
       throw new Error("Error in fetching data from the server", error);
     }
   };
@@ -116,7 +119,7 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
       setTrendingHotels(data);
       console.log("Log", data);
       return data;
-    } catch (error) {
+    } catch (error: any) {
       throw new Error("Error in fetching data from the server", error);
     }
   };

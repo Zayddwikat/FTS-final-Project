@@ -9,13 +9,16 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useState } from "react";
 import { PopOver } from "./PopOverCalender";
 import BedIcon from "@mui/icons-material/Bed";
+import * as Yup from "yup";
 import PersonIcon from "@mui/icons-material/Person";
 import { StepperTextInput } from "./StepperTextInput";
-
+import { SearchContextProps } from "../../Context/SearchContextApi";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { searchResult, useSearchResult } from "../../hooks/searchHook";
 
 interface DataObjectInfo {
   adult: number;
@@ -27,10 +30,46 @@ interface DataObjectInfo {
   Rate: number;
 }
 interface SearchBarProps {
-  data: DataObjectInfo;
+  data?: DataObjectInfo;
+  cityTextField?: boolean;
+  dateTextField?: boolean;
+  adultTextField?: boolean;
+  searchValues?: DataObjectInfo;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({
+  data,
+  cityTextField,
+  dateTextField,
+  adultTextField,
+  searchValues,
+}) => {
+  const initialValues = {
+    adult: searchValues?.adult ?? data?.adult ?? 2,
+    children: searchValues?.children ?? data?.children ?? 0,
+    city: searchValues?.city ?? data?.city ?? "",
+    rooms: searchValues?.rooms ?? data?.rooms ?? 1,
+    CheckIn:
+      searchValues?.CheckIn ??
+      data?.CheckIn ??
+      new Date().toISOString().split("T")[0],
+    CheckOut:
+      searchValues?.CheckOut ??
+      data?.CheckOut ??
+      new Date(Date.now() + 86400000).toISOString().split("T")[0],
+    Rate: searchValues?.Rate ?? data?.Rate ?? 4,
+  };
+  const validationSchema = Yup.object({
+    adult: Yup.number().min(2, "At least twos adult is required").required(),
+    children: Yup.number().min(0).required(),
+    rooms: Yup.number().min(1, "At least one room is required").required(),
+    CheckIn: Yup.date().required("Check-in date is required"),
+    CheckOut: Yup.date()
+      .min(Yup.ref("CheckIn"), "Check-out date cannot be before check-in date")
+      .required("Check-out date is required"),
+    Rate: Yup.number().min(1).max(5).required(),
+  });
+
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
@@ -59,37 +98,25 @@ export const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
   };
 
   const navigation = useNavigate();
+  const [searchResultData, setSearchResultData] = useState([]);
+  // const { onSearch, searchResult, setSearchResult } = useSearchContext();
 
-  const { onSearch, setSearchResult } = useSearchContext();
-
-  //   const [rooms, setRoomsNum] = useState(1);
-  //   const [startRate, setStarRate] = useState(0);
   const formik = useFormik({
-    initialValues: {
-      adult: data?.adult ?? 2,
-      children: data?.children ?? 0,
-      city: data?.city ?? "",
-      rooms: data?.rooms ?? 1,
-      CheckIn: data?.CheckIn ?? new Date().toISOString().split("T")[0],
-      CheckOut:
-        data?.CheckOut ??
-        new Date(Date.now() + 86400000).toISOString().split("T")[0],
-      Rate: data?.Rate ?? 4,
-    },
-
+    initialValues,
+    validationSchema,
     onSubmit: async (values) => {
-      const searchData = await onSearch({
-        adults: values.adult,
-        childrenWithAdults: values.children,
-        city: values.city,
-        numOfRooms: values.rooms,
-        checkIn: values.CheckIn,
-        checkOut: values.CheckOut,
-        starRate: values.Rate,
+      console.log("inside submit");
+      console.log("Current path:", window.location.pathname);
+      const searchData = await searchResult({
+        adults: searchValues?.adult ?? values.adult,
+        childrenWithAdults: searchValues?.children ?? values.children,
+        city: searchValues?.city ?? values.city ?? "",
+        numOfRooms: searchValues?.rooms ?? values.rooms,
+        checkIn: searchValues?.CheckIn ?? values.CheckIn,
+        checkOut: searchValues?.CheckOut ?? values.CheckOut,
+        starRate: searchValues?.Rate ?? values.Rate,
       });
-
-      console.table(searchData);
-      setSearchResult(searchData);
+      console.log("search data is : ", searchData);
       if (searchData) {
         navigation("/search-result", {
           state: {
@@ -167,7 +194,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
       </div>
 
       <div className=" w-full flex items-center my-2 gap-2">
-        <StepperTextInput elem="room" formik={formik} />
+        <StepperTextInput elem="rooms" formik={formik} />
         <StepperTextInput elem="Rate" formik={formik} />
       </div>
     </main>
@@ -175,7 +202,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
   const CheckInCheckOutComponent = (
     <TextField
       onClick={handleCalenderOption}
-      className="bg-white w-full md:w-[30%] text-field"
+      className={`bg-white w-full md:w-[35%] text-field`}
       disabled={true}
       placeholder={
         "In " +
@@ -201,7 +228,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
       <TextField
         onClick={handleRoomElement}
         aria-describedby={idRoomsOption}
-        className="bg-white w-full md:w-[30%] text-field"
+        className={`bg-white w-full  ${
+          cityTextField ? "md:w-[28%]" : "md:w-[33%]"
+        } text-field`}
         disabled={true}
         placeholder={
           formik.values.adult +
@@ -225,26 +254,29 @@ export const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
   );
 
   return (
-    <main className="flex flex-row flex-wrap w-full items-center mx-8 justify-center">
+    <main className="flex flex-row flex-wrap w-[70dvw] items-center m-2 justify-center">
       <form
-        className="flex md:flex-row flex-col w-full  flex-wrap lg:w-[80dvw] md:w-[80dvw] p-1 gap-1 md:items-start md:justify-start border border-black rounded-md m-4 items-center justify-center"
+        className="flex md:flex-row flex-col w-full  flex-wrap lg:w-[80dvw] border border-yellow-300 border-4 md:w-[80dvw] gap-1 md:items-start md:justify-start  rounded-md m-4 items-center justify-center"
         onSubmit={formik.handleSubmit}
       >
-        <TextField
-          name="city"
-          onChange={formik.handleChange}
-          className="bg-white w-full md:w-[30%]"
-          placeholder={formik.values.city || "City"}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start">
-                  <BedIcon fontSize="large" />
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
+        {cityTextField ? (
+          <TextField
+            name="city"
+            onChange={formik.handleChange}
+            className={`bg-white w-full md:w-[25%]`}
+            placeholder={formik.values.city || "City"}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <BedIcon fontSize="large" />
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+        ) : null}
+
         <>
           {CheckInCheckOutComponent}
           <PopOver
@@ -263,14 +295,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({ data }) => {
             {roomsChildrenAdult}
           </PopOver>
         </>
-
         <Button
+          primary
           handleClick={() => {}}
           isSubmitting={false}
           size="thick"
-          className="self-stretch md:self-stretch lg:self-stretch"
+          className={`self-stretch md:self-stretch lg:self-stretch ${
+            cityTextField ? `w-[23%]` : "w-[30%]"
+          } `}
           value="Search"
           color="blue"
+          children={undefined}
         />
       </form>
     </main>

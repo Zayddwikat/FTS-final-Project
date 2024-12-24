@@ -4,7 +4,6 @@ import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import PropTypes from "prop-types";
 import useFilterSelected from "../hooks/filterHooks";
 import { FormikProps } from "formik";
 
@@ -17,31 +16,35 @@ interface CheckBoxProps {
 export const CheckBoxesGroup: React.FC<CheckBoxProps> = ({
   filters,
   formik,
-  data,
 }) => {
-  const { onFilteredAdded } = useFilterSelected();
-  console.log(formik.values);
+  const { onFilterChange } = useFilterSelected();
   return (
     <Box>
       <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
         <FormLabel component="legend">Most Used Filter</FormLabel>
         <FormGroup>
           <div className="flex md:flex-row lg:flex-col ">
-            {filters.map((elem, index) => (
+            {filters.map((elem: string, index: number) => (
               <FormControlLabel
                 key={index}
                 control={
                   <Checkbox
-                    value={false}
+                    value={formik.values[elem]}
                     name={elem}
-                    onChange={(e, value) => {
-                      // e.target.value = value;
-                      formik.setFieldValue(
-                        elem,
-                        e.target.value === "false" ? false : true
+                    onChange={(
+                      e: React.ChangeEvent<HTMLInputElement>,
+                      value: any
+                    ) => {
+                      console.table("first", formik.values);
+                      const newValue = !formik.values[elem];
+                      formik.setFieldValue(elem, newValue);
+                      console.table("second", formik.values);
+                      onFilterChange(formik);
+                      console.log("Stepper Value:", value);
+                      console.log(
+                        "Updated Formik Value (Predicted):",
+                        newValue
                       );
-                      // onFilteredAdded({formik.values, data});
-                      console.log(elem + "checked " + formik.values[elem]);
                     }}
                   />
                 }

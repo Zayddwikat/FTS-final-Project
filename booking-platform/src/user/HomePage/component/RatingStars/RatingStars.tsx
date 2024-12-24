@@ -1,6 +1,16 @@
-import PropTypes from "prop-types";
+import { FormEventHandler } from "react";
 
-export default function RatingReview({ rating, setRating, onChange }) {
+interface RatingReviewProps {
+  rating: number;
+  setRating?: Function;
+  onChange?: FormEventHandler<HTMLSpanElement>;
+}
+
+export const RatingReview: React.FC<RatingReviewProps> = ({
+  rating,
+  setRating,
+  onChange,
+}) => {
   return (
     <div>
       {[1, 2, 3, 4, 5].map((star) => {
@@ -9,11 +19,11 @@ export default function RatingReview({ rating, setRating, onChange }) {
             className="start"
             key={star}
             id="Rate"
-            name='Rate'
+            name="Rate"
             style={{
               cursor: "pointer",
               color: rating >= star ? "gold" : "gray",
-              fontSize: `35px`,
+              fontSize: `20px`,
             }}
             onChange={onChange}
             onClick={() => {
@@ -27,9 +37,4 @@ export default function RatingReview({ rating, setRating, onChange }) {
       })}
     </div>
   );
-}
-RatingReview.propTypes = {
-  rating: PropTypes.number.isRequired,
-  setRating: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
 };

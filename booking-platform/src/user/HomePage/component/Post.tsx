@@ -2,13 +2,20 @@ import Box from "@mui/material/Box";
 
 interface PostObjectInformation {
   cityName: string;
+  roomPhotoUrl: string;
+  hotelName: string;
+  starRating: number;
+  hotelStarRating: number;
+  roomPrice: number;
+  originalRoomPrice: number;
+  finalPrice: number;
 }
 
 interface PostProps {
   post: PostObjectInformation;
 }
 
-export const Post: React.FC<PostProps> = ({post}) => {
+export const Post: React.FC<PostProps> = ({ post }) => {
   const handleClickedDeals = (post: PostObjectInformation) => {
     console.log("clicked", post.cityName);
   };
@@ -17,7 +24,7 @@ export const Post: React.FC<PostProps> = ({post}) => {
       onClick={() => handleClickedDeals(post)}
       className="border border-black w-[90dvw] shadow hover:shadow-lg rounded-md lg:w-[15dvw] md:w-full md:flex-wrap  "
     >
-      <div className=" w-full md:flex-wrap h-[50dvh] ">
+      <div className="w-full md:flex-wrap h-[50dvh] ">
         <img
           style={{
             width: "100%",
@@ -34,7 +41,6 @@ export const Post: React.FC<PostProps> = ({post}) => {
           <div className="flex flex-row items-center justify-start w-full">
             <p className="text-md border text-white bg-blue-700 p-0.5 rounded-md">
               {post.starRating ? post.starRating * 2 : post.hotelStarRating * 2}{" "}
-              /10
             </p>
             <p className="text-sm  px-2 rounded-md">
               {post.starRating
@@ -53,7 +59,7 @@ export const Post: React.FC<PostProps> = ({post}) => {
                 ? "Good"
                 : "Traditional"}
             </p>
-          </div>
+          </div>  
           <div className="flex flex-row items-center justify-end gap-4 w-full">
             <div className="flex flex-row items-center gap-2">
               <p className="text-sm line-through line-clamp-2 text-blue-600 ">

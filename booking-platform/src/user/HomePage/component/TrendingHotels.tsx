@@ -10,22 +10,22 @@ export default function TrendingHotels() {
   const HotelsTrending = useQuery({
     queryKey: ["trendingHotels"],
     queryFn: async () => {
-      //   return new Promise.reject("Error ");
+      // return new Promise.reject("error ");
       const res = await onDestinationTrending();
       return res;
     },
   });
   if (HotelsTrending.isLoading)
     return (
-      <div className="flex flex-row">
+      <div className="flex  flex-row">
         {[1, 2, 3, 4].map((elem, index) => (
           <div className="" key={index}>
             <Skeleton
-              className="m-4 rounded-md lg:w-[23dvw] md:w-[70dvw]"
+              className="m-4 rounded-md lg:w-[21dvw] md:w-[70dvw]"
               variant="rectangular"
               height={250}
             />
-            <Box className="mx-4" sx={{ pt: 0.5 }}>
+            <Box className="mx-2" sx={{ pt: 0.5 }}>
               <Skeleton width={300} />
               <Skeleton width={300} />
             </Box>
@@ -37,18 +37,20 @@ export default function TrendingHotels() {
   if (HotelsTrending.isError)
     return <pre>{JSON.stringify(HotelsTrending.error)}</pre>;
   return (
-    <main className="my-4 w-full mx-2">
-      <header className="flex flex-row items-center w-full justify-between  ">
-        <h1 className="text-3xl">Trending</h1>
-        <Link className="self-end mx-12" to={"/Show-more"}>
+    <main className="flex flex-col my-4 items-start w-full gap-4 items-start ">
+      <header className="flex flex-row items-center w-full justify-between ">
+        <h1 className="text-3xl">Trending Hotels</h1>
+        <Link className="  " to={"/Show-more"}>
           <h1 className="text-sm text-blue-600 underline">show more</h1>
         </Link>
       </header>
-      <main className="flex flex-row flex-wrap md:flex-nowrap w-full gap-4 my-4">
-        {HotelsTrending.data.map((post, index) => (
-          <TrendingPost key={index} post={post} />
+      <div className="flex flex-row flex-wrap md:flex-nowrap w-full gap-4">
+        {HotelsTrending.data.slice(0, 5).map((elem: any, index: number) => (
+          <>
+            <TrendingPost key={index} post={elem} />
+          </>
         ))}
-      </main>
+      </div>
     </main>
   );
 }

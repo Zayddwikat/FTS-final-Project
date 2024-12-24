@@ -1,18 +1,40 @@
+import { FormikFormProps, FormikProps } from "formik";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 interface onFilterInformation {
-  filter: string;
   data: any;
+  formik: FormikProps<any>;
+}
+interface onFilterChangeProps {
+  formik: FormikProps<any>;
 }
 
 export default function useFilterSelected() {
-  const [filteredData, setFilteredData] = useState([]);
-  const onFilteredAdded = ({ filter, data }: onFilterInformation) => {
-    const filtered = data.filter((elem: any) =>
-      elem.amenities.some((elem2: any) => elem2.name === filter)
+  const [filteredData, setFilteredData] = useState<any[]>([]);
+  const onFilteredAdded = async ({ data, formik }: onFilterInformation) => {
+    if (formik.values.budget === 0) {
+      return data;
+    }
+    const filteredDataNew = data.filter(
+      (hotel) => hotel.roomPrice >= formik.values.budget
     );
-    setFilteredData(filtered);
+    setFilteredData((prevData) => [...prevData, ...filteredDataNew]);
+    return filteredDataNew;
   };
 
-  return { filteredData, onFilteredAdded };
+  const onFilterChange = (formik: FormikProps<any>, data: any, filter: any) => {
+    const resultArr = [];
+    if (formik.values.doubleRoom === true) {
+      const doubleRoom = data.filter((hotel) => {
+        if (hotel.roomType === "Double") resultArr.push(hotel);
+      });
+      console.log(resultArr);
+      return resultArr;
+    } else {
+      return data;
+    }
+  };
+
+  return { onFilterChange, onFilteredAdded };
 }

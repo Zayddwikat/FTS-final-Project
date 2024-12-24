@@ -60,3 +60,8 @@ body {
 .text-field::placeholder {
   color: black;
 }
+
+.sticky-con {
+  position: sticky;
+  position: -webkit-sticky;
+}
