@@ -3,19 +3,15 @@ import { CityInformation } from "../../classes/Cities";
 import { getCityInfo } from "../hooks/getCityInfo";
 import { LoadingScreen } from "../../component/LoadingPage";
 import { ErrorPage } from "../../ErrorPage";
-import TripImg from "../../assets/TripImg.jpg";
 import { getCityPhotos } from "../hooks/getcityPhotos";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "../../Login/component/LoginButton";
-import { deleteHotel } from "../hooks/deleteHotelFromCity";
 import { HotelCard } from "./hotelCard";
 import { DeleteConfirmation } from "./deleteConfirmation";
-import { deleteCity } from "../hooks/deleteCity";
-import { IconButton, Snackbar, SnackbarCloseReason } from "@mui/material";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useHotel } from "../../user/HotelPage/Hooks/useGetHotel";
+import { useNavigate } from "react-router-dom";
 import { useHotelContext } from "../context/hotelContext";
+import { useCityContext } from "../context/cityContext";
 
 interface CityInformationProps {
   city: CityInformation;
@@ -44,7 +40,9 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
   const navigate = useNavigate();
 
   const [includeHotels, setIncludeHotels] = useState<boolean>(false);
-  const { hotels, setHotels } = useHotelContext();
+  const { hotels, setHotels ,setFilteredHotels } = useHotelContext();
+
+  const { deleteCity } = useCityContext();
 
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
@@ -59,9 +57,6 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
     const data = await deleteCity(city.id);
     if (data) {
       toggleDrawer("right", false);
-      setCities((prevCities) =>
-        prevCities.filter((city1) => city1.id !== city.id)
-      );
     } else {
       new Error("Error in deleting data");
     }
@@ -72,6 +67,7 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
     queryFn: async () => {
       const data = getCityInfo(city.id, includeHotels);
       setHotels(await data.then((res) => res.hotels));
+      setFilteredHotels(await data.then((res) => res.hotels));
       return data;
     },
   });

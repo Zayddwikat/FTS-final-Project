@@ -11,9 +11,11 @@ import { AddCityDialog } from "./addCityDialog";
 import React from "react";
 import { Snackbar } from "@mui/material";
 import { useSnakeBar } from "../hooks/useSnakBar";
+import { useCityContext } from "../context/cityContext";
 
 export const CityOptions: React.FC<any> = () => {
-  const [cities, setCities] = useState<Array<CityInformation>>([]);
+
+  const { cities, getCities, setCities } = useCityContext();
 
   const { openSnackBar, handleCloseSnackBar, action, setOpenSnackBar } =
     useSnakeBar();
@@ -21,16 +23,17 @@ export const CityOptions: React.FC<any> = () => {
   const citiesQuery = useQuery({
     queryKey: ["cities"],
     queryFn: async () => {
-      const data = getCities({ name: "", searchQuery: "" });
-      setCities([...(await data)]);
+      const data = await getCities({ name: "", searchQuery: "" });
       return data;
     },
+    enabled: true,
+    staleTime: 0,
   });
   const [pageNum, setPageNum] = useState<number>(0);
 
   const itemsPerPage = 12;
-  const totalPages = Math.ceil(cities.length / itemsPerPage);
-  const data = cities.slice(
+  const totalPages = Math.ceil(cities?.length / itemsPerPage);
+  const data = cities?.slice(
     pageNum * itemsPerPage,
     (pageNum + 1) * itemsPerPage
   );
@@ -65,7 +68,6 @@ export const CityOptions: React.FC<any> = () => {
           handleClose={handleClose}
           open={openIndex}
           cities={cities}
-          setCities={setCities}
         />
       </div>
       <table className="w-full h-[70dvh] block ml-10 my-10 border-collapse border border-gray-300 text-start overflow-y-auto">

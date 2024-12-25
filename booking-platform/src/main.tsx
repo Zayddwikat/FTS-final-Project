@@ -25,6 +25,7 @@ import { AmenitiesProvider } from "./Admin/context/amenitiesContext.js";
 import { AmenitiesPageRoom } from "./Admin/component/Amenities/component/AmenitiesPageRoom.js";
 import { AmenitiesOption } from "./Admin/component/Amenities/component/amenitiesOption.js";
 import { TableContent } from "./Admin/component/Amenities/component/tableContent.js";
+import { CityProvider } from "./Admin/context/cityContext.js";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 
@@ -94,7 +95,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/AdminHome/Cities",
-        element: <AdminHomeCities />,
+        element: (
+          <CityProvider>
+            <AdminHomeCities />,
+          </CityProvider>
+        ),
         errorElement: <ErrorPage />,
       },
       {

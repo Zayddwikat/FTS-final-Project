@@ -15,6 +15,7 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
   const [filteredAmenities, setFilteredAmenities] = useState<
     Array<AmenitiesInformation>
   >([]);
+
   const [filteredRoomAmenities, setFilteredRoomAmenities] = useState<
     Array<AmenitiesInformation>
   >([]);
@@ -23,17 +24,17 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
   >([]);
 
   const token = localStorage.getItem("ADMIN_TOKEN");
-  const copyOfRoomAmenities = roomAmenities.map((amenity) => ({
-    ...amenity,
-  }));
+
 
   const searchAmenities = (searchCriteria: string) => {
     if (!searchCriteria) {
       setAmenities([...filteredAmenities]);
       return;
     }
-    const filtered = amenities.filter((amenity) =>
-      amenity.name.toLowerCase().includes(searchCriteria.toLowerCase())
+    const filtered = filteredAmenities.filter(
+      (amenity) =>
+        amenity.name.toLowerCase().includes(searchCriteria.toLowerCase()) ||
+        amenity.description.toLowerCase().includes(searchCriteria.toLowerCase())
     );
 
     setAmenities(filtered);
@@ -41,11 +42,10 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
 
   const searchAmenitiesRoom = (searchCriteria: string) => {
     if (!searchCriteria) {
-      console.log(...roomAmenities);
-      setRoomAmenities([...roomAmenities]);
+      setRoomAmenities([...filteredRoomAmenities]);
       return;
     }
-    const filtered = copyOfRoomAmenities.filter(
+    const filtered = filteredRoomAmenities.filter(
       (amenity) =>
         amenity.name.toLowerCase().includes(searchCriteria.toLowerCase()) ||
         amenity.description.toLowerCase().includes(searchCriteria.toLowerCase())
@@ -54,25 +54,7 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
     setRoomAmenities(filtered);
   };
 
-  // const searchAmenities = async (searchCriteria: string) => {
-  //   try {
-  //     const data = await fetch(
-  //       `${baseUrl}/api/hotel-Amenities?name=${searchCriteria}&pageSize=1000&pageNumber=1`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     )
-  //       .then(async (res) => await res.json())
-  //       .catch((err) => new Error("Error on search", err));
-  //     setAmenities(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+ 
 
   const getAmenities = async (hotelId: number) => {
     console.log(hotelId);

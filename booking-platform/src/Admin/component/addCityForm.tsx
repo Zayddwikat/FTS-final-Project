@@ -1,23 +1,19 @@
 import { Field, Form, Formik } from "formik";
-import { addCity } from "../hooks/addCity";
 import { Button } from "../../Login/component/LoginButton";
 import * as Yup from "yup";
+import { useCityContext } from "../context/cityContext";
 
 interface AddCityFormProps {
-  cities: [];
-  setCities: ([]) => void;
   handleClose: () => void;
 }
 
-export const AddCityForm: React.FC<AddCityFormProps> = ({
-  cities,
-  setCities,
-  handleClose,
-}) => {
+export const AddCityForm: React.FC<AddCityFormProps> = ({ handleClose }) => {
   const validateSchema = Yup.object({
     cityName: Yup.string().required(),
     cityDescription: Yup.string().required(),
   });
+
+  const { addCity } = useCityContext();
 
   return (
     <Formik
@@ -27,7 +23,6 @@ export const AddCityForm: React.FC<AddCityFormProps> = ({
         console.table(values);
         console.log("Clicked");
         const data = await addCity(values);
-        setCities([...cities, data]);
         handleClose();
       }}
     >

@@ -10,6 +10,7 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [hotels, setHotels] = useState<Array<hotelObject>>([]);
+  const [filteredHotels, setFilteredHotels] = useState<Array<hotelObject>>([]);
 
   const [state, setState] = useState({
     right: false,
@@ -32,6 +33,19 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
       setState({ ...state, [anchor]: open });
     };
 
+  const searchHotels = (searchCriteria: string) => {
+    if (!searchCriteria) {
+      setHotels([...filteredHotels]);
+      return;
+    }
+    const filtered = filteredHotels.filter(
+      (hotel) =>
+        hotel.name.toLowerCase().includes(searchCriteria.toLowerCase()) ||
+        hotel.description.toLowerCase().includes(searchCriteria.toLowerCase())
+    );
+    setHotels(filtered);
+  };
+
   const handleDeleteHotel = async (hotel: hotelObject, cityId: number) => {
     console.log("Attempting to delete:", hotel.id, hotel.name, cityId);
     try {
@@ -39,6 +53,9 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
       if (data) {
         setHotels((prevHotels) =>
           prevHotels.filter((hot: hotelObject) => hot.id !== hotel.id)
+        );
+        setFilteredHotels((prevFilteredHotels) =>
+          prevFilteredHotels.filter((hot: hotelObject) => hot.id !== hotel.id)
         );
       } else {
         console.error("Delete failed. No data returned.");
@@ -88,6 +105,21 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
               : hot
           )
         );
+        setFilteredHotels((prevFilteredHotels) =>
+          prevFilteredHotels.map((hot) =>
+            hot.id === hotel.id
+              ? {
+                  ...hot,
+                  name: newHotel.name,
+                  description: newHotel.description,
+                  hotelType: newHotel.hotelType,
+                  starRating: newHotel.starRating / 2,
+                  latitude: newHotel.latitude,
+                  longitude: newHotel.longitude,
+                }
+              : hot
+          )
+        );
       }
       return data;
     } catch (err) {
@@ -118,6 +150,7 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
       setHotels((prevHotels) => {
         return [...prevHotels, data];
       });
+      setFilteredHotels((prevFilteredHotels) => [...prevFilteredHotels, data]);
       return data;
     } catch (err) {
       console.log("error in adding new hotels", err);
@@ -134,6 +167,8 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
         toggleDrawer,
         handleEditHotel,
         addHotels,
+        searchHotels,
+        setFilteredHotels,
       }}
     >
       {children}
