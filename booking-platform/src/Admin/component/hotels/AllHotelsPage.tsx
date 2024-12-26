@@ -1,20 +1,20 @@
 import { useLocation } from "react-router-dom";
-import { hotelObject } from "./CityInformationDrawer";
-import { Button } from "../../Login/component/LoginButton";
-import { DrawerDrawer } from "./Drawer";
-import { useHotelContext } from "../context/hotelContext";
-import { Snackbar } from "@mui/material";
-import { useSnakeBar } from "../hooks/useSnakBar";
-import { useState } from "react";
-import { AddHotelDialog } from "./addHotelDialog";
-import { useQuery } from "@tanstack/react-query";
 
-export const TableOfContent: React.FC<any> = () => {
-  const { state } = useLocation();
-  const city = state.city;
-  console.log(city);
-  const { hotels, getCityHotels } = useHotelContext();
+import { Snackbar } from "@mui/material";
+import { useState } from "react";
+import { useHotelContext } from "../../context/hotelContext";
+import { useSnakeBar } from "../../hooks/useSnakBar";
+import { useQuery } from "@tanstack/react-query";
+import { Button } from "../../../Login/component/LoginButton";
+import { hotelObject } from "../CityInformationDrawer";
+import { DrawerDrawer } from "../Drawer";
+import { AddHotelDialog } from "../addHotelDialog";
+
+export const AllHotelsPage: React.FC<any> = () => {
+  const { hotels, handleGetallHotels } = useHotelContext();
+
   console.log(hotels);
+
   const { action, handleCloseSnackBar, openSnackBar, setOpenSnackBar } =
     useSnakeBar();
   const [massage, setMassage] = useState<string>("");
@@ -34,43 +34,21 @@ export const TableOfContent: React.FC<any> = () => {
     setOpenSnackBar(true);
     setMassage("Successfully adding new city");
   };
-  const hotelQuery = useQuery({
-    queryKey: ["hotels", city.id],
-    queryFn: () => getCityHotels(city.id, true),
+  const hotelsQuery = useQuery({
+    queryKey: ["hotels", pageNum],
+    queryFn: async () => {
+      return await handleGetallHotels("", "", 1000000, pageNum + 1);
+    },
   });
-  console.log(hotels);
-
+  console.log(hotelsQuery.data);
   const itemsPerPage = 11;
   const totalPages = Math.ceil(hotels.length / itemsPerPage);
-  var data = hotels?.slice(
-    pageNum * itemsPerPage,
-    (pageNum + 1) * itemsPerPage
-  );
+  var data = hotels.slice(pageNum * itemsPerPage, (pageNum + 1) * itemsPerPage);
 
   return (
     <div className="w-full self-start ">
       <div className="self-start flex flex-row items-center justify-between w-full">
-        <h1 className="self-start mx-6 text-2xl">
-          Table of Hotels in {city.name}
-        </h1>
-        <Button
-          color={""}
-          size={""}
-          value={"Add Hotels"}
-          isSubmitting={false}
-          handleClick={handleOpenAddDialog}
-          className={""}
-          children={undefined}
-          primary={true}
-        />
-        <AddHotelDialog
-          open={addHotelDialog}
-          handleClose={handleCloseAddDialog}
-          handleConfirm={handleConfirmAdding}
-          setOpenSnackBar={setOpenSnackBar}
-          label="Hotel"
-          city={city}
-        />
+        <h1 className="self-start mx-6 text-2xl">Table of Hotels</h1>
       </div>
       <div className="flex flex-col items-start justify-between h-[85dvh]">
         <table className="self-start  w-full bg-white block ml-10 my-10 border-collapse border border-gray-300 text-start overflow-y-auto table-fixed">
@@ -98,7 +76,7 @@ export const TableOfContent: React.FC<any> = () => {
                   </td>
                   <DrawerDrawer
                     setMassage={setMassage}
-                    city={city}
+                    city={undefined}
                     hotel={hotel}
                     setOpenSnakeBar={setOpenSnackBar}
                   />

@@ -81,7 +81,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/AdminHome/Hotels",
-        element: <HotelPageAdmin />,
+        element: (
+          <HotelProvider>
+            <ImageProvider>
+              <HotelPageAdmin />,
+            </ImageProvider>
+          </HotelProvider>
+        ),
         errorElement: <ErrorPage />,
         children: [
           {
@@ -114,7 +120,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/AdminHome/photos/city/:cityId",
-            element: <CityPhotos/>,
+            element: <CityPhotos />,
             errorElement: <ErrorPage />,
           },
         ],
@@ -122,9 +128,11 @@ const router = createBrowserRouter([
       {
         path: "/AdminHome/:hotelId/Rooms",
         element: (
-          <RoomProvider>
-            <HotelRooms />,
-          </RoomProvider>
+          <ImageProvider>
+            <RoomProvider>
+              <HotelRooms />,
+            </RoomProvider>
+          </ImageProvider>
         ),
         errorElement: <ErrorPage />,
       },
@@ -185,6 +193,11 @@ const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: "/AdminHome/Rooms",
+        element: <>Hiiii</>,
+        errorElement: <ErrorPage />,
       },
     ],
   },

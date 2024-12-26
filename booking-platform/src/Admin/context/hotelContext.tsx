@@ -3,6 +3,8 @@ import { deleteHotel } from "../hooks/deleteHotelFromCity";
 import { hotelObject } from "../component/CityInformationDrawer";
 import { Anchor } from "../component/Drawer";
 import { baseUrl } from "../../const/constantVariables";
+import { getCityPhotos } from "../hooks/getcityPhotos";
+import { getCityInfo } from "../hooks/getCityInfo";
 
 export const HotelContext = createContext<any>([]);
 
@@ -157,6 +159,41 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  const handleGetallHotels = async (
+    name?: string,
+    searchQuery?: string,
+    pageSize = 100,
+    pageNumber = 1
+  ) => {
+    try {
+      const url = `${baseUrl}/api/hotels?name=${name}&searchQuery=${searchQuery}&pageSize=${pageSize}&pageNumber=${pageNumber}`;
+      console.log(url);
+      const response = await fetch(
+        `${baseUrl}/api/hotels?name=${name}&searchQuery=${searchQuery}&pageSize=${pageSize}&pageNumber=${pageNumber}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token} `,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .catch((err) => new Error("Error in getting hotels", err));
+      setHotels(response);
+      console.log(hotels);
+      return hotels;
+    } catch (err) {
+      console.log("error in getting all hotels", err);
+    }
+  };
+
+  const getCityHotels = async (cityId: number, includeHotels = true) => {
+    const response = await getCityInfo(cityId, true);
+    setHotels(response.hotels);
+    setFilteredHotels(response.hotels);
+  };
+
   return (
     <HotelContext.Provider
       value={{
@@ -169,6 +206,8 @@ export const HotelProvider: React.FC<{ children: ReactNode }> = ({
         addHotels,
         searchHotels,
         setFilteredHotels,
+        handleGetallHotels,
+        getCityHotels,
       }}
     >
       {children}

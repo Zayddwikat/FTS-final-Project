@@ -36,7 +36,7 @@ export const CityPhotos: React.FC<any> = () => {
     });
   };
 
-  const { cityImages, getCityGallery } = useImageContext();
+  const { cityImages, getCityGallery, deleteCityImg } = useImageContext();
 
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -56,9 +56,8 @@ export const CityPhotos: React.FC<any> = () => {
   };
 
   const handleDeleteImg = async () => {
-    if (selectedPhoto !== null)
-      //   await deleteHotelImg(hotel.id, selectedPhoto.id);
-      setOpenSnackBar(true);
+    if (selectedPhoto !== null) await deleteCityImg(city.id, selectedPhoto.id);
+    setOpenSnackBar(true);
   };
 
   const handleOpenAddImgDialog = () => {

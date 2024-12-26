@@ -17,6 +17,8 @@ import { roomInformation } from "../../classes/roomInformation";
 import { useRoomContext } from "../context/roomcontext";
 import { Divider } from "@mui/material";
 import { EditRoomDialog } from "./editRoomDialog";
+import { SwiperSection } from "./photosSection/component/swiperSection";
+import { useImageContext } from "../context/imageContext";
 
 interface adminHotelCardProps {
   hotel: hotelObject;
@@ -37,6 +39,7 @@ export const RoomCardDrawer: React.FC<adminHotelCardProps> = ({
   setMassage,
 }) => {
   const { deleteRoom, handleEditHotel } = useRoomContext();
+  const { getRoomImage, images } = useImageContext();
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
   const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
@@ -76,11 +79,16 @@ export const RoomCardDrawer: React.FC<adminHotelCardProps> = ({
     },
   });
 
+  const photoQuery = useQuery({
+    queryKey: ["roomPhotos"],
+    queryFn: async () => await getRoomImage(room.roomId),
+  });
+
   if (hotelQuery.error) return <ErrorPage />;
   if (hotelQuery.isLoading) return <LoadingScreen />;
-
+  console.log(photoQuery.data, room.roomId, images);
   return (
-    <div className="md:w-[40dvw] flex flex-col  gap-4 overflow-x-hidden mx-4 p-2">
+    <div className="md:w-[50dvw] flex flex-col  gap-4 overflow-x-hidden mx-4 p-2">
       <div className=" flex items-center justify-start  w-full">
         <Button
           color={""}
@@ -94,27 +102,22 @@ export const RoomCardDrawer: React.FC<adminHotelCardProps> = ({
           <CloseIcon />
         </Button>
       </div>
-      <div className="flex flex-col gap-4 mx-4">
-        <img
-          src={room?.roomPhotoUrl}
-          alt="image"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
+      <div className="w-full h-dvh flex flex-col gap-4 mr-4 gap-4 items-center  ">
+        <div className="flex flex-col justify-start gap-4 items-start  w-full h-full  ">
+          <SwiperSection imgs={images} />
+        </div>
         <Link
           to={`/AdminHome/${hotel.id}/Rooms/${room.roomId}/photos`}
           state={{
             data: room,
           }}
-          className="text-blue-400 underline"
+          className="text-blue-400 underline self-start mx-4"
         >
           all photos
         </Link>
+        <Divider />
       </div>
-      <Divider />
+
       <div className="mx-4 w-full flex flex-col gap-2">
         <article className="flex md:flex-row flex-col items-start md:items-center w-12/12 justify-between mr-4">
           <div className="flex items-center gap-2">

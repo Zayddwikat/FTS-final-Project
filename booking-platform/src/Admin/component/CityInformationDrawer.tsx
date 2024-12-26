@@ -14,6 +14,8 @@ import { useHotelContext } from "../context/hotelContext";
 import { useCityContext } from "../context/cityContext";
 import TripImg from "../../assets/TripImg.jpg";
 import { Divider } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { SwiperSection } from "./photosSection/component/swiperSection";
 
 interface CityInformationProps {
   city: CityInformation;
@@ -67,9 +69,12 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
   const cityInfoQuery = useQuery({
     queryKey: ["cityInfo", includeHotels],
     queryFn: async () => {
+      console.log(includeHotels);
       const data = getCityInfo(city.id, includeHotels);
       setHotels(await data.then((res) => res.hotels));
       setFilteredHotels(await data.then((res) => res.hotels));
+      console.log("Cities sets");
+      
       return data;
     },
   });
@@ -79,7 +84,7 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
       return await getCityPhotos(city.id);
     },
   });
-  console.log(cityPhotos.data);
+  console.log("city Photos ", cityPhotos.data);
 
   if (cityInfoQuery.isLoading) return <LoadingScreen />;
   if (cityInfoQuery.error)
@@ -91,34 +96,39 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
     );
   return (
     <div className="w-[50dvw] overflow-x-hidden ">
+      <div className=" flex items-center justify-start  w-full">
+        <Button
+          color={""}
+          size={"small"}
+          value={""}
+          isSubmitting={false}
+          handleClick={() => toggleDrawer("right", false)}
+          className={""}
+          primary={false}
+        >
+          <CloseIcon />
+        </Button>
+      </div>
       {!cityInfoQuery.data?.name ? (
         <div className="flex w-full h-dvh items-center justify-center">
           The city Not Found
         </div>
       ) : (
-        <div className="w-full h-dvh flex flex-col  mx-4 items-center my-4 ">
+        <div className="w-full h-dvh flex flex-col gap-4 mx-4 items-center  ">
           {cityPhotos.data ? (
             <>
-              <div className="flex flex-col gap-4 ">
-                <img
-                  src={TripImg}
-                  alt="image"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-                <Link
-                  to={`/AdminHome/photos/city/:${city.id}`}
-                  state={{
-                    data: city,
-                  }}
-                  className="text-blue-400 underline"
-                >
-                  all photos
-                </Link>
+              <div className="flex flex-col justify-start gap-4 items-start  w-[90%] h-[40%]  ">
+                <SwiperSection imgs={cityPhotos.data} />
               </div>
+              <Link
+                to={`/AdminHome/photos/city/:${city.id}`}
+                state={{
+                  data: city,
+                }}
+                className="text-blue-400 underline self-start"
+              >
+                all photos
+              </Link>
               <Divider />
             </>
           ) : (

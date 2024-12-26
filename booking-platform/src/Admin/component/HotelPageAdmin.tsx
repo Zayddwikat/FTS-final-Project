@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { AdminSearch } from "./AdminSearchBar";
 import { TableOfContent } from "./TableOfContent";
+import { AllHotelsPage } from "./hotels/AllHotelsPage";
 
 export const HotelPageAdmin: React.FC<any> = () => {
   const { state } = useLocation();
@@ -10,7 +11,7 @@ export const HotelPageAdmin: React.FC<any> = () => {
       <header className=" ">
         <AdminSearch />
       </header>
-      {state ? <TableOfContent /> : <>sss</>}
+      {state ? <TableOfContent /> : <AllHotelsPage />}
     </main>
   );
 };

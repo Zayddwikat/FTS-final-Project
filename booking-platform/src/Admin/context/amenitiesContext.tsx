@@ -5,6 +5,7 @@ import { Anchor } from "../component/Drawer";
 import { baseUrl } from "../../const/constantVariables";
 import { AmenitiesInformation } from "../../classes/amenitiesInformation";
 import { roomInformation } from "../../classes/roomInformation";
+import { roomAmenities } from "../../classes/roomAmenities";
 
 export const AmenitiesContext = createContext<any>([]);
 
@@ -15,7 +16,6 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
   const [filteredAmenities, setFilteredAmenities] = useState<
     Array<AmenitiesInformation>
   >([]);
-
   const [filteredRoomAmenities, setFilteredRoomAmenities] = useState<
     Array<AmenitiesInformation>
   >([]);
@@ -24,7 +24,6 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
   >([]);
 
   const token = localStorage.getItem("ADMIN_TOKEN");
-
 
   const searchAmenities = (searchCriteria: string) => {
     if (!searchCriteria) {
@@ -53,8 +52,6 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
     console.log("filtered", amenities);
     setRoomAmenities(filtered);
   };
-
- 
 
   const getAmenities = async (hotelId: number) => {
     console.log(hotelId);
@@ -248,6 +245,70 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  const getAllAmenities = async (
+    name: string,
+    pageSize: number,
+    pageNumber: number
+  ) => {
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/room-amenities?name=${name}&pageSize=${pageSize}&pageNumber=${pageNumber}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token} `,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .catch((err) => new Error("Error in getting data ", err));
+      setAmenities(response);
+      setFilteredAmenities(response);
+      return amenities;
+    } catch (err) {
+      console.log("error in getting all amenities", err);
+    }
+  };
+
+  const editHotelAmenities = async (
+    hotelAmenityId: number,
+    amenityInfo: AmenitiesInformation
+  ) => {
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/hotel-Amenities/${hotelAmenityId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token} `,
+          },
+          body: JSON.stringify(amenityInfo),
+        }
+      )
+        .then((res) => (res.status === 204 ? true : false))
+        .catch((err) => new Error("Error in editing amenity ", err));
+      setAmenities(
+        amenities.map((amenity) => {
+          if (amenity.id === hotelAmenityId) {
+            return { ...amenity, ...amenityInfo };
+          }
+          return amenity;
+        })
+      );
+      setFilteredAmenities((prevAmenities) =>
+        prevAmenities.map((amenity) =>
+          amenity.id === hotelAmenityId
+            ? { ...amenity, ...amenityInfo }
+            : amenity
+        )
+      );
+    } catch (err) {
+      console.log("error in editing hotel amenities", err);
+    }
+  };
+
   return (
     <AmenitiesContext.Provider
       value={{
@@ -263,6 +324,8 @@ export const AmenitiesProvider: React.FC<{ children: ReactNode }> = ({
         handleEditAmenityRoom,
         searchAmenities,
         searchAmenitiesRoom,
+        getAllAmenities,
+        editHotelAmenities,
       }}
     >
       {children}

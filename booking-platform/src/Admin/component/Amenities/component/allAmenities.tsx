@@ -20,33 +20,20 @@ import { hotelObject } from "../../CityInformationDrawer";
 import { TableContent } from "./tableContent";
 import { EditAmenitiesDialog } from "./EditAmenitiesDialog";
 
-export const AmenitiesOption: React.FC<any> = () => {
-  const { state } = useLocation();
-  console.log(state);
-  const hotel = state.data;
-
+export const AllAmenities: React.FC<any> = () => {
   const { openSnackBar, handleCloseSnackBar, action, setOpenSnackBar } =
     useSnakeBar();
-  const { getAmenities, amenities, handleDeleteAmenities, editHotelAmenities } =
+  const { getAllAmenities, amenities, handleDeleteAmenities } =
     useAmenitiesContext();
-  const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
-  const handleCloseEditDialog = () => {
-    setOpenEditDialog(false);
-    setSelectedAmenity(null);
-  };
-  const handleOpenEditDialog = (amenity: AmenitiesInformation) => {
-    setSelectedAmenity(amenity);
-    setOpenEditDialog(true);
-  };
-
-  const amenitiesQuery = useQuery({
-    queryKey: ["amenities"],
-    queryFn: async () => {
-      return getAmenities(state.data.id);
-    },
-  });
 
   const [pageNum, setPageNum] = useState<number>(0);
+
+  const amenitiesQuery = useQuery({
+    queryKey: ["amenities", pageNum],
+    queryFn: async () => {
+      return getAllAmenities("", 1000000000, pageNum + 1);
+    },
+  });
 
   const itemsPerPage = 10;
   const totalPages = Math.ceil(amenities.length / itemsPerPage);
@@ -65,24 +52,13 @@ export const AmenitiesOption: React.FC<any> = () => {
     setSelectedAmenity(amenity);
     setOpenDialog(true);
   };
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-    setSelectedAmenity(null);
-  };
 
-  const handleClose = () => {
-    setOpenIndex(null);
-  };
 
-  const handleDeleteAmenity = async () => {
-    if (selectedAmenity !== null)
-      await handleDeleteAmenities(hotel, selectedAmenity.id);
-    setOpenSnackBar(true);
-  };
 
-  const handleClickOpen = (index: number) => {
-    setOpenIndex(index);
-  };
+
+  
+
+  
 
   if (amenitiesQuery.error) return <ErrorPage />;
   if (amenitiesQuery.isLoading) return <LoadingScreen />;
@@ -91,48 +67,16 @@ export const AmenitiesOption: React.FC<any> = () => {
   return (
     <>
       <div className="self-start w-11/12 flex items-center justify-between mx-10 ">
-        <h1 className=" text-2xl font-bold">Amenities in {hotel.name} </h1>
-        <Button
-          children
-          className=""
-          color="blue"
-          handleClick={handleClickOpen}
-          isSubmitting={false}
-          primary={true}
-          size="small"
-          value="Add Amenities"
-        />
-        <AddAmenitiesDialog
-          handleClose={handleClose}
-          open={openIndex}
-          hotel={hotel}
-        />
+        <h1 className=" text-2xl font-bold">Amenities </h1>
       </div>
       <div className="flex flex-col items-start justify-between h-[80dvh]">
         <TableContent
           data={data}
-          handleOpenDialog={handleOpenDialog}
-          handleOpenEditDialog={handleOpenEditDialog}
-          withEdit={true}
+          handleOpenDialog={undefined}
+          handleOpenEditDialog={() => {}}
+          withEdit={false}
+          withDelete={false}
         />
-        <DeleteConfirmation
-          open={openDialog}
-          handleClose={handleCloseDialog}
-          handleConfirm={() => {
-            handleDeleteAmenity();
-          }}
-          setOpenSnackBar={setOpenSnackBar}
-          label="Amenity"
-        />
-        <EditAmenitiesDialog
-          open={openEditDialog}
-          handleClose={handleCloseEditDialog}
-          handleConfirm={editHotelAmenities}
-          setOpenSnackBar={setOpenSnackBar}
-          label="Amenity"
-          amenity={selectedAmenity}
-        />
-
         <div className="flex justify-end self-end mb-4">
           <button
             className={`px-3 py-1 mx-1 ${

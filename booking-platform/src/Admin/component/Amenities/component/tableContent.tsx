@@ -6,6 +6,7 @@ interface TableContentProp {
   handleOpenDialog: (prop: AmenitiesInformation) => void;
   handleOpenEditDialog: (prop: AmenitiesInformation) => void;
   withEdit?: boolean;
+  withDelete?: boolean;
 }
 
 export const TableContent: React.FC<TableContentProp> = ({
@@ -13,6 +14,7 @@ export const TableContent: React.FC<TableContentProp> = ({
   handleOpenDialog,
   handleOpenEditDialog,
   withEdit,
+  withDelete = true,
 }) => {
   return (
     <>
@@ -22,7 +24,9 @@ export const TableContent: React.FC<TableContentProp> = ({
             <th className="border w-1/5">Index</th>
             <th className="border w-1/5">Name</th>
             <th className="border w-2/5">Description</th>
-            <th className="border w-1/5">Amenity info</th>
+            {withDelete || withEdit ? (
+              <th className="border w-1/5">Amenity info</th>
+            ) : null}
           </tr>
         </thead>
         <tbody className="border">

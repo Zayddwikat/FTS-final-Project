@@ -14,6 +14,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetAvailableRooms } from "../../user/HotelPage/Hooks/useAvailableRooms";
 import { Divider } from "@mui/material";
+import { SwiperSection } from "./photosSection/component/swiperSection";
+import { useImageContext } from "../context/imageContext";
 
 interface adminHotelCardProps {
   hotel: hotelObject;
@@ -34,6 +36,7 @@ export const AdminHotelCard: React.FC<adminHotelCardProps> = ({
   setMassage,
 }) => {
   const { handleDeleteHotel, handleEditHotel } = useHotelContext();
+  const { hotelImages, getHotelGallery } = useImageContext();
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
   const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
@@ -72,12 +75,20 @@ export const AdminHotelCard: React.FC<adminHotelCardProps> = ({
       return await useHotel(hotel.id);
     },
   });
+  console.log(hotelQuery.data)
+  const hotelPhoto = useQuery({
+    queryKey: ["hotelPhoto", "hotelId"],
+    queryFn: async () => {
+      return await getHotelGallery(hotel.id);
+    },
+  });
+  console.log(hotelPhoto);
 
   if (hotelQuery.error) return <ErrorPage />;
   if (hotelQuery.isLoading) return <LoadingScreen />;
 
   return (
-    <div className="md:w-[40dvw] flex flex-col  gap-4 overflow-x-hidden mx-4">
+    <div className="md:w-[50dvw] flex flex-col  gap-4 overflow-x-hidden mx-4">
       <div className=" flex items-center justify-start  w-full">
         <Button
           color={""}
@@ -92,15 +103,7 @@ export const AdminHotelCard: React.FC<adminHotelCardProps> = ({
         </Button>
       </div>
       <div className="flex flex-col gap-4 mx-4">
-        <img
-          src={TripImg}
-          alt="image"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
+        <SwiperSection imgs={hotelImages} />
         <Link
           to={`/AdminHome/photos/:${hotel.id}`}
           state={{

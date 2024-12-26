@@ -75,3 +75,49 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+
+
+.custom-swiper {
+  position: relative;
+  padding-bottom: 40px; /* Add space below the image for pagination */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+
+.image {
+  width: 20px;
+  padding-left: 20px;
+  height: auto;
+  object-fit: contain;
+}
+
+.swiper-pagination {
+  margin-top: 20px; /* Space between pagination and image */
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  top: 50%; /* Position buttons vertically centered */
+  transform: translateY(-50%);
+}
+
+.swiper-button-prev {
+  left: 0px; /* Space between the left button and the image */
+}
+
+.swiper-button-next {
+  right: 10px; /* Space between the right button and the image */
+}
+

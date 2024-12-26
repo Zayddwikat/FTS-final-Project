@@ -14,7 +14,7 @@ export const EditAmenitiesForm: React.FC<AddCityFormProps> = ({
   handleClose,
   amenity,
 }) => {
-  const { handleEditAmenityRoom } = useAmenitiesContext();
+  const { handleEditAmenityRoom, editHotelAmenities } = useAmenitiesContext();
 
   const validateSchema = Yup.object({
     name: Yup.string().required(),
@@ -31,6 +31,7 @@ export const EditAmenitiesForm: React.FC<AddCityFormProps> = ({
       onSubmit={async (values) => {
         console.table(values);
         await handleEditAmenityRoom(amenity.id, values);
+        await editHotelAmenities(amenity.id, values);
         console.log("Clicked");
         handleClose();
       }}

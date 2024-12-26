@@ -156,6 +156,26 @@ export const ImageProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  const deleteCityImg = async (cityId: number, imgId: number) => {
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/cities/${cityId}/photos/${imgId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+        .then((res) => (res.status === 204 ? true : false))
+        .catch((err) => new Error("Error in deleting img ", err));
+      setCityImages(cityImages.filter((img) => img.id !== imgId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <imageContext.Provider
       value={{
@@ -170,6 +190,7 @@ export const ImageProvider: React.FC<{ children: ReactNode }> = ({
         cityImages,
         getCityGallery,
         addCityImg,
+        deleteCityImg,
       }}
     >
       {children}
