@@ -33,6 +33,8 @@ import { ImageProvider } from "./Admin/context/imageContext.js";
 import { HotelPhotos } from "./Admin/component/photosSection/component/hotelPhotos.js";
 import { AdminSearch } from "./Admin/component/AdminSearchBar.js";
 import { CityPhotos } from "./Admin/component/photosSection/component/CityPhotos.js";
+import { roomNotFound } from "./const/constantVariables.js";
+import { SelectHotelToShowRoom } from "./const/constantJSX.js";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 
@@ -195,8 +197,9 @@ const router = createBrowserRouter([
         ],
       },
       {
+        // add the
         path: "/AdminHome/Rooms",
-        element: <>Hiiii</>,
+        element:  <SelectHotelToShowRoom/> ,
         errorElement: <ErrorPage />,
       },
     ],
