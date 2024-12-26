@@ -3,21 +3,27 @@ import * as Yup from "yup";
 import { useImageContext } from "../../../context/imageContext";
 import { roomInformation } from "../../../../classes/roomInformation";
 import { Button } from "../../../../Login/component/LoginButton";
+import { hotelObject } from "../../CityInformationDrawer";
+import { CityInformation } from "../../../../classes/Cities";
 
 interface AddCityFormProps {
   handleClose: () => void;
-  room: roomInformation;
+  room?: roomInformation;
+  hotel?: hotelObject;
+  city?: CityInformation;
 }
 
 export const AddImgForm: React.FC<AddCityFormProps> = ({
   handleClose,
   room,
+  hotel,
+  city,
 }) => {
   const validateSchema = Yup.object({
     imgUrl: Yup.string().required(),
   });
 
-  const { addImageToRoom } = useImageContext();
+  const { addHotelImg, addImageToRoom, addCityImg } = useImageContext();
 
   return (
     <Formik
@@ -26,7 +32,16 @@ export const AddImgForm: React.FC<AddCityFormProps> = ({
       onSubmit={async (values) => {
         console.table(values);
         console.log("Clicked");
-        const data = await addImageToRoom(room.roomId, values.imgUrl);
+        if (room) {
+          // add img to room
+          await addImageToRoom(room.roomId, values.imgUrl);
+        } else if (hotel) {
+          // add img to hote
+          await addHotelImg(hotel.id, values.imgUrl);
+        } else if (city) {
+          //add img to city
+          await addCityImg(city.id, values.imgUrl);
+        }
         handleClose();
       }}
     >

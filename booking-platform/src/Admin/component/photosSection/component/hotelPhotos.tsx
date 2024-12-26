@@ -108,7 +108,9 @@ export const HotelPhotos: React.FC<any> = () => {
         <AddImgDialog
           handleClose={handleCloseAddImgDialog}
           open={openDialog}
-          room={hotel}
+          room={undefined}
+          hotel={hotel}
+          city={undefined}
         />
       </div>
       <div className="mb-10 flex flex-col flex-wrap ">

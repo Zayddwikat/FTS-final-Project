@@ -14,7 +14,7 @@ export const CloseDialogBtn = ({
     </button>
   );
 };
-export const AddImgDialog: React.FC<any> = ({ handleClose, open, room }) => {
+export const AddImgDialog: React.FC<any> = ({ handleClose, open, room , hotel , city   }) => {
   return (
     <Dialog
       open={open}
@@ -34,7 +34,7 @@ export const AddImgDialog: React.FC<any> = ({ handleClose, open, room }) => {
           <div className="flex flex-row items-start">
             <article className="w-full flex flex-col items-center border border-black rounded gap-4 py-5">
               {/* <AddCityForm handleClose={handleClose} /> */}
-              <AddImgForm handleClose={handleClose} room={room} />
+              <AddImgForm handleClose={handleClose} room={room} hotel={hotel} city={city} />
             </article>
             <CloseDialogBtn handleClose={handleClose} />
           </div>
