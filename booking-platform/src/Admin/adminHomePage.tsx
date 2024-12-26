@@ -9,9 +9,9 @@ export const AdminHomePage: React.FC<any> = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <main className="flex flex-row items-center justify-start  h-dvh overflow-hidden">
+    <main className="flex flex-row items-center justify-start  h-dvh overflow-x-hidden">
       <aside
-        className={`transition-all duration-700 ${
+        className={`transition-all duration-700 sticky top-0 ${
           isHovered ? "w-72" : "w-20"
         }`}
         onMouseEnter={() => setIsHovered(true)}

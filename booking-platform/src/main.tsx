@@ -26,6 +26,12 @@ import { AmenitiesPageRoom } from "./Admin/component/Amenities/component/Ameniti
 import { AmenitiesOption } from "./Admin/component/Amenities/component/amenitiesOption.js";
 import { TableContent } from "./Admin/component/Amenities/component/tableContent.js";
 import { CityProvider } from "./Admin/context/cityContext.js";
+import { AmenitiesInformation } from "./classes/amenitiesInformation.js";
+import { RoomPhotos } from "./Admin/component/photosSection/component/roomPhoos.js";
+import { PhotoMainPage } from "./Admin/component/photosSection/mainPagePhotos.js";
+import { ImageProvider } from "./Admin/context/imageContext.js";
+import { HotelPhotos } from "./Admin/component/photosSection/component/hotelPhotos.js";
+import { AdminSearch } from "./Admin/component/AdminSearchBar.js";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 
@@ -85,6 +91,29 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: "/AdminHome/photos/",
+        element: (
+          <>
+            <main className="w-auto flex-1 flex flex-col items-center justify-center my-4 ">
+              <header>
+                <AdminSearch />
+              </header>
+              <ImageProvider>
+                <HotelPhotos />
+              </ImageProvider>
+            </main>
+          </>
+        ),
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "/AdminHome/photos/:hotelId",
+            element: <>hi</>,
+            errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
         path: "/AdminHome/:hotelId/Rooms",
         element: (
           <RoomProvider>
@@ -116,7 +145,7 @@ const router = createBrowserRouter([
             element: (
               <div className="self-start">
                 <h1>Please select hotel or room to show the amenities</h1>
-                <TableContent data={[]} handleOpenDialog={() => {}} />
+                <TableContent data={[]} />
               </div>
             ),
           },
@@ -129,6 +158,25 @@ const router = createBrowserRouter([
             path: "/AdminHome/amenities/hotel/:Hotel",
             element: <AmenitiesOption />,
             errorElement: <ErrorPage />,
+          },
+        ],
+      },
+      {
+        path: "/AdminHome/:hotelId/Rooms/:roomId",
+        element: (
+          <ImageProvider>
+            <PhotoMainPage />,
+          </ImageProvider>
+        ),
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "/AdminHome/:hotelId/Rooms/:roomId/photos",
+            element: (
+              <ImageProvider>
+                <RoomPhotos />,
+              </ImageProvider>
+            ),
           },
         ],
       },

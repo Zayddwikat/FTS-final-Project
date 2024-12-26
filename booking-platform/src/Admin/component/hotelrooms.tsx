@@ -5,11 +5,9 @@ import { useRoomContext } from "../context/roomcontext";
 import { Button } from "../../Login/component/LoginButton";
 import { roomInformation } from "../../classes/roomInformation";
 import { AdminSearch } from "./AdminSearchBar";
-import { AddHotelDialog } from "./addHotelDialog";
 import { AddRoomDialog } from "./addRoomDialog";
 import { useSnakeBar } from "../hooks/useSnakBar";
 import { hotelObject } from "./CityInformationDrawer";
-import { DrawerDrawer } from "./Drawer";
 import { RoomDrawer } from "./roomDrawer";
 import { Snackbar } from "@mui/material";
 
@@ -37,6 +35,10 @@ export const HotelRooms: React.FC = () => {
   };
 
   const hotel = state.hotel as hotelObject;
+
+  console.table(hotel);
+
+  
   const checkIn = new Date().toISOString().split("T")[0];
   const checkOut = new Date(new Date().setDate(new Date().getDate() + 1))
     .toISOString()

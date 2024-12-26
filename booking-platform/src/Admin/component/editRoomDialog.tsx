@@ -106,7 +106,9 @@ export const EditRoomDialog: React.FC<any> = ({
                           size={"small"}
                           value={"Edit"}
                           isSubmitting={false}
-                          handleClick={() => {}}
+                          handleClick={() => {
+                            handleConfirm();
+                          }}
                           className={""}
                           children={undefined}
                           primary={true}
