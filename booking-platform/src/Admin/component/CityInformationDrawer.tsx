@@ -9,9 +9,11 @@ import { Button } from "../../Login/component/LoginButton";
 import { HotelCard } from "./hotelCard";
 import { DeleteConfirmation } from "./deleteConfirmation";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useHotelContext } from "../context/hotelContext";
 import { useCityContext } from "../context/cityContext";
+import TripImg from "../../assets/TripImg.jpg";
+import { Divider } from "@mui/material";
 
 interface CityInformationProps {
   city: CityInformation;
@@ -40,7 +42,7 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
   const navigate = useNavigate();
 
   const [includeHotels, setIncludeHotels] = useState<boolean>(false);
-  const { hotels, setHotels ,setFilteredHotels } = useHotelContext();
+  const { hotels, setHotels, setFilteredHotels } = useHotelContext();
 
   const { deleteCity } = useCityContext();
 
@@ -97,20 +99,27 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
         <div className="w-full h-dvh flex flex-col  mx-4 items-center my-4 ">
           {cityPhotos.data ? (
             <>
-              <div className="w-10/12 h-2/5 mb-6">
+              <div className="flex flex-col gap-4 ">
                 <img
-                  src={
-                    cityPhotos.data[0]?.url ??
-                    "https://oionline.com/wp-content/uploads/2018/03/notfound.jpg"
-                  }
-                  alt="City image"
+                  src={TripImg}
+                  alt="image"
                   style={{
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
                   }}
                 />
+                <Link
+                  to={`/AdminHome/photos/city/:${city.id}`}
+                  state={{
+                    data: city,
+                  }}
+                  className="text-blue-400 underline"
+                >
+                  all photos
+                </Link>
               </div>
+              <Divider />
             </>
           ) : (
             <div className="w-11/12">
@@ -159,7 +168,7 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
           <article className="self-start flex w-full flex-col justify-around  gap-2 my-4">
             <div className="flex flex-row justify-around">
               {includeHotels ? (
-                <div className=" flex flex-row w-8/12 gap-4">
+                <div className=" flex flex-row w-7/12 gap-4">
                   <p>
                     Number of Hotels: {hotels?.length > 0 ? hotels.length : 0}
                   </p>
@@ -186,8 +195,8 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
               <div
                 className={`flex flex-row   items-center  ${
                   includeHotels
-                    ? "justify-end w-9/12"
-                    : "justify-end w-full mr-6"
+                    ? "justify-end w-3/12"
+                    : "justify-end w-full mr-10"
                 }  `}
               >
                 <label className="" htmlFor="includeHotels">

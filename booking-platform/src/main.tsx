@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import LoginPage from "./Login/LoginPage.js";
 import { LoginProvider } from "./Login/Context/LoginContext.js";
 import IndexPage from "./IndexPage/IndexPage.js";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./ErrorPage";
 import HomePage from "./user/HomePage/HomePage.js";
 import { SearchProvider } from "./user/Context/SearchContextApi.js";
@@ -32,6 +32,7 @@ import { PhotoMainPage } from "./Admin/component/photosSection/mainPagePhotos.js
 import { ImageProvider } from "./Admin/context/imageContext.js";
 import { HotelPhotos } from "./Admin/component/photosSection/component/hotelPhotos.js";
 import { AdminSearch } from "./Admin/component/AdminSearchBar.js";
+import { CityPhotos } from "./Admin/component/photosSection/component/CityPhotos.js";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 
@@ -99,7 +100,7 @@ const router = createBrowserRouter([
                 <AdminSearch />
               </header>
               <ImageProvider>
-                <HotelPhotos />
+                <Outlet />
               </ImageProvider>
             </main>
           </>
@@ -108,7 +109,12 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/AdminHome/photos/:hotelId",
-            element: <>hi</>,
+            element: <HotelPhotos />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "/AdminHome/photos/city/:cityId",
+            element: <CityPhotos/>,
             errorElement: <ErrorPage />,
           },
         ],

@@ -10,6 +10,7 @@ export const ImageProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [images, setImages] = useState<Array<ImgObject>>([]);
   const [hotelImages, setHotelImages] = useState<Array<ImgObject>>([]);
+  const [cityImages, setCityImages] = useState<Array<ImgObject>>([]);
   const token = localStorage.getItem("ADMIN_TOKEN");
 
   const getRoomImage = async (roomId: number) => {
@@ -98,6 +99,63 @@ export const ImageProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  const addHotelImg = async (hotelId: number, imageUrl: string) => {
+    try {
+      const response = await fetch(`${baseUrl}/api/hotels/${hotelId}/photos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          url: imageUrl,
+        }),
+      })
+        .then((res) => res.json())
+        .catch((err) => new Error("Error in adding new Hotel image ", err));
+      setHotelImages([...hotelImages, response]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getCityGallery = async (cityId: number) => {
+    try {
+      const response = await fetch(`${baseUrl}/api/cities/${cityId}/photos`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .catch((err) => new Error("Error in fetching city Images  ", err));
+      setCityImages(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addCityImg = async (cityId: number, imgUrl: string) => {
+    try {
+      const response = await fetch(`${baseUrl}/api/cities/${cityId}/photos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          url: imgUrl,
+        }),
+      })
+        .then((res) => res.json())
+        .catch((err) => new Error("Error in adding image", err));
+      setCityImages([...cityImages, response]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <imageContext.Provider
       value={{
@@ -107,7 +165,11 @@ export const ImageProvider: React.FC<{ children: ReactNode }> = ({
         handleDeleteImgFromRoom,
         hotelImages,
         getHotelGallery,
-        deleteHotelImg
+        deleteHotelImg,
+        addHotelImg,
+        cityImages,
+        getCityGallery,
+        addCityImg,
       }}
     >
       {children}
