@@ -6,7 +6,7 @@ import { Button } from "./LoginButton";
 import PropTypes from "prop-types";
 import { useLoginContext } from "../Context/LoginContext";
 import { useNavigate } from "react-router-dom";
-
+import * as Yup from "yup";
 interface ButtonProps {
   passwordError: boolean;
 }
@@ -14,11 +14,18 @@ interface ButtonProps {
 export const LoginForm: React.FC<ButtonProps> = ({ passwordError }) => {
   const navigate = useNavigate();
   const { Login } = useLoginContext();
+
+  // const validateSchema = Yup.object({
+  //   userName: Yup.string().required(),
+  //   password: Yup.string().required(),
+  // });
+
   const formik = useFormik({
     initialValues: {
       userName: "",
       password: "",
     },
+
     onSubmit: async (values, { setSubmitting }) => {
       try {
         console.log(values);
