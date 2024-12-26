@@ -94,7 +94,7 @@ export const RoomCardDrawer: React.FC<adminHotelCardProps> = ({
           <CloseIcon />
         </Button>
       </div>
-      <div className="">
+      <div className="flex flex-col gap-4 mx-4">
         <img
           src={room?.roomPhotoUrl}
           alt="image"
@@ -104,7 +104,17 @@ export const RoomCardDrawer: React.FC<adminHotelCardProps> = ({
             objectFit: "cover",
           }}
         />
+        <Link
+          to={`/AdminHome/${hotel.id}/Rooms/${room.roomId}/photos`}
+          state={{
+            data: room,
+          }}
+          className="text-blue-400 underline"
+        >
+          all photos
+        </Link>
       </div>
+      <Divider />
       <div className="mx-4 w-full flex flex-col gap-2">
         <article className="flex md:flex-row flex-col items-start md:items-center w-12/12 justify-between mr-4">
           <div className="flex items-center gap-2">
