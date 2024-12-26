@@ -13,6 +13,7 @@ import { EditHotelDialog } from "./edithotelDialog";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetAvailableRooms } from "../../user/HotelPage/Hooks/useAvailableRooms";
+import { Divider } from "@mui/material";
 
 interface adminHotelCardProps {
   hotel: hotelObject;
@@ -90,7 +91,7 @@ export const AdminHotelCard: React.FC<adminHotelCardProps> = ({
           <CloseIcon />
         </Button>
       </div>
-      <div className="">
+      <div className="flex flex-col gap-4 mx-4">
         <img
           src={TripImg}
           alt="image"
@@ -100,7 +101,17 @@ export const AdminHotelCard: React.FC<adminHotelCardProps> = ({
             objectFit: "cover",
           }}
         />
+        <Link
+          to={`/AdminHome/photos/:${hotel.id}`}
+          state={{
+            data: hotel,
+          }}
+          className="text-blue-400 underline"
+        >
+          all photos
+        </Link>
       </div>
+      <Divider />
       <div className="mx-4 w-full flex flex-col gap-2">
         <article className="flex md:flex-row flex-col items-start md:items-center w-12/12 justify-between mr-4">
           <div className="flex items-center gap-2">
