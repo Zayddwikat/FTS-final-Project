@@ -23,93 +23,88 @@ interface locationInfo {
   post: PostObjectInformation;
   searchValue: any;
 }
+
 export const HotelPage: React.FC<any> = () => {
   const location = useLocation();
   const { post, searchValue }: locationInfo = location.state || {};
   const HotelQuery = useQuery({
     queryKey: ["hotel", post.hotelId],
     queryFn: () => {
-      // return Promise.reject();
       return useHotel(post.hotelId);
     },
   });
 
   if (HotelQuery.isLoading) return <LoadingScreen />;
-  () => console.log(HotelQuery.error);
   if (HotelQuery.error) return <ErrorPage />;
 
   return (
     <CartProvider>
-      <main className="flex  flex-col justify-center items-center">
+      <main className="flex flex-col items-center">
         <Header />
-        <SearchBar cityTextField={true} />
-        <main className="flex flex-col md:flex-row lg:flex-row items-start justify-start  w-[75dvw]">
-          <div className="flex flex-col justify-start items-start gap-2 w-[90%] ">
-            <article className="flex flex-col mx-2  items-center justify-center">
+        <SearchBar cityTextField={true} data={undefined} searchValues={searchValue} />
+
+        <main className="flex flex-col lg:flex-row items-start justify-start w-full lg:w-3/4">
+          {/* Left Column */}
+          <div className="flex flex-col gap-4 w-full lg:w-2/3 px-4 py-6">
+            <article className="flex flex-col items-start">
               <Box sx={{ pt: 1 }}>
-                <h1 className="text-2xl ">{HotelQuery.data.hotelName}</h1>
+                <h1 className="text-2xl font-bold">{HotelQuery.data.hotelName}</h1>
               </Box>
             </article>
-            <div className="flex gap-2 w-full md:h-[65dvh]">
-              <div className="lg:w-[100%] md:w-[100%] w-full p-2 h-full ">
-                <HotelGalleryContainer post={post} />
-              </div>
+
+            {/* Hotel Gallery */}
+            <div className="w-full h-[60vh] md:h-[65vh] lg:h-[50vh]">
+              <HotelGalleryContainer post={post} />
             </div>
-            <article className="mx-2 mb-4">
+
+            {/* Description */}
+            <article className="mx-2 mb-4 text-sm">
               <p>{HotelQuery.data.description}</p>
             </article>
+
+            {/* Popular Facilities */}
             <article className="mx-2 w-full">
-              <h2 className="text-xl">Most popular facilities</h2>
+              <h2 className="text-xl font-semibold">Most popular facilities</h2>
               <FacilitiesList dataArr={HotelQuery.data.amenities} />
             </article>
           </div>
-          <article className=" flex flex-col md:flex-col w-full md:w-[30%] rounded h-fit my-20 ">
-            <div className="border flex flex-col md:flex-row border-b-0 border-black w-full items-end justify-end rounded h-fit py-1 px-4">
-              <div className="flex flex-row items-center ">
-                <p className="text-sm px-2 rounded-md">
-                  {post.starRating
-                    ? post.starRating * 2 > 9.5
-                      ? "Excellent"
-                      : post.starRating * 2 > 8
-                      ? "Very Good"
-                      : post.starRating * 2 > 6
-                      ? "Good"
-                      : "Traditional"
-                    : post.hotelStarRating * 2 > 9.5
-                    ? "Excellent"
-                    : post.hotelStarRating * 2 > 8
-                    ? "Very Good"
-                    : post.hotelStarRating * 2 > 6
-                    ? "Good"
-                    : "Traditional"}
-                </p>
-                <p className="text-md border text-white bg-blue-700 p-0.5 rounded-md">
-                  {post.starRating
-                    ? post.starRating * 2
-                    : post.hotelStarRating * 2}{" "}
-                </p>
-              </div>
+
+          {/* Right Column */}
+          <article className="flex flex-col gap-4 w-full lg:w-1/3 bg-white border border-gray-300 p-4 rounded-md shadow-lg">
+            {/* Star Rating */}
+            <div className="flex justify-between items-center border-b pb-2">
+              <p className="text-sm px-2 py-1 rounded-md">
+                {post.starRating ? (post.starRating * 2 > 9.5 ? "Excellent" : post.starRating * 2 > 8 ? "Very Good" : post.starRating * 2 > 6 ? "Good" : "Traditional") : post.hotelStarRating * 2 > 9.5 ? "Excellent" : post.hotelStarRating * 2 > 8 ? "Very Good" : post.hotelStarRating * 2 > 6 ? "Good" : "Traditional"}
+              </p>
+              <p className="text-md border text-white bg-blue-700 p-0.5 rounded-md">
+                {post.starRating ? post.starRating * 2 : post.hotelStarRating * 2}
+              </p>
             </div>
-            <div className="border flex flex-row border-black w-full items-end justify-end rounded h-fit py-1 px-4 mb-2">
-              <div className="flex flex-row items-center gap-4 ">
-                <h3>Available Rooms</h3>
-                <p className="bg-blue-600 text-white p-0.5 rounded-md">
-                  {HotelQuery.data.availableRooms}
-                </p>
-              </div>
+
+            {/* Available Rooms */}
+            <div className="flex justify-between items-center py-2 border-b">
+              <h3 className="text-lg">Available Rooms</h3>
+              <p className="bg-blue-600 text-white p-1 rounded-md">
+                {HotelQuery.data.availableRooms}
+              </p>
             </div>
-            <SimpleMap
-              lat={HotelQuery.data.latitude}
-              lng={HotelQuery.data.longitude}
-            />
-            <div className="mt-2 flex flex-row items-center justify-start">
+
+            {/* Hotel Location Map */}
+            <SimpleMap lat={HotelQuery.data.latitude} lng={HotelQuery.data.longitude} />
+
+            {/* Reviews */}
+            <div className="mt-4">
               <Reviews post={post} />
             </div>
           </article>
         </main>
-        <div className="w-9/12 border border-grey border w-full mt-4 "></div>
-        <div className="md:w-[90dvw] w-full mt-4 md:flex ">
-          <h2 className="text-2xl md:w-[30%] self-start ">Available Rooms</h2>
+
+        {/* Divider */}
+        <div className="w-full border-t my-6"></div>
+
+        {/* Available Rooms Section */}
+        <div className="w-full px-4 md:px-8 lg:px-16">
+          <h2 className="text-2xl font-semibold mb-4">Available Rooms</h2>
           <AvailableRooms
             hotel={post}
             checkIn={searchValue.CheckIn}
@@ -117,7 +112,9 @@ export const HotelPage: React.FC<any> = () => {
             searchOption={searchValue}
           />
         </div>
-        <div className="w-[90dvw] mb-10">
+
+        {/* Reviews Section */}
+        <div className="w-full px-4 md:px-8 lg:px-16 mt-8">
           <ReviewPostPrimary {...post} />
         </div>
       </main>

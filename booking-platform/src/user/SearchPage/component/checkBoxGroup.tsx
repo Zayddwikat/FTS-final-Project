@@ -18,12 +18,13 @@ export const CheckBoxesGroup: React.FC<CheckBoxProps> = ({
   formik,
 }) => {
   const { onFilterChange } = useFilterSelected();
+
   return (
     <Box>
       <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
         <FormLabel component="legend">Most Used Filter</FormLabel>
         <FormGroup>
-          <div className="flex md:flex-row lg:flex-col ">
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-4">
             {filters.map((elem: string, index: number) => (
               <FormControlLabel
                 key={index}

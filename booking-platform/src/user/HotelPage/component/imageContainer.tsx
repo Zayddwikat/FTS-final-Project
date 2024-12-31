@@ -3,6 +3,12 @@ import PostObjectInformation from "../../../classes/postObjectInfo";
 import { getHotelGallery } from "../Hooks/useGetHotelsGallery";
 import { ErrorPage } from "../../../ErrorPage";
 import { LoadingScreen } from "../../../component/LoadingPage";
+import { LoginSwiperSection } from "../../../Login/component/LoginSwiperSection";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Autoplay,
+} from "swiper/modules";
 
 export interface ImgObject {
   id: number;
@@ -12,7 +18,7 @@ export interface ImgObject {
 export const HotelGalleryContainer: React.FC<any> = ({
   post,
 }: {
-  post: PostObjectInformation ;
+  post: PostObjectInformation;
 }) => {
   const hotelGallery = useQuery({
     queryKey: ["hotelGallery", post.hotelId],
@@ -26,7 +32,7 @@ export const HotelGalleryContainer: React.FC<any> = ({
   return (
     <div className="w-full h-full flex  flex-col gap-2">
       <div className="w-full flex flex-row gap-1 ">
-        <div className="w-full flex flex-row flex-wrap w-6/12  gap-1">
+        <div className="w-full flex flex-row flex-wrap w-4/12  gap-1">
           {hotelGallery.data.slice(0, 2).map((img: ImgObject) => {
             return (
               <div className="flex flex-row flex-wrap aspect-video">
@@ -44,11 +50,11 @@ export const HotelGalleryContainer: React.FC<any> = ({
             );
           })}
         </div>
-        <div className="w-full flex flex-row flex-wrap w-8/12  gap-1">
+        <div className="w-full flex flex-row flex-wrap w-11/12  gap-1">
           {hotelGallery.data.slice(2, 3).map((img: ImgObject) => {
             return (
-              <div className="flex flex-col aspect-video flex-wrap ">
-                <img
+              <div className="flex flex-col aspect-video w-[35dvw] flex-wrap ">
+                {/* <img
                   style={{
                     width: "100%",
                     height: "100%",
@@ -57,29 +63,38 @@ export const HotelGalleryContainer: React.FC<any> = ({
                   src={img.url}
                   className="rounded-lg"
                   alt="hotel gallery"
-                />
+                /> */}
+                <LoginSwiperSection imgs={hotelGallery.data} noTitle={true} />
               </div>
             );
           })}
         </div>
       </div>
-      <div className="flex flex-row h-[17%] gap-1">
-        {hotelGallery.data.slice(3).map((img: ImgObject) => {
-          return (
-            <div className="w-11/12">
-              <img
-                src={img.url}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-                className="rounded"
-                alt="hotel Photos"
-              ></img>
-            </div>
-          );
-        })}
+      <div className="flex flex-row h-[17%]">
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={6}
+          loop={true}
+          autoplay={{ delay: 4000 }}
+        >
+          {hotelGallery.data.slice(3).map((img: ImgObject) => (
+            <SwiperSlide key={img.id}>
+              <div className="md:w-[10dvw] h-full p-2">
+                <img
+                  src={img.url}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                  className="rounded px-4"
+                  alt="hotel Photos"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

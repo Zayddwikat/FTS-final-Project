@@ -35,10 +35,11 @@ export const Reviews: React.FC<ReviewsProps> = ({ post }) => {
         <div key={anchor}>
           <Button
             className=""
-            color="blue"
+            color=""
             handleClick={toggleDrawer(anchor, true)}
-            size=""
+            size="small"
             value="Reviews"
+            primary={false}
             isSubmitting={false}
           />
           <Drawer

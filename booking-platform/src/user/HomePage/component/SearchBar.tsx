@@ -168,13 +168,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
         {/* Search Button */}
         <Button
-          color={""}
-          size={"thick"}
-          value={"Search"}
+          color="primary"
+          size="large" // or any suitable size for the button
+          value="Search"
           isSubmitting={formik.isSubmitting}
           handleClick={formik.handleSubmit}
-          className={""}
-          children={undefined}
+          className="w-full sm:w-auto px-6 py-2 text-base sm:text-lg md:text-xl font-semibold bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-all duration-300"
           primary={true}
         />
       </form>

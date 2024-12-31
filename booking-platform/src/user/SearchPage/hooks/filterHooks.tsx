@@ -1,40 +1,84 @@
-import { FormikFormProps, FormikProps } from "formik";
+import { FormikProps } from "formik";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { hotelObject } from "../../../Admin/component/CityInformationDrawer";
+import { hotelInformation } from "../../../classes/hotelInformation";
+
 interface onFilterInformation {
   data: any;
-  formik: FormikProps<any>;
-}
-interface onFilterChangeProps {
   formik: FormikProps<any>;
 }
 
 export default function useFilterSelected() {
   const [filteredData, setFilteredData] = useState<any[]>([]);
+
   const onFilteredAdded = async ({ data, formik }: onFilterInformation) => {
-    if (formik.values.budget === 0) {
-      return data;
+    let filtered = [...data];
+
+    // Filter by Budget
+    if (formik.values.budget > 0) {
+      filtered = filtered.filter(
+        (hotel) => hotel.roomPrice >= formik.values.budget
+      );
     }
-    const filteredDataNew = data.filter(
-      (hotel) => hotel.roomPrice >= formik.values.budget
-    );
-    setFilteredData((prevData) => [...prevData, ...filteredDataNew]);
-    return filteredDataNew;
+
+    // Filter by doubleRoom
+    // if (formik.values.doubleRoom) {
+    //   filtered = filtered.filter((hotel: hotelInformation) =>
+    //     hotel.amenities.map((amen) => amen.name === "wifi")
+    //   );
+    // }
+
+    // Filter by Wifi
+    if (formik.values.Wifi) {
+      filtered = filtered.filter((hotel: hotelInformation) =>
+        hotel.amenities.map((amen) => amen.name === "wifi")
+      );
+    }
+
+    if (formik.values.rating > 0) {
+      filtered = filtered.filter(
+        (hotel) => hotel.rating >= formik.values.rating
+      );
+    }
+
+    if (formik.values.hotels) {
+      filtered = filtered.filter((hotel) => hotel.isHotel === true);
+    }
+
+    setFilteredData(filtered);
+    return filtered;
   };
 
-  const onFilterChange = (formik: FormikProps<any>, data: any, filter: any) => {
-    const resultArr = [];
-    if (formik.values.doubleRoom === true) {
-      const doubleRoom = data.filter((hotel) => {
-        if (hotel.roomType === "Double") resultArr.push(hotel);
-      });
-      console.log(resultArr);
-      return resultArr;
-    } else {
-      return data;
+  const onFilterChange = (formik: FormikProps<any>, data: any) => {
+    let resultArr = [...data];
+
+    // Handle all filters in one function
+    if (formik.values.hotels) {
+      resultArr = resultArr.filter((hotel) => hotel.isHotel === true);
     }
+
+    if (formik.values.Wifi === "true") {
+      resultArr = resultArr.filter((hotel) => hotel.hasWifi === true);
+    }
+
+    if (formik.values.doubleRoom) {
+      resultArr = resultArr.filter((hotel) => hotel.roomType === "Double");
+    }
+
+    if (formik.values.budget > 0) {
+      resultArr = resultArr.filter(
+        (hotel) => hotel.roomPrice >= formik.values.budget
+      );
+    }
+
+    if (formik.values.rating > 0) {
+      resultArr = resultArr.filter(
+        (hotel) => hotel.rating >= formik.values.rating
+      );
+    }
+
+    return resultArr;
   };
 
-  return { onFilterChange, onFilteredAdded };
+  return { onFilterChange, onFilteredAdded, filteredData };
 }
