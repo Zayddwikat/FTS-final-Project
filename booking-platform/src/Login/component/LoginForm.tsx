@@ -49,8 +49,11 @@ export const LoginForm: React.FC<ButtonProps> = ({ passwordError }) => {
     },
   });
   return (
-    <main className="">
-      <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2 ">
+    <main className="self-start flex flex-col ">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="flex flex-col gap-4 justify-evenly"
+      >
         <UserNameField
           id="userName"
           label="User Name"
@@ -62,12 +65,12 @@ export const LoginForm: React.FC<ButtonProps> = ({ passwordError }) => {
           error={passwordError ? passwordError : false}
           formik={formik}
         />{" "}
-        <div className="flex w-full flex-row items-center justify-center">
+        <div className="flex w-full my-4 flex-row items-center justify-center">
           <Button
             primary
-            handleClick={() => {}}
+            handleClick={formik.handleSubmit}
             color="blue"
-            size="large"
+            size=""
             value="Login"
             isSubmitting={false}
             className=""

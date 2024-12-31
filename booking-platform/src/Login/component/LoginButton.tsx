@@ -21,30 +21,29 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   primary,
 }) => {
+  // Determine the button size based on the 'size' prop
+  const buttonSize = size === "large"
+    ? "w-full"
+    : size === "small"
+    ? "w-auto px-3 py-1"
+    : size === "thick"
+    ? "w-[6.99dvw] px-4 py-2"
+    : "w-[10dvw] px-4 py-2";
+
+  // Conditional class names based on primary prop
+  const buttonStyle = primary
+    ? "bg-blue-300 text-white border rounded"
+    : "underline text-blue-500 border-none";
+
   return (
     <button
       onClick={handleClick}
-      type="submit"
-      value="Login"
-      className={
-        `px-4  ${
-          size === "large"
-            ? `w-full`
-            : size === "small"
-            ? ""
-            : size === "thick"
-            ? "w-[6.99dvw] "
-            : "w-[10dvw]"
-        } ${
-          primary
-            ? `border bg-blue-300 rounded`
-            : `underline text-blue-500`
-        } ` + className
-      }
+      type="button"
+      className={`${buttonSize} ${buttonStyle} ${className} disabled:opacity-50`}
       disabled={isSubmitting}
     >
       {children}
-      {value}
+      {value && <span>{value}</span>}
     </button>
   );
 };
