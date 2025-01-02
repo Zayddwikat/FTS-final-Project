@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  background-color: whitesmoke;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  /* color: whitesmoke; */
+}
+.error-page {
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  place-items: center;
+}
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.animated {
+  /* color: hsl(0, 0%, 28%); */
+  font-size: 50px;
+  font-weight: bold;
+  font-family: monospace;
+  letter-spacing: 7px;
+  cursor: pointer;
+}
+
+.animated span {
+  transition: 0.5s ease-out;
+}
+.animated:hover span:nth-child(1) {
+  margin-right: 5px;
+}
+
+.animated:hover span:nth-child(2) {
+  margin-left: 30px;
+}
+.animated:hover {
+  transition: 0.5s ease-out;
+  margin-left: 100px;
+}
+.animated:hover span {
+  color: transparent;
+  /* text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff; */
+}
+
+.img-cart {
+  background-image: url("./IndexPage/assets/background2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: bottom;
+  margin: 0;
+}
+
+.text-field::placeholder {
+  color: black;
+}
+
+.sticky-con {
+  position: sticky;
+  position: -webkit-sticky;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+
+
+.custom-swiper {
+  position: relative;
+  padding-bottom: 40px; /* Add space below the image for pagination */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+
+.image {
+  width: 20px;
+  padding-left: 20px;
+  height: auto;
+  object-fit: contain;
+}
+
+.swiper-pagination {
+  margin-top: 20px; /* Space between pagination and image */
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  top: 50%; /* Position buttons vertically centered */
+  transform: translateY(-50%);
+}
+
+.swiper-button-prev {
+  left: 0px; /* Space between the left button and the image */
+}
+
+.swiper-button-next {
+  right: 10px; /* Space between the right button and the image */
+}
+
