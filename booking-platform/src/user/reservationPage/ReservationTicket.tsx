@@ -1,9 +1,12 @@
 import React from "react";
 import { ReservationDetails } from "../../classes/reservationInfo";
+import { Button } from "../../Login/component/LoginButton";
 
+interface ReservationTicketProps extends ReservationDetails {
+  deleteReservation: (confirmationNumber: string) => void;
+}
 
-
-export const ReservationTicket: React.FC<ReservationDetails> = ({
+export const ReservationTicket: React.FC<ReservationTicketProps> = ({
   customerName,
   hotelName,
   roomNumber,
@@ -13,7 +16,12 @@ export const ReservationTicket: React.FC<ReservationDetails> = ({
   paymentMethod,
   bookingStatus,
   confirmationNumber,
+  deleteReservation,
 }) => {
+  const handleDelete = () => {
+    deleteReservation(confirmationNumber); 
+  };
+
   return (
     <div className="max-w-xs sm:max-w-sm md:max-w-md mx-auto bg-white border shadow-lg rounded-xl relative overflow-hidden p-4">
       <div className="flex justify-between items-center bg-blue-600 text-white px-3 py-1.5 rounded-t-lg">
@@ -71,6 +79,19 @@ export const ReservationTicket: React.FC<ReservationDetails> = ({
             className="w-16 h-16 sm:w-20 sm:h-20"
           />
         </div>
+      </div>
+
+      <div className="flex justify-center mt-4">
+        <Button
+          color="red"
+          size="small"
+          value="Delete Reservation"
+          isSubmitting={false}
+          handleClick={handleDelete}
+          className="bg-red-500 text-white"
+          primary={true}
+          children={undefined}
+        />
       </div>
     </div>
   );

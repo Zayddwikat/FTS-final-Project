@@ -32,7 +32,6 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
   checkOut,
   searchOption,
 }) => {
-  const { newBook } = useCartContext();
   const formik = useFormik({
     initialValues: {
       customerName: "",
@@ -94,9 +93,7 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
             optional?: React.ReactNode;
           } = {};
           if (isStepOptional(index)) {
-            labelProps.optional = (
-              <Typography variant="caption"></Typography>
-            );
+            labelProps.optional = <Typography variant="caption"></Typography>;
           }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
@@ -115,7 +112,6 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
             <Divider />
             <SelectionSection searchOption={searchOption} />
           </div>
-
           <CustomerInformationForm
             hotel={hotel}
             roomInformationObject={roomInformationObject}

@@ -1,28 +1,18 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { ReservationDetails } from "../../classes/reservationInfo";
 import { baseUrl } from "../../const/constantVariables";
 
-interface CartContextProps {
-  reservationList: Array<ReservationDetails>;
-  newBook: (
-    customerName: string,
-    hotelName: string,
-    roomNumber: string,
-    roomType: string,
-    bookingDateTime: string,
-    totalCost: number,
-    paymentMethod: string
-  ) => Promise<void>; // Ensure newBook is async
-}
-
-const CartContext = createContext<CartContextProps | null>(null);
+const CartContext = createContext<any>(0);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const token = localStorage.getItem("USER_TOKEN");
   const [reservationList, setReservationList] = useState<ReservationDetails[]>(
-    []
+    () => {
+      const savedReservations = localStorage.getItem("reservations");
+      return savedReservations ? JSON.parse(savedReservations) : [];
+    }
   );
 
   const newBook = async (
@@ -34,6 +24,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     totalCost: number,
     paymentMethod: string
   ): Promise<void> => {
+    console.log(
+      customerName,
+      hotelName,
+      roomNumber,
+      roomType,
+      bookingDateTime,
+      totalCost,
+      paymentMethod
+    );
+
     if (!token) {
       throw new Error("No token found");
     }
@@ -61,15 +61,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
       if (!response.ok) {
         throw new Error("Failed to create booking");
       }
-
-      const result: ReservationDetails = await response.json(); // Assume the API returns a reservation object
-
+      const result: ReservationDetails = await response.json();
       console.table(result);
-
-      // Append the new reservation to the list
       setReservationList((prevReservation: ReservationDetails[]) => [
         ...prevReservation,
-        result, // Append the reservation details (result)
+        result,
       ]);
     } catch (err) {
       console.error("Error in adding new Reservation:", err);
@@ -77,17 +73,31 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const getReservation = () => {
+    return reservationList;
+  };
+
+  const deleteReservation = (confirmationNumber: string) => {
+    setReservationList((prevReservations) =>
+      prevReservations.filter(
+        (reservation) => reservation.confirmationNumber !== confirmationNumber
+      )
+    );
+  };
+
+  useEffect(() => {
+    console.log("Reservation list updated:", reservationList);
+    localStorage.setItem("reservations", JSON.stringify(reservationList));
+  }, [reservationList]);
   return (
-    <CartContext.Provider value={{ reservationList, newBook }}>
+    <CartContext.Provider
+      value={{ reservationList, newBook, getReservation, deleteReservation }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
-export const useCartContext = (): CartContextProps => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCartContext must be used within a CartProvider");
-  }
-  return context;
+export const useCartContext = () => {
+  return useContext(CartContext);
 };

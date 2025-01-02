@@ -69,9 +69,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/cart",
-    element: <ReservationPage />,
-
+    path: "/reservation",
+    element: (
+      <CartProvider>
+        <ReservationPage />
+      </CartProvider>
+    ),
     errorElement: <ErrorPage />,
   },
   {
@@ -221,11 +224,11 @@ if (rootElement) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <LoginProvider>
-          <CartProvider>
-            <Elements stripe={stripePromise}>
+          <Elements stripe={stripePromise}>
+            <CartProvider>
               <RouterProvider router={router} />
-            </Elements>
-          </CartProvider>
+            </CartProvider>
+          </Elements>
         </LoginProvider>
       </QueryClientProvider>
     </StrictMode>
