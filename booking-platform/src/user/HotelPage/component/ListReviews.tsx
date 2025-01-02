@@ -14,10 +14,6 @@ interface ListReviewProps {
 }
 
 export const ListReviews: React.FC<ListReviewProps> = ({ post, onClose }) => {
-  console.log("the function is : ", onClose);
-  const addReviews = () => {};
-  console.log("the Post Is : ", post);
-
   return (
     <>
       <div className="m-4">

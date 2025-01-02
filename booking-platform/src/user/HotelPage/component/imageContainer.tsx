@@ -53,17 +53,7 @@ export const HotelGalleryContainer: React.FC<any> = ({
         <div className="w-full flex flex-row flex-wrap w-11/12  gap-1">
           {hotelGallery.data.slice(2, 3).map((img: ImgObject) => {
             return (
-              <div className="flex flex-col aspect-video w-[35dvw] flex-wrap ">
-                {/* <img
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                  src={img.url}
-                  className="rounded-lg"
-                  alt="hotel gallery"
-                /> */}
+              <div className="flex flex-col aspect-video w-[35dvw] flex-wrap ">   
                 <LoginSwiperSection imgs={hotelGallery.data} noTitle={true} />
               </div>
             );

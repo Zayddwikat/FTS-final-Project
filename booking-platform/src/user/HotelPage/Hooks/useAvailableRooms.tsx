@@ -1,11 +1,4 @@
-export const useGetAvailableRooms = async ({
-  hotel,
-  checkIn,
-  checkOut,
-}: {
-  checkIn: string;
-  checkOut: string;
-}) => {
+export const useGetAvailableRooms = async ({ hotel, checkIn, checkOut }) => {
   console.log(hotel, checkIn, checkOut);
   const str = `https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api/hotels/${
     hotel.hotelId ?? hotel.id

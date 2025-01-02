@@ -114,7 +114,7 @@ export const HotelPage: React.FC<any> = () => {
         </div>
 
         {/* Reviews Section */}
-        <div className="w-full px-4 md:px-8 lg:px-16 mt-8">
+        <div className="w-full px-4 md:px-8 lg:px-16 mt-8 mb-20">
           <ReviewPostPrimary {...post} />
         </div>
       </main>
