@@ -15,16 +15,16 @@ export const AvailableRooms: React.FC<any> = ({
   checkOut,
   searchOption,
 }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [openCheckOut, setOpenCheckOut] = useState<number | null>(null);
-  const { addOneToCart } = useCartContext();
+  const [openIndex, setOpenIndex] = useState<number>(-1);
+  const [openCheckOut, setOpenCheckOut] = useState<number>(-1);
+ 
 
   const handleOpenCheckOut = (index: number) => {
     setOpenCheckOut(index);
   };
 
   const handleCloseCheckOut = () => {
-    setOpenCheckOut(null);
+    setOpenCheckOut(-1);
   };
 
   const handleClickOpen = (index: number) => {
@@ -32,7 +32,7 @@ export const AvailableRooms: React.FC<any> = ({
   };
 
   const handleClose = () => {
-    setOpenIndex(null);
+    setOpenIndex(-1);
   };
 
   const roomsQuery = useQuery({
@@ -81,6 +81,7 @@ export const AvailableRooms: React.FC<any> = ({
                   element={element}
                   handleOpenCheckOut={handleOpenCheckOut}
                   index={index}
+
                 />
               </td>
               <td className="border border-gray-300 px-2 py-1 text-xs md:text-sm">

@@ -2,6 +2,7 @@ import { Button } from "../../../Login/component/LoginButton";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ChildCareIcon from "@mui/icons-material/ChildCare";
 import { AmenitiesInformation } from "../../../classes/amenitiesInformation";
+import { useCartContext } from "../../Context/cartContext";
 
 export const RoomDialogInformation: React.FC<any> = ({
   element,
@@ -9,6 +10,7 @@ export const RoomDialogInformation: React.FC<any> = ({
   index,
   handleClose,
 }) => {
+  
   return (
     <>
       <article className="flex flex-col w-full justify-between ">

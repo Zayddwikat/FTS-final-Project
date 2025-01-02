@@ -4,6 +4,7 @@ import { LoadingScreen } from "../../../component/LoadingPage";
 import { confirmBooking } from "../hooks/confirmBooking";
 import { onDateSub } from "../../HomePage/component/SearchPost";
 import { formatTimestampWithoutSeconds } from "./customerInformation";
+import { useCartContext } from "../../Context/cartContext";
 
 export const ConformationBooking: React.FC<any> = ({
   roomInformationObject,
@@ -12,19 +13,21 @@ export const ConformationBooking: React.FC<any> = ({
 }) => {
   const differenceInDays = new Date().toISOString();
   console.table("formik values IS: ", formik.values);
+  const { newBook } = useCartContext();
   const confirmQuery = useQuery({
     queryKey: ["confirmBooking"],
     queryFn: async () => {
       console.log("iam here");
-      return await confirmBooking({
-        customerName: formik.values.customerName ?? "user",
-        hotelName: hotel.hotelName ?? "Plaza",
-        roomNumber: roomInformationObject.roomNumber ?? 101,
-        roomType: roomInformationObject.roomType ?? "Standard",
-        bookingDateTime: differenceInDays,
-        totalCost: roomInformationObject.price ?? 150,
-        paymentMethod: formik.values.paymentMethod ?? "Cash",
-      });
+      await newBook(
+        formik.values.customerName ?? "user",
+        hotel.hotelName ?? "Plaza",
+        roomInformationObject.roomNumber ?? 101,
+        roomInformationObject.roomType ?? "Standard",
+        differenceInDays,
+        roomInformationObject.price ?? 150,
+        formik.values.paymentMethod ?? "Cash"
+      );
+      return 1;
     },
   });
   if (confirmQuery.error) return <ErrorPage />;

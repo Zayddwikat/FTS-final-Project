@@ -14,6 +14,7 @@ import { CustomerInformationForm } from "./customerInformation";
 import { CheckOutPage } from "./checkOutPage";
 import { ConformationBooking } from "./confirmationOfBooking";
 import { useFormik } from "formik";
+import { useCartContext } from "../../Context/cartContext";
 
 interface hotelInformationProps {
   roomInformationObject: roomInformation;
@@ -22,7 +23,7 @@ interface hotelInformationProps {
   checkOut: string;
   searchOption: any;
 }
-const steps = ["Create an ad group", "Create an ad"];
+const steps = ["Reservation info", "Confirmed Reservation"];
 
 export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
   roomInformationObject,
@@ -31,6 +32,7 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
   checkOut,
   searchOption,
 }) => {
+  const { newBook } = useCartContext();
   const formik = useFormik({
     initialValues: {
       customerName: "",
@@ -41,7 +43,7 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
       totalCost: roomInformationObject.price ?? 0,
       paymentMethod: "",
     },
-    onSubmit: () => {},
+    onSubmit: async (values) => {},
   });
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -72,8 +74,6 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
 
   const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
       throw new Error("You can't skip a step that isn't optional.");
     }
 
@@ -95,7 +95,7 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
           } = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
+              <Typography variant="caption"></Typography>
             );
           }
           if (isStepSkipped(index)) {
@@ -140,11 +140,6 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
           </main>
         </>
       ) : (
-        // <React.Fragment>
-        //   <Typography sx={{ mt: 2, mb: 1 }}>
-        //     All steps completed - you&apos;re finished
-        //   </Typography>
-        // </React.Fragment>
         <React.Fragment>
           <Box
             sx={{

@@ -47,7 +47,7 @@ const validationSchema = Yup.object({
 });
 
 interface SearchBarProps {
-  data: Partial<SearchFormData>;
+  data: Partial<SearchFormData> | undefined;
   cityTextField: boolean;
   searchValues: Partial<SearchFormData>;
 }
