@@ -5,6 +5,7 @@ import { confirmBooking } from "../hooks/confirmBooking";
 import { onDateSub } from "../../HomePage/component/SearchPost";
 import { formatTimestampWithoutSeconds } from "./customerInformation";
 import { useCartContext } from "../../Context/cartContext";
+import { ReservationTicket } from "../../reservationPage/ReservationTicket";
 
 export const ConformationBooking: React.FC<any> = ({
   roomInformationObject,
@@ -13,7 +14,7 @@ export const ConformationBooking: React.FC<any> = ({
 }) => {
   const differenceInDays = new Date().toISOString();
   console.table("formik values IS: ", formik.values);
-  const { newBook } = useCartContext();
+  const { newBook, reservationList } = useCartContext();
   const confirmQuery = useQuery({
     queryKey: ["confirmBooking"],
     queryFn: async () => {
@@ -32,11 +33,11 @@ export const ConformationBooking: React.FC<any> = ({
   });
   if (confirmQuery.error) return <ErrorPage />;
   if (confirmQuery.isLoading) return <LoadingScreen />;
+  console.log(reservationList);
   return (
     <>
-      {}
       thank's for Booking from our site, The Booking information will send to
-      your email.
+      your email. You can check your reservation from the reservation page
     </>
   );
 };
