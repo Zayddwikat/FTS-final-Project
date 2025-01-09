@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { LoadingScreen } from "../../../../component/LoadingPage";
 import { ErrorPage } from "../../../../ErrorPage";
 import { useLocation } from "react-router-dom";
-import { roomInformation } from "../../../../classes/roomInformation";
+import { roomInformation } from "../../../../data_module/roomInformation";
 import { getRoomGallery } from "../../../../user/HotelPage/Hooks/getRoomGallery";
 import { useState } from "react";
 import { Button } from "../../../../Login/component/LoginButton";

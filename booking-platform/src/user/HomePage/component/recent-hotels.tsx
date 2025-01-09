@@ -5,7 +5,7 @@ import LoadingPost from "./LoadingPost";
 import { ErrorPage } from "../../../ErrorPage";
 import { recentHotels } from "../hooks/recentHotels";
 import { RecentViewedPost } from "./recentViewedPost";
-import { recentHotelsInformation } from "../../../classes/recentHotelsPost";
+import { recentHotelsInformation } from "../../../data_module/recentHotelsPost";
 import { Link } from "react-router-dom";
 
 interface RecentHotelsProps {

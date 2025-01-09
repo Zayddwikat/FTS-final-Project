@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import PostObjectInformation from "../../../classes/postObjectInfo";
+import PostObjectInformation from "../../../data_module/postObjectInfo";
 import { getHotelGallery } from "../Hooks/useGetHotelsGallery";
 import { ErrorPage } from "../../../ErrorPage";
 import { LoadingScreen } from "../../../component/LoadingPage";

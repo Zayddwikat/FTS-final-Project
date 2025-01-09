@@ -12,9 +12,9 @@ import { ImgObject } from "../../../../user/HotelPage/component/imageContainer";
 import { DeleteConfirmation } from "../../deleteConfirmation";
 import { Snackbar } from "@mui/material";
 import { useSnakeBar } from "../../../hooks/useSnakBar";
-import { hotelInformation } from "../../../../classes/hotelInformation";
+import { hotelInformation } from "../../../../data_module/hotelInformation";
 import { hotelObject } from "../../CityInformationDrawer";
-import { CityInformation } from "../../../../classes/Cities";
+import { CityInformation } from "../../../../data_module/Cities";
 
 export const CityPhotos: React.FC<any> = () => {
   const { state } = useLocation();

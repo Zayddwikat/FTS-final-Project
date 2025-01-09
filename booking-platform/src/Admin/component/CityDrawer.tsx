@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import Drawer from "@mui/material/Drawer";
-import { CityInformation } from "../../classes/Cities";
+import { CityInformation } from "../../data_module/Cities";
 import { Button } from "../../Login/component/LoginButton";
 import { CityInformationDrawer } from "./CityInformationDrawer";
 

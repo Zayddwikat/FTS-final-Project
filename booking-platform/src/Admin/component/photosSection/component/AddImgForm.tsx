@@ -1,10 +1,10 @@
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useImageContext } from "../../../context/imageContext";
-import { roomInformation } from "../../../../classes/roomInformation";
+import { roomInformation } from "../../../../data_module/roomInformation";
 import { Button } from "../../../../Login/component/LoginButton";
 import { hotelObject } from "../../CityInformationDrawer";
-import { CityInformation } from "../../../../classes/Cities";
+import { CityInformation } from "../../../../data_module/Cities";
 
 interface AddCityFormProps {
   handleClose: () => void;

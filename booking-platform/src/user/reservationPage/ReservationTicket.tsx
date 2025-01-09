@@ -1,5 +1,5 @@
 import React from "react";
-import { ReservationDetails } from "../../classes/reservationInfo";
+import { ReservationDetails } from "../../data_module/reservationInfo";
 import { Button } from "../../Login/component/LoginButton";
 
 interface ReservationTicketProps extends ReservationDetails {

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { CityInformation } from "../../classes/Cities";
+import { CityInformation } from "../../data_module/Cities";
 import { getCityInfo } from "../hooks/getCityInfo";
 import { LoadingScreen } from "../../component/LoadingPage";
 import { ErrorPage } from "../../ErrorPage";

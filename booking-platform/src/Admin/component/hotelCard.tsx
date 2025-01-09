@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { CityInformation } from "../../classes/Cities";
+import { CityInformation } from "../../data_module/Cities";
 import { hotelObject } from "./CityInformationDrawer";
 import { deleteHotel } from "../hooks/deleteHotelFromCity";
 import { ErrorPage } from "../../ErrorPage";

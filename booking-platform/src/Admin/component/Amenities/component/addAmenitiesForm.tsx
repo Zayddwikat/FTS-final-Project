@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Button } from "../../../../Login/component/LoginButton";
 import { useAmenitiesContext } from "../../../context/amenitiesContext";
 import { hotelObject } from "../../CityInformationDrawer";
-import { roomInformation } from "../../../../classes/roomInformation";
+import { roomInformation } from "../../../../data_module/roomInformation";
 
 interface AddCityFormProps {
   room: roomInformation;

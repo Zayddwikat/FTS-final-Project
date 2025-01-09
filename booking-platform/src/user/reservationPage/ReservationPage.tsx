@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ReservationTicket } from "./ReservationTicket";
 import Header from "../HomePage/component/header";
 import { useCartContext } from "../Context/cartContext";
-import { ReservationDetails } from "../../classes/reservationInfo";
+import { ReservationDetails } from "../../data_module/reservationInfo";
 
 export const ReservationPage: React.FC = () => {
   const { reservationList, deleteReservation } = useCartContext();

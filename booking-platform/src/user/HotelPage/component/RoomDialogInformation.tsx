@@ -1,7 +1,7 @@
 import { Button } from "../../../Login/component/LoginButton";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ChildCareIcon from "@mui/icons-material/ChildCare";
-import { AmenitiesInformation } from "../../../classes/amenitiesInformation";
+import { AmenitiesInformation } from "../../../data_module/amenitiesInformation";
 import { useCartContext } from "../../Context/cartContext";
 
 export const RoomDialogInformation: React.FC<any> = ({

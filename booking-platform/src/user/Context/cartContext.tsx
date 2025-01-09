@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { ReservationDetails } from "../../classes/reservationInfo";
+import { ReservationDetails } from "../../data_module/reservationInfo";
 import { baseUrl } from "../../const/constantVariables";
 
 const CartContext = createContext<any>(0);

@@ -3,9 +3,9 @@ import { deleteHotel } from "../hooks/deleteHotelFromCity";
 import { hotelObject } from "../component/CityInformationDrawer";
 import { Anchor } from "../component/Drawer";
 import { baseUrl } from "../../const/constantVariables";
-import { AmenitiesInformation } from "../../classes/amenitiesInformation";
-import { roomInformation } from "../../classes/roomInformation";
-import { roomAmenities } from "../../classes/roomAmenities";
+import { AmenitiesInformation } from "../../data_module/amenitiesInformation";
+import { roomInformation } from "../../data_module/roomInformation";
+import { roomAmenities } from "../../data_module/roomAmenities";
 
 export const AmenitiesContext = createContext<any>([]);
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
-import PostObjectInformation from "../../../classes/postObjectInfo";
+import PostObjectInformation from "../../../data_module/postObjectInfo";
 import { Button } from "../../../Login/component/LoginButton";
 import { ListReviews } from "./ListReviews";
 

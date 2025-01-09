@@ -26,7 +26,7 @@ import { AmenitiesPageRoom } from "./Admin/component/Amenities/component/Ameniti
 import { AmenitiesOption } from "./Admin/component/Amenities/component/amenitiesOption.js";
 import { TableContent } from "./Admin/component/Amenities/component/tableContent.js";
 import { CityProvider } from "./Admin/context/cityContext.js";
-import { AmenitiesInformation } from "./classes/amenitiesInformation.js";
+import { AmenitiesInformation } from "./data_module/amenitiesInformation.js";
 import { RoomPhotos } from "./Admin/component/photosSection/component/roomPhoos.js";
 import { PhotoMainPage } from "./Admin/component/photosSection/mainPagePhotos.js";
 import { ImageProvider } from "./Admin/context/imageContext.js";

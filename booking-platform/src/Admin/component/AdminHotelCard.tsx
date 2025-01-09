@@ -5,7 +5,7 @@ import { useHotel } from "../../user/HotelPage/Hooks/useGetHotel";
 import TripImg from "../../assets/TripImg.jpg";
 import { hotelObject } from "./CityInformationDrawer";
 import { Button } from "../../Login/component/LoginButton";
-import { CityInformation } from "../../classes/Cities";
+import { CityInformation } from "../../data_module/Cities";
 import { useHotelContext } from "../context/hotelContext";
 import { useState } from "react";
 import { DeleteConfirmation } from "./deleteConfirmation";

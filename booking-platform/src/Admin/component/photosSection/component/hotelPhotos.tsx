@@ -12,7 +12,7 @@ import { ImgObject } from "../../../../user/HotelPage/component/imageContainer";
 import { DeleteConfirmation } from "../../deleteConfirmation";
 import { Snackbar } from "@mui/material";
 import { useSnakeBar } from "../../../hooks/useSnakBar";
-import { hotelInformation } from "../../../../classes/hotelInformation";
+import { hotelInformation } from "../../../../data_module/hotelInformation";
 import { hotelObject } from "../../CityInformationDrawer";
 
 export const HotelPhotos: React.FC<any> = () => {

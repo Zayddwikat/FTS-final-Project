@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { CityInformation } from "../../classes/Cities";
+import { CityInformation } from "../../data_module/Cities";
 import { baseUrl } from "../../const/constantVariables";
 
 export const CityContext = createContext<any>([]);

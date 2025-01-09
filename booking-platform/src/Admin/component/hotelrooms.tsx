@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useRoomContext } from "../context/roomcontext";
 import { Button } from "../../Login/component/LoginButton";
-import { roomInformation } from "../../classes/roomInformation";
+import { roomInformation } from "../../data_module/roomInformation";
 import { AdminSearch } from "./AdminSearchBar";
 import { AddRoomDialog } from "./addRoomDialog";
 import { useSnakeBar } from "../hooks/useSnakBar";

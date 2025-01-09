@@ -1,4 +1,4 @@
-import { AmenitiesInformation } from "../../../../classes/amenitiesInformation";
+import { AmenitiesInformation } from "../../../../data_module/amenitiesInformation";
 import { Button } from "../../../../Login/component/LoginButton";
 
 interface TableContentProp {

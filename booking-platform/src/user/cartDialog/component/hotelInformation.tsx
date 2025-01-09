@@ -1,6 +1,6 @@
 import { Divider } from "@mui/material";
-import { hotelInformation } from "../../../classes/hotelInformation";
-import { roomInformation } from "../../../classes/roomInformation";
+import { hotelInformation } from "../../../data_module/hotelInformation";
+import { roomInformation } from "../../../data_module/roomInformation";
 import { CheckInCheckOutSection } from "./checkInCheckOutSection";
 import { SelectionSection } from "./yourSelectionSection";
 import * as React from "react";

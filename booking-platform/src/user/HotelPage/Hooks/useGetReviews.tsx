@@ -1,4 +1,4 @@
-import PostObjectInformation from "../../../classes/postObjectInfo";
+import PostObjectInformation from "../../../data_module/postObjectInfo";
 
 export const useGetReview = async ({
   post,

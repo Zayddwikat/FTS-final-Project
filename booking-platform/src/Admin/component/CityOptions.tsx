@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCities } from "../hooks/getCities";
 import { ErrorPage } from "../../ErrorPage";
 import { LoadingScreen } from "../../component/LoadingPage";
-import { CityInformation } from "../../classes/Cities";
+import { CityInformation } from "../../data_module/Cities";
 import { Button } from "../../Login/component/LoginButton";
 import { useState } from "react";
 import { addCity } from "../hooks/addCity";

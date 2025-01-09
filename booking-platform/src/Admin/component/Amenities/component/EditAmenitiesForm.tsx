@@ -3,7 +3,7 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { Button } from "../../../../Login/component/LoginButton";
 import { useAmenitiesContext } from "../../../context/amenitiesContext";
-import { AmenitiesInformation } from "../../../../classes/amenitiesInformation";
+import { AmenitiesInformation } from "../../../../data_module/amenitiesInformation";
 
 interface AddCityFormProps {
   handleClose: () => void;

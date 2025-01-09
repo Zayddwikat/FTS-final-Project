@@ -7,7 +7,7 @@ import { useCartContext } from "../../Context/cartContext";
 import { CartPage } from "../../cartDialog/CartPage";
 import { LoadingScreen } from "../../../component/LoadingPage";
 import { ErrorPage } from "../../../ErrorPage";
-import { roomInformation } from "../../../classes/roomInformation";
+import { roomInformation } from "../../../data_module/roomInformation";
 
 export const AvailableRooms: React.FC<any> = ({
   hotel,

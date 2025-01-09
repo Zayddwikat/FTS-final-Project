@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { recentHotelsInformation } from "../../../classes/recentHotelsPost";
+import { recentHotelsInformation } from "../../../data_module/recentHotelsPost";
 
 interface RecentViewedProps {
   post: recentHotelsInformation;

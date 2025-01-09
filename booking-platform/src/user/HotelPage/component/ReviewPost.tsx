@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import ReviewObjectInfo from "../../../classes/ReviewsObjectInfo";
-import PostObjectInformation from "../../../classes/postObjectInfo";
+import ReviewObjectInfo from "../../../data_module/ReviewsObjectInfo";
+import PostObjectInformation from "../../../data_module/postObjectInfo";
 import { Avatar, Divider } from "@mui/material";
 
 interface ReviewPostProps {

@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { roomInformation } from "../../classes/roomInformation";
+import { roomInformation } from "../../data_module/roomInformation";
 import { baseUrl } from "../../const/constantVariables";
 
 export const RoomContext = createContext<any>([]);
