@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { AdminAside } from "./Aside/AsideAdmin";
+import { AdminAside } from "./aside/asideAdmin";
 import { useState } from "react";
 
 export const AdminHomePage: React.FC<any> = () => {

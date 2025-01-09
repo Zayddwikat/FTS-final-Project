@@ -2,7 +2,7 @@ import { PasswordField } from "./passwordField";
 import { UserNameField } from "./userName";
 import { useFormik } from "formik";
 import "../../tailwindCss.css";
-import { Button } from "./LoginButton";
+import { Button } from "./loginButton";
 import PropTypes from "prop-types";
 import { useLoginContext } from "../Context/LoginContext";
 import { useNavigate } from "react-router-dom";

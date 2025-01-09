@@ -1,6 +1,6 @@
 import TripImg from "../../../assets/TripImg.jpg";
 import { loginImgs } from "../../../const/loginImg";
-import { LoginSwiperSection } from "../../../Login/component/LoginSwiperSection";
+import { LoginSwiperSection } from "../../../login/component/loginSwiperSection";
 
 export default function Slider() {
   return (

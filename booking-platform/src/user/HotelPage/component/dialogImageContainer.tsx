@@ -1,7 +1,7 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { ImgObject } from "./imageContainer";
-import { LoginSwiperSection } from "../../../Login/component/LoginSwiperSection";
+import { LoginSwiperSection } from "../../../login/component/loginSwiperSection";
 
 export const DialogImageContainer: React.FC<any> = ({
   roomGallery,

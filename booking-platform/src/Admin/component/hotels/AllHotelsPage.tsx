@@ -5,9 +5,9 @@ import { useState } from "react";
 import { useHotelContext } from "../../context/hotelContext";
 import { useSnakeBar } from "../../hooks/useSnakBar";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "../../../Login/component/LoginButton";
-import { hotelObject } from "../CityInformationDrawer";
-import { DrawerDrawer } from "../Drawer";
+import { Button } from "../../../login/component/loginButton";
+import { hotelObject } from "../cityInformationDrawer";
+import { DrawerDrawer } from "../drawer";
 import { AddHotelDialog } from "../addHotelDialog";
 
 export const AllHotelsPage: React.FC<any> = () => {

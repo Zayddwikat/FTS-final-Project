@@ -1,4 +1,4 @@
-import { Button } from "../../../Login/component/LoginButton";
+import { Button } from "../../../login/component/loginButton";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ChildCareIcon from "@mui/icons-material/ChildCare";
 import { AmenitiesInformation } from "../../../data_module/amenitiesInformation";

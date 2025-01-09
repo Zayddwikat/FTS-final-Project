@@ -1,5 +1,5 @@
 import { AmenitiesInformation } from "../../../../data_module/amenitiesInformation";
-import { Button } from "../../../../Login/component/LoginButton";
+import { Button } from "../../../../login/component/loginButton";
 
 interface TableContentProp {
   data: Array<AmenitiesInformation>;

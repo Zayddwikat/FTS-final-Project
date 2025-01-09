@@ -4,7 +4,7 @@ import { ErrorPage } from "../../../ErrorPage";
 import { LoadingScreen } from "../../../component/LoadingPage";
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import { ImgObject } from "./imageContainer";
-import { Button } from "../../../Login/component/LoginButton";
+import { Button } from "../../../login/component/loginButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { DialogImageContainer } from "./dialogImageContainer";

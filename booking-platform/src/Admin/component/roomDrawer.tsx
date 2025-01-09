@@ -1,6 +1,6 @@
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import Drawer from "@mui/material/Drawer";
-import { Button } from "../../Login/component/LoginButton";
+import { Button } from "../../login/component/loginButton";
 import { RoomCardDrawer } from "./roomCardDrawer";
 
 export type Anchor = "right";

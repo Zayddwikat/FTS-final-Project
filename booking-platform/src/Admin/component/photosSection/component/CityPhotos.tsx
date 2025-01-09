@@ -3,7 +3,7 @@ import { LoadingScreen } from "../../../../component/LoadingPage";
 import { ErrorPage } from "../../../../ErrorPage";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "../../../../Login/component/LoginButton";
+import { Button } from "../../../../login/component/loginButton";
 import { AddImgDialog } from "./addImageDialog";
 import { useImageContext } from "../../../context/imageContext";
 import "../../../../tailwindCss.css";
@@ -13,7 +13,7 @@ import { DeleteConfirmation } from "../../deleteConfirmation";
 import { Snackbar } from "@mui/material";
 import { useSnakeBar } from "../../../hooks/useSnakBar";
 import { hotelInformation } from "../../../../data_module/hotelInformation";
-import { hotelObject } from "../../CityInformationDrawer";
+import { hotelObject } from "../../cityInformationDrawer";
 import { CityInformation } from "../../../../data_module/Cities";
 
 export const CityPhotos: React.FC<any> = () => {

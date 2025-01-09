@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { roomInformation } from "../../../../data_module/roomInformation";
 import { getRoomGallery } from "../../../../user/HotelPage/Hooks/getRoomGallery";
 import { useState } from "react";
-import { Button } from "../../../../Login/component/LoginButton";
+import { Button } from "../../../../login/component/loginButton";
 import { AddImgDialog } from "./addImageDialog";
 import { useImageContext } from "../../../context/imageContext";
 import "../../../../tailwindCss.css";

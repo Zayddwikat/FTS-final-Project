@@ -1,7 +1,7 @@
 import { Badge } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
-import { Button } from "../../../Login/component/LoginButton";
+import { Button } from "../../../login/component/loginButton";
 
 export const HeaderBadge: React.FC<any> = () => {
   const navigate = useNavigate();

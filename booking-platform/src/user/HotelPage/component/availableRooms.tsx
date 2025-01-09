@@ -2,7 +2,7 @@ import { useGetAvailableRooms } from "../Hooks/useAvailableRooms";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { DialogDemo } from "./roomDialog";
-import { Button } from "../../../Login/component/LoginButton";
+import { Button } from "../../../login/component/loginButton";
 import { useCartContext } from "../../Context/cartContext";
 import { CartPage } from "../../cartDialog/CartPage";
 import { LoadingScreen } from "../../../component/LoadingPage";

@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import { CloseDialogBtn } from "./addCityDialog";
-import { hotelObject } from "./CityInformationDrawer";
+import { hotelObject } from "./cityInformationDrawer";
 
 interface hotelPopoverProps {
   open: any;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
-import { Button } from "../../Login/component/LoginButton";
+import { Button } from "../../login/component/loginButton";
 import Gift from "../assets/Gift.png";
 import { useNavigate } from "react-router-dom";
 

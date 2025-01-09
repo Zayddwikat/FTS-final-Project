@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { AdminSearch } from "../AdminSearchBar";
+import { AdminSearch } from "../adminSearchBar";
 
 export const PhotoMainPage: React.FC<any> = () => {
   return (

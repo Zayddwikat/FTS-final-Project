@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import { CloseDialogBtn } from "../HotelPage/component/roomDialog";
 import { HotelInformationDialog } from "./component/hotelInformation";
-import { roomInformation } from "../../data_module/roomInformation";
+import { roomInformation } from "../../data_models/roomInformation";
 
 export const CartPage: React.FC<any> = ({
   handleClose,
@@ -14,7 +14,6 @@ export const CartPage: React.FC<any> = ({
 }: {
   room: roomInformation;
 }) => {
-  
   return (
     <Dialog
       open={open}

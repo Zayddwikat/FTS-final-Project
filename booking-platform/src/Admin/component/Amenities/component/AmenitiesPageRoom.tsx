@@ -5,10 +5,10 @@ import { useState } from "react";
 import React from "react";
 import { Snackbar } from "@mui/material";
 import { useSnakeBar } from "../../../hooks/useSnakBar";
-import { Button } from "../../../../Login/component/LoginButton";
+import { Button } from "../../../../login/component/loginButton";
 import { AddCityDialog } from "../../addCityDialog";
 import { CityInformation } from "../../../../data_module/Cities";
-import { CityDrawer } from "../../CityDrawer";
+import { CityDrawer } from "../../cityDrawer";
 import { useLocation } from "react-router-dom";
 import { useAmenitiesContext } from "../../../context/amenitiesContext";
 import { ErrorPage } from "../../../../ErrorPage";
@@ -16,9 +16,9 @@ import { LoadingScreen } from "../../../../component/LoadingPage";
 import { AmenitiesInformation } from "../../../../data_module/amenitiesInformation";
 import { AddAmenitiesDialog } from "./addAmenitiesDialog";
 import { DeleteConfirmation } from "../../deleteConfirmation";
-import { hotelObject } from "../../CityInformationDrawer";
+import { hotelObject } from "../../cityInformationDrawer";
 import { TableContent } from "./tableContent";
-import { EditAmenitiesDialog } from "./EditAmenitiesDialog";
+import { EditAmenitiesDialog } from "./editAmenitiesDialog";
 
 export const AmenitiesPageRoom: React.FC<any> = () => {
   const { state } = useLocation();

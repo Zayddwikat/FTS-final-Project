@@ -2,7 +2,6 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import SingleBedIcon from "@mui/icons-material/SingleBed";
 import TvIcon from "@mui/icons-material/Tv";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../Login/component/LoginButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";

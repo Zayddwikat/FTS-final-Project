@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { deleteHotel } from "../hooks/deleteHotelFromCity";
-import { hotelObject } from "../component/CityInformationDrawer";
-import { Anchor } from "../component/Drawer";
+import { hotelObject } from "../component/cityInformationDrawer";
+import { Anchor } from "../component/drawer";
 import { baseUrl } from "../../const/constantVariables";
 import { getCityPhotos } from "../hooks/getcityPhotos";
 import { getCityInfo } from "../hooks/getCityInfo";

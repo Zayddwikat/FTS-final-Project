@@ -5,7 +5,7 @@ import { LoadingScreen } from "../../component/LoadingPage";
 import { ErrorPage } from "../../ErrorPage";
 import { getCityPhotos } from "../hooks/getcityPhotos";
 import { Dispatch, SetStateAction, useState } from "react";
-import { Button } from "../../Login/component/LoginButton";
+import { Button } from "../../login/component/loginButton";
 import { HotelCard } from "./hotelCard";
 import { DeleteConfirmation } from "./deleteConfirmation";
 import React from "react";

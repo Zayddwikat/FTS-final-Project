@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useRoomContext } from "../context/roomcontext";
-import { Button } from "../../Login/component/LoginButton";
+import { Button } from "../../login/component/loginButton";
 import { roomInformation } from "../../data_module/roomInformation";
-import { AdminSearch } from "./AdminSearchBar";
+import { AdminSearch } from "./adminSearchBar";
 import { AddRoomDialog } from "./addRoomDialog";
 import { useSnakeBar } from "../hooks/useSnakBar";
-import { hotelObject } from "./CityInformationDrawer";
+import { hotelObject } from "./cityInformationDrawer";
 import { RoomDrawer } from "./roomDrawer";
 import { Snackbar } from "@mui/material";
 

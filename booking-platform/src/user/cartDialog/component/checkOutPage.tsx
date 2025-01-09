@@ -5,7 +5,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { ReactFragment, useEffect, useState } from "react";
-import { Button } from "../../../Login/component/LoginButton";
+import { Button } from "../../../login/component/loginButton";
 import { PaymentIntent } from "@stripe/stripe-js";
 import { useNavigate, useNavigation } from "react-router-dom";
 

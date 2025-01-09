@@ -1,9 +1,9 @@
 import { Field, Form, Formik } from "formik";
 
 import * as Yup from "yup";
-import { Button } from "../../../../Login/component/LoginButton";
+import { Button } from "../../../../login/component/loginButton";
 import { useAmenitiesContext } from "../../../context/amenitiesContext";
-import { hotelObject } from "../../CityInformationDrawer";
+import { hotelObject } from "../../cityInformationDrawer";
 import { roomInformation } from "../../../../data_module/roomInformation";
 
 interface AddCityFormProps {

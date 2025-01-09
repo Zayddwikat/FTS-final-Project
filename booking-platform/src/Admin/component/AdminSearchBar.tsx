@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { Button } from "../../Login/component/LoginButton";
+import { Button } from "../../login/component/loginButton";
 import { useAmenitiesContext } from "../context/amenitiesContext";
 import { useCityContext } from "../context/cityContext";
 import { useHotelContext } from "../context/hotelContext";

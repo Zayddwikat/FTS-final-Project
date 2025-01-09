@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { AddAmenitiesForm } from "./addAmenitiesForm";
-import { AddAmenitiesHotelForm } from "./AddAmenitiesHotelForm";
+import { AddAmenitiesHotelForm } from "./addAmenitiesHotelForm";
 
 export const CloseDialogBtn = ({
   handleClose,

@@ -3,7 +3,7 @@ import PostObjectInformation from "../../../data_module/postObjectInfo";
 import { getHotelGallery } from "../Hooks/useGetHotelsGallery";
 import { ErrorPage } from "../../../ErrorPage";
 import { LoadingScreen } from "../../../component/LoadingPage";
-import { LoginSwiperSection } from "../../../Login/component/LoginSwiperSection";
+import { LoginSwiperSection } from "../../../login/component/loginSwiperSection";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,

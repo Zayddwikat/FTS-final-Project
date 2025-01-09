@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchContext } from "../../Context/SearchContextApi";
-import { useLoginContext } from "../../../Login/Context/LoginContext";
+import { useLoginContext } from "../../../login/Context/LoginContext";
 import LoadingPost from "./LoadingPost";
 import { ErrorPage } from "../../../ErrorPage";
 import { recentHotels } from "../hooks/recentHotels";

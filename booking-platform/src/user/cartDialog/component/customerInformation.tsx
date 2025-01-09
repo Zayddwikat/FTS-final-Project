@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { UserNameField } from "../../../Login/component/userName";
+import { UserNameField } from "../../../login/component/userName";
 import { useState } from "react";
 
 export const CustomerInformationForm: React.FC<any> = ({

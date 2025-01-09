@@ -1,6 +1,6 @@
 import { FormikProps } from "formik";
 import { useState } from "react";
-import { hotelObject } from "../../../Admin/component/CityInformationDrawer";
+import { hotelObject } from "../../../admin/component/cityInformationDrawer";
 import { hotelInformation } from "../../../data_module/hotelInformation";
 
 interface onFilterInformation {

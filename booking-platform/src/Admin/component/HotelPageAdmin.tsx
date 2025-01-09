@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { AdminSearch } from "./AdminSearchBar";
+import { AdminSearch } from "./adminSearchBar";
 import { TableOfContent } from "./TableOfContent";
 import { AllHotelsPage } from "./hotels/AllHotelsPage";
 

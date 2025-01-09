@@ -1,5 +1,5 @@
-import { AdminSearch } from "./AdminSearchBar";
-import { CityOptions } from "./CityOptions";
+import { AdminSearch } from "./adminSearchBar";
+import { CityOptions } from "./cityOptions";
 
 export const AdminHomeCities: React.FC<any> = () => {
   return (

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { CityInformation } from "../../data_module/Cities";
-import { hotelObject } from "./CityInformationDrawer";
+import { hotelObject } from "./cityInformationDrawer";
 import { deleteHotel } from "../hooks/deleteHotelFromCity";
 import { ErrorPage } from "../../ErrorPage";
 import { LoadingScreen } from "../../component/LoadingPage";
-import { Button } from "../../Login/component/LoginButton";
+import { Button } from "../../login/component/loginButton";
 import { Dispatch, SetStateAction, useState } from "react";
 import { HotelPopOver } from "./hotelPopOver";
 import { DeleteConfirmation } from "./deleteConfirmation";

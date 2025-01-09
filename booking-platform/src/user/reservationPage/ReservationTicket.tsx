@@ -1,6 +1,6 @@
 import React from "react";
 import { ReservationDetails } from "../../data_module/reservationInfo";
-import { Button } from "../../Login/component/LoginButton";
+import { Button } from "../../login/component/loginButton";
 
 interface ReservationTicketProps extends ReservationDetails {
   deleteReservation: (confirmationNumber: string) => void;

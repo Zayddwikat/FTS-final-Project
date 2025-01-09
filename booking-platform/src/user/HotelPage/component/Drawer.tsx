@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import PostObjectInformation from "../../../data_module/postObjectInfo";
-import { Button } from "../../../Login/component/LoginButton";
+import { Button } from "../../../login/component/loginButton";
 import { ListReviews } from "./ListReviews";
 
 export type Anchor = "right";

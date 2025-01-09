@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { AdminSearch } from "../AdminSearchBar";
-import { CityOptions } from "../CityOptions";
+import { AdminSearch } from "../adminSearchBar";
+import { CityOptions } from "../cityOptions";
 import { AmenitiesOption } from "./component/amenitiesOption";
-import { AmenitiesPageRoom } from "./component/AmenitiesPageRoom";
+import { AmenitiesPageRoom } from "./component/amenitiesPageRoom";
 import { AllAmenities } from "./component/allAmenities";
 import { AmenitiesProvider } from "../../context/amenitiesContext";
 
