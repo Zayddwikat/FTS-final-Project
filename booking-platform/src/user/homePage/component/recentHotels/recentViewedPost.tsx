@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { recentHotelsInformation } from "../../../../data_models/recentHotelsPost";
-
 interface RecentViewedProps {
   post: recentHotelsInformation;
 }
@@ -59,8 +58,8 @@ export const RecentViewedPost: React.FC<RecentViewedProps> = ({ post }) => {
   } = post;
 
   return (
-    <div className="border border-black shadow hover:shadow-lg rounded-md w-full sm:w-[45%] md:w-[30%] lg:w-[22%] xl:w-full mb-4">
-      <div className="w-full h-[40dvh] relative">
+    <div className="border shadow hover:shadow-lg rounded-md w-full mb-4">
+      <div className="w-full h-40 sm:h-48 lg:h-60 relative">
         <img
           className="w-full h-full object-cover rounded-t-md"
           src={thumbnailUrl}
@@ -68,10 +67,10 @@ export const RecentViewedPost: React.FC<RecentViewedProps> = ({ post }) => {
         />
       </div>
 
-      <article className="flex flex-col items-start mx-2 my-1">
-        <Box sx={{ pt: 0.5 }}>
-          <h2 className="text-xl font-bold">{hotelName}</h2>
-          <p className="text-sm text-gray-600">{cityName}</p>
+      <article className="flex flex-col items-start p-4">
+        <Box>
+          <h2 className="text-lg font-semibold">{hotelName}</h2>
+          <p className="text-sm text-gray-500">{cityName}</p>
         </Box>
 
         <RatingBadge rating={starRating} />

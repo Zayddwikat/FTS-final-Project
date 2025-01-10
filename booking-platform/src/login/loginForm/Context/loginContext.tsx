@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface LoginContextProp {
