@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useImageContext } from "../../../context/imageContext";
-import { Button } from "../../../../login/component/loginButton";
+import { Button } from "../../../../login/loginForm/loginButton";
 import { hotelObject } from "../../cityInformationDrawer";
 import { roomInformation } from "../../../../data_models/roomInformation";
 import { CityInformation } from "../../../../data_models/cities";

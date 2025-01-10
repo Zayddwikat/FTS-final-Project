@@ -1,7 +1,8 @@
 import { FormikProps } from "formik";
 import { useState } from "react";
 import { hotelObject } from "../../../admin/component/cityInformationDrawer";
-import { hotelInformation } from "../../../data_module/hotelInformation";
+import { AmenitiesInformation } from "../../../data_models/amenitiesInformation";
+import { hotelInformation } from "../../../data_models/hotelInformation";
 
 interface onFilterInformation {
   data: any;
@@ -14,10 +15,9 @@ export default function useFilterSelected() {
   const onFilteredAdded = async ({ data, formik }: onFilterInformation) => {
     let filtered = [...data];
 
-    // Filter by Budget
     if (formik.values.budget > 0) {
       filtered = filtered.filter(
-        (hotel) => hotel.roomPrice >= formik.values.budget
+        (hotel) => hotel.roomPrice <= formik.values.budget
       );
     }
 
@@ -67,7 +67,7 @@ export default function useFilterSelected() {
 
     if (formik.values.budget > 0) {
       resultArr = resultArr.filter(
-        (hotel) => hotel.roomPrice >= formik.values.budget
+        (hotel) => hotel.roomPrice <= formik.values.budget
       );
     }
 

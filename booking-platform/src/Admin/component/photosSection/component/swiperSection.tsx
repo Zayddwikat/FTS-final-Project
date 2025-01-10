@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "../../../../tailwindCss.css";
-import { ImgObject } from "../../../../user/hotelPage/component/imageContainer";
+import { ImgObject } from "../../../../user/hotelPage/component/hotelDetails/imageContainer/imageContainer";
 
 interface SwiperSectionProps {
   imgs: Array<ImgObject>;

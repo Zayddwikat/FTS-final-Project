@@ -4,7 +4,7 @@ import { hotelObject } from "./cityInformationDrawer";
 import { deleteHotel } from "../hooks/deleteHotelFromCity";
 import { ErrorPage } from "../../ErrorPage";
 import { LoadingScreen } from "../../component/loadingPage";
-import { Button } from "../../login/component/loginButton";
+import { Button } from "../../login/loginForm/loginButton";
 import { Dispatch, SetStateAction, useState } from "react";
 import { HotelPopOver } from "./hotelPopOver";
 import { DeleteConfirmation } from "./deleteConfirmation";

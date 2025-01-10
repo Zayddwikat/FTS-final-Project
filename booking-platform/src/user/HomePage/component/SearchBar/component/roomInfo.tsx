@@ -1,5 +1,5 @@
 import { Divider } from "@mui/material";
-import { StepperTextInput } from "../../stepperTextInput";
+import { StepperTextInput } from "./stepperTextInput";
 
 export const RoomsAdultChildrenSection = ({ formik }) => (
   <main>

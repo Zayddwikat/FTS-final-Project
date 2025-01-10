@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
-import { Button } from "../../login/component/loginButton";
+import { Button } from "../../login/loginForm/loginButton";
 import { useHotelContext } from "../context/hotelContext";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { useRoomContext } from "../context/roomcontext";
+import { useRoomContext } from "../context/roomContext";
 
 export const AddRoomDialog: React.FC<any> = ({
   open,

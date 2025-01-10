@@ -1,6 +1,6 @@
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import Drawer from "@mui/material/Drawer";
-import { Button } from "../../login/component/loginButton";
+import { Button } from "../../login/loginForm/loginButton";
 import { AdminHotelCard } from "./adminHotelCard";
 import { ImageProvider } from "../context/imageContext";
 

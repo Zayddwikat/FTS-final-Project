@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import Header from "../homePage/component/header";
-import { SearchBar } from "../homePage/component/searchBar";
+import Header from "../homePage/component/header/header";
+import { SearchBar } from "../homePage/component/SearchBar/component/searchBar";
 import { CheckBoxesGroup } from "./component/checkBoxGroup";
 import { useFormik } from "formik";
 import { BudgetSlider } from "./component/budgetSlider";

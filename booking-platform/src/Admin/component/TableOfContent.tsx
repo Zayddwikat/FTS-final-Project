@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { hotelObject } from "./cityInformationDrawer";
-import { Button } from "../../login/component/loginButton";
+import { Button } from "../../login/loginForm/loginButton";
 import { DrawerDrawer } from "./drawer";
 import { useHotelContext } from "../context/hotelContext";
 import { Snackbar } from "@mui/material";

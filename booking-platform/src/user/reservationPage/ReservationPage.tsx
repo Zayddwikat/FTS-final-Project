@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { ReservationTicket } from "./reservationTicket";
-import Header from "../homePage/component/header";
-import { useCartContext } from "../Context/cartContext";
-import { ReservationDetails } from "../../data_module/reservationInfo";
+import Header from "../homePage/component/header/header";
+import { useCartContext } from "../cartDialog/checkOutCheckInPage/cartContext";
+import { ReservationDetails } from "../../data_models/reservationInfo";
 
 export const ReservationPage: React.FC = () => {
   const { reservationList, deleteReservation } = useCartContext();

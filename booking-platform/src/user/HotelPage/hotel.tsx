@@ -4,12 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useHotel } from "./Hooks/useGetHotel";
 import { LoadingScreen } from "../../component/loadingPage";
 import { ErrorPage } from "../../ErrorPage";
-import { CartProvider } from "../Context/cartContext";
-import { HeaderSection } from "./component/hotelPageComponent/HeaderSection";
-import { HotelDetails } from "./component/hotelPageComponent/HotelDetails";
-import { HotelSidebar } from "./component/hotelPageComponent/HotelSidebar";
-import { AvailableRoomsSection } from "./component/hotelPageComponent/AvailableRoomsSection";
-import { ReviewsSection } from "./component/hotelPageComponent/ReviewsSection";
+import { CartProvider } from "../cartDialog/checkOutCheckInPage/cartContext";
+import { HeaderSection } from "./component/header/headerSection";
+import { HotelDetails } from "./component/hotelDetails/hotelDetails";
+import { HotelSidebar } from "./component/hotelSideBarInfo/hotelSidebar";
+import { AvailableRoomsSection } from "./component/availableRooms/availableRoomsSection";
+import { ReviewsSection } from "./component/Reviews/reviewsSection/reviewsSection";
 
 export const HotelPage: React.FC<any> = () => {
   const location = useLocation();

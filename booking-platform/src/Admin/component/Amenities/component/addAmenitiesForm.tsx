@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
 
 import * as Yup from "yup";
-import { Button } from "../../../../login/component/loginButton";
+import { Button } from "../../../../login/loginForm/loginButton";
 import { useAmenitiesContext } from "../../../context/amenitiesContext";
 import { hotelObject } from "../../cityInformationDrawer";
 import { roomInformation } from "../../../../data_module/roomInformation";

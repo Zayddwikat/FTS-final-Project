@@ -1,7 +1,7 @@
 import { loginImgs } from "../const/loginImg";
-import { LoginForm } from "./component/loginForm";
+import { LoginForm } from "./loginForm/loginForm";
 import HomeIcon from "@mui/icons-material/Home";
-import { LoginSwiperSection } from "./component/loginSwiperSection";
+import { LoginSwiperSection } from "./loginImageSwiper/loginSwiperSection";
 import { Divider } from "@mui/material";
 
 function LoginPage() {

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useHotelContext } from "../../context/hotelContext";
 import { useSnakeBar } from "../../hooks/useSnakBar";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "../../../login/component/loginButton";
+import { Button } from "../../../login/loginForm/loginButton";
 import { hotelObject } from "../cityInformationDrawer";
 import { DrawerDrawer } from "../drawer";
 import { AddHotelDialog } from "../addHotelDialog";

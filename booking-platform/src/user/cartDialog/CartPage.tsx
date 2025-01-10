@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
-import { CloseDialogBtn } from "../hotelPage/component/roomDialog";
-import { HotelInformationDialog } from "./component/hotelInformation";
+import { CloseDialogBtn } from "../hotelPage/component/availableRooms/roomInfoDialog/roomDialog";
+// import { HotelInformationDialog } from "./checkOutCheckInPage/hotelInformation";
 import { roomInformation } from "../../data_models/roomInformation";
-
-
+import { HotelInformationDialog } from "./checkOutCheckInPage/hotelInformation";
+import { hotelInformation } from "../../data_models/hotelInformation";
 
 export const CartPage: React.FC<any> = ({
   handleClose,
@@ -15,6 +15,12 @@ export const CartPage: React.FC<any> = ({
   searchOption,
 }: {
   room: roomInformation;
+  handleClose: () => void;
+  open: boolean;
+  hotel: hotelInformation;
+  checkIn: string;
+  checkOut: string;
+  searchOption: any;
 }) => {
   return (
     <Dialog

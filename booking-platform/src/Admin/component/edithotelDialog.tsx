@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
-import { Button } from "../../login/component/loginButton";
+import { Button } from "../../login/loginForm/loginButton";
 import { useHotelContext } from "../context/hotelContext";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";

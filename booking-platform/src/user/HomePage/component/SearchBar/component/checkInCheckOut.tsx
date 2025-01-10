@@ -1,7 +1,7 @@
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { Button } from "../../../../../login/component/loginButton";
+import { Button } from "../../../../../login/loginForm/loginButton";
 import dayjs from "dayjs";
 
 export const CheckInCheckOutSection = ({ formik, handleClose }) => (

@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
-import { Button } from "../../login/component/loginButton";
+import { Button } from "../../login/loginForm/loginButton";
 
 export const DeleteConfirmation: React.FC<any> = ({
   open,
