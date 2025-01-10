@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useSearchContext } from "../../Context/SearchContextApi";
+import { useSearchContext } from "../../Context/searchContextApi";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-import { TrendingPost } from "./TrendingPost";
+import { TrendingPost } from "./trendingPost";
 
 export default function TrendingHotels() {
   const { onDestinationTrending } = useSearchContext();

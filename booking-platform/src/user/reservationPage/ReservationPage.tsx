@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { ReservationTicket } from "./ReservationTicket";
-import Header from "../HomePage/component/header";
+import { ReservationTicket } from "./reservationTicket";
+import Header from "../homePage/component/header";
 import { useCartContext } from "../Context/cartContext";
 import { ReservationDetails } from "../../data_module/reservationInfo";
 

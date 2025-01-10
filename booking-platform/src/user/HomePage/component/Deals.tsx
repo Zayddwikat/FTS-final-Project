@@ -1,8 +1,8 @@
-import { useSearchContext } from "../../Context/SearchContextApi";
-import { Post } from "./Post";
+import { useSearchContext } from "../../Context/searchContextApi";
+import { Post } from "./post";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import LoadingPost from "./LoadingPost";
+import LoadingPost from "./loadingPost";
 
 export default function Deals() {
   const { onFeaturedDeals } = useSearchContext();

@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import calculateDistance from "../../SearchPage/hooks/getDifference";
-import getCurrentPositionAsync from "../../SearchPage/hooks/getLocation";
+import calculateDistance from "../../searchPage/hooks/getDifference";
+import getCurrentPositionAsync from "../../searchPage/hooks/getLocation";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 

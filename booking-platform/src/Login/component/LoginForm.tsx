@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import "../../tailwindCss.css";
 import { Button } from "./loginButton";
 import PropTypes from "prop-types";
-import { useLoginContext } from "../Context/LoginContext";
+import { useLoginContext } from "../Context/loginContext";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 interface ButtonProps {

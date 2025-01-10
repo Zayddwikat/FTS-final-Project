@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { DialogDemo } from "./roomDialog";
 import { Button } from "../../../login/component/loginButton";
 import { useCartContext } from "../../Context/cartContext";
-import { CartPage } from "../../cartDialog/CartPage";
-import { LoadingScreen } from "../../../component/LoadingPage";
+import { CartPage } from "../../cartDialog/cartPage";
+import { LoadingScreen } from "../../../component/loadingPage";
 import { ErrorPage } from "../../../ErrorPage";
 import { roomInformation } from "../../../data_module/roomInformation";
 

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import PostObjectInformation from "../../../data_module/postObjectInfo";
 import { useGetReview } from "../Hooks/useGetReviews";
-import { LoadingScreen } from "../../../component/LoadingPage";
+import { LoadingScreen } from "../../../component/loadingPage";
 import { ErrorPage } from "../../../ErrorPage";
 import ReviewObjectInfo from "../../../data_module/ReviewsObjectInfo";
 import { ReviewPost } from "./ReviewPost";

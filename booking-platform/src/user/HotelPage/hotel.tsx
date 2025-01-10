@@ -2,7 +2,7 @@
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useHotel } from "./Hooks/useGetHotel";
-import { LoadingScreen } from "../../component/LoadingPage";
+import { LoadingScreen } from "../../component/loadingPage";
 import { ErrorPage } from "../../ErrorPage";
 import { CartProvider } from "../Context/cartContext";
 import { HeaderSection } from "./component/hotelPageComponent/HeaderSection";

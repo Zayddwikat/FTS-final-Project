@@ -1,4 +1,4 @@
-import ServiceCards from "./CardsContainer";
+import ServiceCards from "./cardsContainer";
 export default function MainPage() {
   return (
     <main className="flex flex-col items-center my-20">

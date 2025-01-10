@@ -5,7 +5,7 @@ import {
   DialogContentText,
   Divider,
 } from "@mui/material";
-import ReviewObjectInfo from "../../../data_module/ReviewsObjectInfo";
+import ReviewObjectInfo from "../../../data_models/reviewsObjectInfo";
 import { CloseDialogBtn } from "./roomDialog";
 
 interface ReviewPopOverProps {

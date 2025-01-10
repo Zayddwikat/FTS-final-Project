@@ -1,8 +1,8 @@
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
-import MainPage from "./component/MainPage";
-import Footer from "./component/Footer";
+import MainPage from "./component/mainPage";
+import Footer from "./component/footer";
 const Header = () => {
   return (
     <header className=" flex flex-row items-center  justify-between gap-2  p-10 ">

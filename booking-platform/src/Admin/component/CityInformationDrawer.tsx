@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { CityInformation } from "../../data_module/Cities";
 import { getCityInfo } from "../hooks/getCityInfo";
-import { LoadingScreen } from "../../component/LoadingPage";
+import { LoadingScreen } from "../../component/loadingPage";
 import { ErrorPage } from "../../ErrorPage";
 import { getCityPhotos } from "../hooks/getcityPhotos";
 import { Dispatch, SetStateAction, useState } from "react";

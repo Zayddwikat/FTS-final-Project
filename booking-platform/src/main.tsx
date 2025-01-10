@@ -1,17 +1,17 @@
 import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import LoginPage from "./login/LoginPage.js";
-import { LoginProvider } from "./login/Context/LoginContext.js";
-import IndexPage from "./indexPage/IndexPage.js";
+import LoginPage from "./login/loginPage.js";
+import { LoginProvider } from "./login/Context/loginContext.js";
+import IndexPage from "./indexPage/indexPage.js";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./ErrorPage";
-import HomePage from "./user/HomePage/HomePage.js";
-import { SearchProvider } from "./user/Context/SearchContextApi.js";
+import HomePage from "./user/homePage/homePage.js";
+import { SearchProvider } from "./user/Context/searchContextApi.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import SearchPage from "./user/SearchPage/SearchPage.js";
-import { HotelPage } from "./user/HotelPage/hotel.js";
+import SearchPage from "./user/searchPage/SearchPage.js";
+import { HotelPage } from "./user/hotelPage/hotel.js";
 import { CartProvider } from "./user/Context/cartContext.js";
-import { CartPage } from "./user/cartDialog/CartPage.js";
+import { CartPage } from "./user/cartDialog/cartPage.js";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { AdminHomePage } from "./admin/adminHomePage.js";
@@ -32,10 +32,10 @@ import { PhotoMainPage } from "./admin/component/photosSection/mainPagePhotos.js
 import { ImageProvider } from "./admin/context/imageContext.js";
 import { HotelPhotos } from "./admin/component/photosSection/component/hotelPhotos.js";
 import { AdminSearch } from "./admin/component/adminSearchBar.js";
-import { CityPhotos } from "./admin/component/photosSection/component/CityPhotos.js";
+import { CityPhotos } from "./admin/component/photosSection/component/cityPhotos.js";
 import { roomNotFound } from "./const/constantVariables.js";
 import { SelectHotelToShowRoom } from "./const/constantJSX.js";
-import { ReservationPage } from "./user/reservationPage/ReservationPage.js";
+import { ReservationPage } from "./user/reservationPage/reservationPage.js";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 

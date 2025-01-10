@@ -1,7 +1,7 @@
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import PostObjectInformation from "../../../data_module/postObjectInfo";
-import { Anchor } from "./Drawer";
+import { Anchor } from "./drawer";
 import { Button } from "../../../login/component/loginButton";
 import { ReviewContainer } from "./ReviewContainer";
 

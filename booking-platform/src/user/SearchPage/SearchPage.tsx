@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
-import Header from "../HomePage/component/header";
-import { SearchBar } from "../HomePage/component/SearchBar";
+import Header from "../homePage/component/header";
+import { SearchBar } from "../homePage/component/searchBar";
 import { CheckBoxesGroup } from "./component/checkBoxGroup";
 import { useFormik } from "formik";
 import { BudgetSlider } from "./component/budgetSlider";
-import { Post } from "../HomePage/component/SearchPost";
+import { Post } from "../homePage/component/searchPost";
 import { useQuery } from "@tanstack/react-query";
 import useFilterSelected from "./hooks/filterHooks";
 

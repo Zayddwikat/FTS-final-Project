@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { ErrorPage } from "../../ErrorPage";
-import { LoadingScreen } from "../../component/LoadingPage";
-import { useHotel } from "../../user/HotelPage/Hooks/useGetHotel";
+import { LoadingScreen } from "../../component/loadingPage";
+import { useHotel } from "../../user/hotelPage/Hooks/useGetHotel";
 import TripImg from "../../assets/TripImg.jpg";
 import { hotelObject } from "./cityInformationDrawer";
 import { Button } from "../../login/component/loginButton";
@@ -12,7 +12,7 @@ import { DeleteConfirmation } from "./deleteConfirmation";
 import { EditHotelDialog } from "./edithotelDialog";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link, useNavigate } from "react-router-dom";
-import { useGetAvailableRooms } from "../../user/HotelPage/Hooks/useAvailableRooms";
+import { useGetAvailableRooms } from "../../user/hotelPage/Hooks/useAvailableRooms";
 import { roomInformation } from "../../data_module/roomInformation";
 import { useRoomContext } from "../context/roomcontext";
 import { Divider } from "@mui/material";

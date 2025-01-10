@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getRoomGallery } from "../Hooks/getRoomGallery";
 import { ErrorPage } from "../../../ErrorPage";
-import { LoadingScreen } from "../../../component/LoadingPage";
+import { LoadingScreen } from "../../../component/loadingPage";
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import { ImgObject } from "./imageContainer";
 import { Button } from "../../../login/component/loginButton";

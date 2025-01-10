@@ -1,7 +1,7 @@
 import Header from "./component/header";
-import { SearchBar } from "./component/SearchBar";
-import Deals from "./component/Deals";
-import { SearchProvider } from "../Context/SearchContextApi";
+import { SearchBar } from "./component/searchBar";
+import Deals from "./component/deals";
+import { SearchProvider } from "../Context/searchContextApi";
 import {RecentHotels} from "./component/recent-hotels";
 import TrendingHotels from "./component/TrendingHotels";
 import Slider from "./component/slider";

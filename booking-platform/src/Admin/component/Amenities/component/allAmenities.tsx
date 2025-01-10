@@ -12,7 +12,7 @@ import { CityDrawer } from "../../cityDrawer";
 import { useLocation } from "react-router-dom";
 import { useAmenitiesContext } from "../../../context/amenitiesContext";
 import { ErrorPage } from "../../../../ErrorPage";
-import { LoadingScreen } from "../../../../component/LoadingPage";
+import { LoadingScreen } from "../../../../component/loadingPage";
 import { AmenitiesInformation } from "../../../../data_module/amenitiesInformation";
 import { AddAmenitiesDialog } from "./addAmenitiesDialog";
 import { DeleteConfirmation } from "../../deleteConfirmation";

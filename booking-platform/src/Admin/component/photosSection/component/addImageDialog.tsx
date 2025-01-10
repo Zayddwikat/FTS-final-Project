@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { AddCityForm } from "../../addCityForm";
-import { AddImgForm } from "./AddImgForm";
+import { AddImgForm } from "./addImgForm";
 
 export const CloseDialogBtn = ({
   handleClose,
@@ -14,7 +14,13 @@ export const CloseDialogBtn = ({
     </button>
   );
 };
-export const AddImgDialog: React.FC<any> = ({ handleClose, open, room , hotel , city   }) => {
+export const AddImgDialog: React.FC<any> = ({
+  handleClose,
+  open,
+  room,
+  hotel,
+  city,
+}) => {
   return (
     <Dialog
       open={open}
@@ -34,7 +40,12 @@ export const AddImgDialog: React.FC<any> = ({ handleClose, open, room , hotel , 
           <div className="flex flex-row items-start">
             <article className="w-full flex flex-col items-center border border-black rounded gap-4 py-5">
               {/* <AddCityForm handleClose={handleClose} /> */}
-              <AddImgForm handleClose={handleClose} room={room} hotel={hotel} city={city} />
+              <AddImgForm
+                handleClose={handleClose}
+                room={room}
+                hotel={hotel}
+                city={city}
+              />
             </article>
             <CloseDialogBtn handleClose={handleClose} />
           </div>

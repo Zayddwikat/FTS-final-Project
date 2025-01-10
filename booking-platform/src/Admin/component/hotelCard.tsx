@@ -3,7 +3,7 @@ import { CityInformation } from "../../data_module/Cities";
 import { hotelObject } from "./cityInformationDrawer";
 import { deleteHotel } from "../hooks/deleteHotelFromCity";
 import { ErrorPage } from "../../ErrorPage";
-import { LoadingScreen } from "../../component/LoadingPage";
+import { LoadingScreen } from "../../component/loadingPage";
 import { Button } from "../../login/component/loginButton";
 import { Dispatch, SetStateAction, useState } from "react";
 import { HotelPopOver } from "./hotelPopOver";

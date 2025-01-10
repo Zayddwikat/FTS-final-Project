@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { AdminSearch } from "./adminSearchBar";
-import { TableOfContent } from "./TableOfContent";
-import { AllHotelsPage } from "./hotels/AllHotelsPage";
+import { TableOfContent } from "./tableOfContent";
+import { AllHotelsPage } from "./hotels/allHotelsPage";
 
 export const HotelPageAdmin: React.FC<any> = () => {
   const { state } = useLocation();

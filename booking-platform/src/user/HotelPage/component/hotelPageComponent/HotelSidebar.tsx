@@ -1,5 +1,5 @@
-import SimpleMap from "../../../GoogleMaps/Googlemaps";
-import { Reviews } from "../Drawer";
+import SimpleMap from "../../../googleMaps/googlemaps";
+import { Reviews } from "../drawer";
 
 
 export const HotelSidebar: React.FC<{ post: any; hotelData: any }> = ({ post, hotelData }) => {

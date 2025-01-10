@@ -1,5 +1,5 @@
-import Header from "../../../HomePage/component/header";
-import { SearchBar } from "../../../HomePage/component/SearchBar";
+import Header from "../../../homePage/component/header";
+import { SearchBar } from "../../../homePage/component/searchBar";
 
 export const HeaderSection: React.FC<{ searchValue: any }> = ({ searchValue }) => {
   return (

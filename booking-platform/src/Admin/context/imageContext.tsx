@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { ImgObject } from "../../user/HotelPage/component/imageContainer";
+import { ImgObject } from "../../user/hotelPage/component/imageContainer";
 import { baseUrl } from "../../const/constantVariables";
-import { getRoomGallery } from "../../user/HotelPage/Hooks/getRoomGallery";
+import { getRoomGallery } from "../../user/hotelPage/Hooks/getRoomGallery";
 
 export const imageContext = createContext<any>([]);
 

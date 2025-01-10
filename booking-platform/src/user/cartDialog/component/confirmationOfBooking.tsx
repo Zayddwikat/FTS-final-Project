@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { ErrorPage } from "../../../ErrorPage";
-import { LoadingScreen } from "../../../component/LoadingPage";
+import { LoadingScreen } from "../../../component/loadingPage";
 import { confirmBooking } from "../hooks/confirmBooking";
-import { onDateSub } from "../../HomePage/component/SearchPost";
+import { onDateSub } from "../../homePage/component/searchPost";
 import { formatTimestampWithoutSeconds } from "./customerInformation";
 import { useCartContext } from "../../Context/cartContext";
-import { ReservationTicket } from "../../reservationPage/ReservationTicket";
+import { ReservationTicket } from "../../reservationPage/reservationTicket";
 
 export const ConformationBooking: React.FC<any> = ({
   roomInformationObject,

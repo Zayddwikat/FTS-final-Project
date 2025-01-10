@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { LoadingScreen } from "../../../../component/LoadingPage";
+import { LoadingScreen } from "../../../../component/loadingPage";
 import { ErrorPage } from "../../../../ErrorPage";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { AddImgDialog } from "./addImageDialog";
 import { useImageContext } from "../../../context/imageContext";
 import "../../../../tailwindCss.css";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { ImgObject } from "../../../../user/HotelPage/component/imageContainer";
+import { ImgObject } from "../../../../user/hotelPage/component/imageContainer";
 import { DeleteConfirmation } from "../../deleteConfirmation";
 import { Snackbar } from "@mui/material";
 import { useSnakeBar } from "../../../hooks/useSnakBar";

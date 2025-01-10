@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCities } from "../hooks/getCities";
 import { ErrorPage } from "../../ErrorPage";
-import { LoadingScreen } from "../../component/LoadingPage";
+import { LoadingScreen } from "../../component/loadingPage";
 import { CityInformation } from "../../data_module/Cities";
 import { Button } from "../../login/component/loginButton";
 import { useState } from "react";

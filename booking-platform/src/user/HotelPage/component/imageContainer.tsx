@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import PostObjectInformation from "../../../data_module/postObjectInfo";
 import { getHotelGallery } from "../Hooks/useGetHotelsGallery";
 import { ErrorPage } from "../../../ErrorPage";
-import { LoadingScreen } from "../../../component/LoadingPage";
+import { LoadingScreen } from "../../../component/loadingPage";
 import { LoginSwiperSection } from "../../../login/component/loginSwiperSection";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {

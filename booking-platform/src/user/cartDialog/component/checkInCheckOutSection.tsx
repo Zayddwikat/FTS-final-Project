@@ -1,6 +1,6 @@
 import { Divider } from "@mui/material";
 import { formatDateToReadable } from "../hooks/formatDate";
-import { onDateSub } from "../../HomePage/component/SearchPost";
+import { onDateSub } from "../../homePage/component/searchPost";
 
 interface checkIn_CheckOutSection {
   checkIn: string;
