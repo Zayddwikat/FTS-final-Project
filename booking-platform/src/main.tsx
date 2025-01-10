@@ -18,7 +18,6 @@ import { AdminHomePage } from "./admin/adminHomePage.js";
 import { HotelPageAdmin } from "./admin/component/hotelPageAdmin.js";
 import { AdminHomeCities } from "./admin/component/adminHomeCities.js";
 import { HotelProvider } from "./admin/context/hotelContext.js";
-import { RoomProvider } from "./admin/context/roomContext.js";
 import { AmenitiesPage } from "./admin/component/amenities/amenitiesPage.js";
 import { AmenitiesProvider } from "./admin/context/amenitiesContext.js";
 import { AmenitiesPageRoom } from "./admin/component/amenities/component/amenitiesPageRoom.js";
@@ -34,7 +33,8 @@ import { CityPhotos } from "./admin/component/photosSection/component/cityPhotos
 import { roomNotFound } from "./const/constantVariables.js";
 import { SelectHotelToShowRoom } from "./const/constantJSX.js";
 import { ReservationPage } from "./user/reservationPage/reservationPage.js";
-import { HotelRooms } from "./admin/component/hotelRooms.js";
+import { RoomProvider } from "./admin/context/roomContext.js";
+import { HotelRooms } from "./admin/component/hotelRooms";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 
