@@ -22,6 +22,8 @@ export default function Footer() {
             color="blue"
             handleClick={() => navigate("/login")}
             value={"Sign In"}
+            children={undefined}
+            primary={true}
           />
         </Box>
       </div>
