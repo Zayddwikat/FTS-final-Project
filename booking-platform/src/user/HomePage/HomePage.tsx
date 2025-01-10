@@ -3,7 +3,7 @@ import { SearchBar } from "./component/searchBar";
 import Deals from "./component/deals";
 import { SearchProvider } from "../Context/searchContextApi";
 import {RecentHotels} from "./component/recent-hotels";
-import TrendingHotels from "./component/TrendingHotels";
+import TrendingHotels from "./component/trendingHotels";
 import Slider from "./component/slider";
 
 export default function HomePage() {

@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useState } from "react";
-import { ReviewPopOver } from "./ReviewPopOveer";
+import { ReviewPopOver } from "./reviewPopOveer";
 
 export const ReviewPostPrimary: React.FC<PostObjectInformation> = (post) => {
   const [openCheckOut, setOpenCheckOut] = useState<number | null>(null);

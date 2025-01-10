@@ -8,7 +8,7 @@ import { ErrorPage } from "./ErrorPage";
 import HomePage from "./user/homePage/homePage.js";
 import { SearchProvider } from "./user/Context/searchContextApi.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import SearchPage from "./user/searchPage/SearchPage.js";
+import SearchPage from "./user/searchPage/searchPage.js";
 import { HotelPage } from "./user/hotelPage/hotel.js";
 import { CartProvider } from "./user/Context/cartContext.js";
 import { CartPage } from "./user/cartDialog/cartPage.js";

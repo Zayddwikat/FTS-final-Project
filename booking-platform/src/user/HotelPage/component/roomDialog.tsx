@@ -8,7 +8,7 @@ import { Button } from "../../../login/component/loginButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { DialogImageContainer } from "./dialogImageContainer";
-import { RoomDialogInformation } from "./RoomDialogInformation";
+import { RoomDialogInformation } from "./roomDialogInformation";
 
 export const CloseDialogBtn = ({
   handleClose,

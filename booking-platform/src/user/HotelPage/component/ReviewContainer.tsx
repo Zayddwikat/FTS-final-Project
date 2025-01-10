@@ -4,7 +4,7 @@ import { useGetReview } from "../Hooks/useGetReviews";
 import { LoadingScreen } from "../../../component/loadingPage";
 import { ErrorPage } from "../../../ErrorPage";
 import ReviewObjectInfo from "../../../data_module/ReviewsObjectInfo";
-import { ReviewPost } from "./ReviewPost";
+import { ReviewPost } from "./reviewPost";
 
 interface ReviewContainerProps {
   post: PostObjectInformation;
