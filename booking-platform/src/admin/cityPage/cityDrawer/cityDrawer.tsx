@@ -1,15 +1,21 @@
-import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Drawer from "@mui/material/Drawer";
-import { Button } from "../../login/loginForm/loginButton";
-import { AdminHotelCard } from "../hotelPage/hotelInformation/adminHotelCard";
+import { Button } from "../../../login/loginForm/loginButton";
+import { CityInformationDrawer } from "./cityInformationDrawer";
+import { CityInformation } from "../../../data_models/cities";
 
 export type Anchor = "right";
 
-export const DrawerDrawer: React.FC<any> = ({
+interface cityDrawerProps {
+  city: CityInformation;
+  setCities: (prop: any) => void;
+  setOpenSnackBar: Dispatch<SetStateAction<boolean>>;
+}
+
+export const CityDrawer: React.FC<cityDrawerProps> = ({
   city,
-  hotel,
-  setOpenSnakeBar,
-  setMassage,
+  setCities,
+  setOpenSnackBar,
 }) => {
   const [state, setState] = useState({
     right: false,
@@ -18,7 +24,6 @@ export const DrawerDrawer: React.FC<any> = ({
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
-      console.log(`Toggling drawer: ${anchor}, Open: ${open}`);
       if (
         event.type === "keydown" &&
         ((event as React.KeyboardEvent).key === "Tab" ||
@@ -39,28 +44,20 @@ export const DrawerDrawer: React.FC<any> = ({
             color="blue"
             handleClick={toggleDrawer(anchor, true)}
             size=""
-            value="Show info"
+            value="Show info "
             isSubmitting={false}
           />
           <Drawer
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
-            sx={{
-              "& .MuiBackdrop-root": {
-                backgroundColor: "rgba(0, 0, 0, 0.01)",
-              },
-            }}
           >
-          
-              <AdminHotelCard
-                setMassage={setMassage}
-                hotel={hotel}
-                city={city}
-                toggleDrawer={toggleDrawer(anchor, false)}
-                setOpenSnakeBar={setOpenSnakeBar}
-              />
-          
+            <CityInformationDrawer
+              toggleDrawer={toggleDrawer(anchor, false)}
+              city={city}
+              setCities={setCities}
+              setOpenSnackBar={setOpenSnackBar}
+            />
           </Drawer>
         </div>
       ))}

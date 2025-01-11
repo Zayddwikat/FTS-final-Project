@@ -1,13 +1,12 @@
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import Drawer from "@mui/material/Drawer";
-import { Button } from "../../login/loginForm/loginButton";
-import { AdminHotelCard } from "../hotelPage/hotelInformation/adminHotelCard";
+import { Button } from "../../../login/loginForm/loginButton";
 
 export type Anchor = "right";
 
-export const DrawerDrawer: React.FC<any> = ({
-  city,
+export const RoomDrawer: React.FC<any> = ({
   hotel,
+  room,
   setOpenSnakeBar,
   setMassage,
 }) => {
@@ -52,15 +51,13 @@ export const DrawerDrawer: React.FC<any> = ({
               },
             }}
           >
-          
-              <AdminHotelCard
-                setMassage={setMassage}
-                hotel={hotel}
-                city={city}
-                toggleDrawer={toggleDrawer(anchor, false)}
-                setOpenSnakeBar={setOpenSnakeBar}
-              />
-          
+            <RoomCardDrawer
+              setMassage={setMassage}
+              hotel={hotel}
+              room={room}
+              toggleDrawer={toggleDrawer(anchor, false)}
+              setOpenSnakeBar={setOpenSnakeBar}
+            />
           </Drawer>
         </div>
       ))}
