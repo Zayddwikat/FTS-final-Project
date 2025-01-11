@@ -27,13 +27,13 @@ export default function Deals() {
             <h1 className="text-sm text-blue-600 underline">show more</h1>
           </Link>
         </header>
-        <div className="flex flex-row flex-wrap md:flex-nowrap w-full gap-4">
+        <main className="flex flex-row flex-wrap md:flex-nowrap w-full gap-4">
           {hotelDeals.data.slice(0, 5).map((elem: any, index: number) => (
             <React.Fragment key={index}>
               <Post key={index} post={elem} />
             </React.Fragment>
           ))}
-        </div>
+        </main>
       </main>
     </>
   );
