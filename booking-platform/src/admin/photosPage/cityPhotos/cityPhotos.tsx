@@ -1,11 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-
 import "../../../tailwindCss.css";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-
 import { Snackbar } from "@mui/material";
 import { CityInformation } from "../../../data_models/cities";
 import { useSnakeBar } from "../../hooks/useSnackBar";

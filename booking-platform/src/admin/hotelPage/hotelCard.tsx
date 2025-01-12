@@ -1,17 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { hotelObject } from "../cityPage/cityDrawer/cityInformationDrawer";
+import { deleteHotel } from "../hooks/deleteHotelFromCity";
 import { ErrorPage } from "../../ErrorPage";
 import { LoadingScreen } from "../../component/loadingPage";
 import { Button } from "../../login/loginForm/loginButton";
 import { Dispatch, SetStateAction, useState } from "react";
-import { useHotelContext } from "./context/hotelContext";
-import { DeleteConfirmation } from "../component/deleteConfirmation";
 import { CityInformation } from "../../data_models/cities";
-
+import { DeleteConfirmation } from "../component/deleteConfirmation";
+import { useHotelContext } from "./context/hotelContext";
 
 interface hotelCardProp {
   city: CityInformation;
-
   setOpenSnackBar: Dispatch<SetStateAction<boolean>>;
 }
 

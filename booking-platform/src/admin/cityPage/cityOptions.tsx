@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCities } from "../hooks/getCities";
 import { ErrorPage } from "../../ErrorPage";
 import { LoadingScreen } from "../../component/loadingPage";
 import { Button } from "../../login/loginForm/loginButton";
 import { useState } from "react";
+import { addCity } from "../hooks/addCity";
 import { CityDrawer } from "./cityDrawer/cityDrawer";
 import React from "react";
 import { Snackbar } from "@mui/material";
-import { useCityContext } from "./context/cityContext";
+
 import { CityInformation } from "../../data_models/cities";
-import { AddCityDialog } from "./addNewCity/addCityDialog";
+import { useCityContext } from "./context/cityContext";
 import { useSnakeBar } from "../hooks/useSnackBar";
+import { AddCityDialog } from "./addNewCity/addCityDialog";
 
 export const CityOptions: React.FC<any> = () => {
 

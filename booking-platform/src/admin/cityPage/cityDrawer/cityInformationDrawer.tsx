@@ -15,6 +15,12 @@ import { CityInformation } from "../../../data_models/cities";
 import { getCityPhotos } from "../../hooks/getCityPhotos";
 import { useHotelContext } from "../../hotelPage/context/hotelContext";
 import { HotelCard } from "../../hotelPage/hotelCard";
+import CityPhotos from "./CityPhotos";
+import CityDetails from "./CityDetails";
+import HotelManagement from "./HotelManagement";
+import DeleteCityDialog from "./DeleteCityDialog";
+import IncludeHotelsSelector from "./IncludeHotelsSelector";
+import HotelList from "./HotelList";
 
 interface CityInformationProps {
   city: CityInformation;
@@ -73,7 +79,7 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
       setHotels(await data.then((res) => res.hotels));
       setFilteredHotels(await data.then((res) => res.hotels));
       console.log("Cities sets");
-      
+
       return data;
     },
   });
@@ -93,8 +99,9 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
         <ErrorPage />
       </>
     );
+
   return (
-    <div className="w-[50dvw] overflow-x-hidden ">
+    <div className="w-[50dvw] overflow-x-hidden">
       <div className=" flex items-center justify-start  w-full">
         <Button
           color={""}
@@ -113,126 +120,40 @@ export const CityInformationDrawer: React.FC<CityInformationProps> = ({
           The city Not Found
         </div>
       ) : (
-        <div className="w-full h-dvh flex flex-col gap-4 mx-4 items-center  ">
-          {cityPhotos.data ? (
-            <>
-              <div className="flex flex-col justify-start gap-4 items-start  w-[90%] h-[40%]  ">
-                <SwiperSection imgs={cityPhotos.data} />
-              </div>
-              <Link
-                to={`/AdminHome/photos/city/:${city.id}`}
-                state={{
-                  data: city,
-                }}
-                className="text-blue-400 underline self-start"
-              >
-                all photos
-              </Link>
-              <Divider />
-            </>
-          ) : (
-            <div className="w-11/12">
-              <img
-                src="https://oionline.com/wp-content/uploads/2018/03/notfound.jpg"
-                alt="City image"
-                style={{
-                  width: "100%",
-                  height: "80%",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-          )}
-
-          <article className="flex self-start items-center justify-between w-full gap-2">
-            <div className="flex items-center gap-2">
-              <p>City Name:</p>
-              <h2 className="text-lg font-bold"> {cityInfoQuery.data.name}</h2>
-            </div>
-            <div className="">
-              <Button
-                children=""
-                className="text-red-500"
-                color={""}
-                size={""}
-                value={"Delete City"}
-                isSubmitting={false}
-                handleClick={() => handleOpenDialog()}
-                primary={false}
-              />
-            </div>
-            <DeleteConfirmation
-              open={openDialog}
-              handleClose={handleCloseDialog}
-              handleConfirm={handleDeleteCities}
+        <div className="w-full h-dvh flex flex-col gap-4 mx-4 items-center">
+          <CityPhotos city={city} cityPhotos={cityPhotos.data} />
+          <CityDetails
+            cityName={cityInfoQuery.data.name}
+            cityDescription={cityInfoQuery.data.description}
+            handleOpenDialog={handleOpenDialog}
+          />
+          <HotelManagement
+            cityName={city.name}
+            hotelsLength={hotels?.length || 0}
+            navigateToHotelPage={() =>
+              navigate(`/AdminHome/Hotels/${city.name}`, {
+                replace: true,
+                state: { data: hotels, city },
+              })
+            }
+          />
+          <DeleteCityDialog
+            open={openDialog}
+            handleCloseDialog={handleCloseDialog}
+            handleDeleteCities={handleDeleteCities}
+            setOpenSnackBar={setOpenSnackBar}
+          />
+          <IncludeHotelsSelector
+            includeHotels={includeHotels}
+            setIncludeHotels={setIncludeHotels}
+          />
+          {includeHotels && (
+            <HotelList
               setOpenSnackBar={setOpenSnackBar}
-              label="City"
+              hotels={hotels}
+              cityId={city.id}
             />
-          </article>
-          <article className="self-start flex items-start w-full ">
-            <p className="w-2/12">City description:</p>
-            <h2 className="w-9/12 ">{cityInfoQuery.data.description}</h2>
-          </article>
-
-          <article className="self-start flex w-full flex-col justify-around  gap-2 my-4">
-            <div className="flex flex-row justify-around">
-              {includeHotels ? (
-                <div className=" flex flex-row w-7/12 gap-4">
-                  <p>
-                    Number of Hotels: {hotels?.length > 0 ? hotels.length : 0}
-                  </p>
-                  <Button
-                    color={""}
-                    size={""}
-                    value={"Manage Hotels"}
-                    isSubmitting={false}
-                    handleClick={() => {
-                      navigate(`/AdminHome/Hotels/${city.name}`, {
-                        replace: true,
-                        state: {
-                          data: hotels,
-                          city: city,
-                        },
-                      });
-                    }}
-                    className={""}
-                    children={undefined}
-                    primary={false}
-                  />
-                </div>
-              ) : null}
-              <div
-                className={`flex flex-row   items-center  ${
-                  includeHotels
-                    ? "justify-end w-3/12"
-                    : "justify-end w-full mr-10"
-                }  `}
-              >
-                <label className="" htmlFor="includeHotels">
-                  Include Hotels:{" "}
-                </label>
-                <select
-                  onChange={(e) => {
-                    setIncludeHotels(e.target.value === "true" ? true : false);
-                  }}
-                  name="includeHotels"
-                  id="includeHotels"
-                >
-                  <option value="false">false</option>
-                  <option value="true">true</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <ul className="flex flex-col gap-4">
-                {includeHotels ? (
-                  <>
-                    <HotelCard city={city} setOpenSnackBar={setOpenSnackBar} />
-                  </>
-                ) : null}
-              </ul>
-            </div>
-          </article>
+          )}
         </div>
       )}
     </div>

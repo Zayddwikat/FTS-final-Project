@@ -39,7 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={handleClick}
-      type="button"
+      type="submit"
       className={`${buttonSize} ${buttonStyle} ${className} disabled:opacity-50 transition-all duration-300`}
       disabled={isSubmitting}
     >
