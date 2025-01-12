@@ -12,7 +12,7 @@ import { TableContent } from "./tableContent";
 import { EditAmenitiesDialog } from "../editAmenities/editAmenitiesDialog";
 import { useAmenitiesContext } from "../context/amenitiesContext";
 import { AmenitiesInformation } from "../../../data_models/amenitiesInformation";
-import { AddAmenitiesDialog } from "../addNewamenities/addAmenitiesDialog";
+import { AddAmenitiesDialog } from "../addNewAmenities/addAmenitiesDialog";
 
 export const AmenitiesOption: React.FC<any> = () => {
   const { state } = useLocation();

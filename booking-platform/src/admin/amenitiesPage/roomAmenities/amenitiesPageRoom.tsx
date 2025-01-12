@@ -3,6 +3,16 @@ import { useState } from "react";
 import React from "react";
 import { Snackbar } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import { useSnakeBar } from "../../hooks/useSnackBar";
+import { useAmenitiesContext } from "../context/amenitiesContext";
+import { AmenitiesInformation } from "../../../data_models/amenitiesInformation";
+import { ErrorPage } from "../../../ErrorPage";
+import { LoadingScreen } from "../../../component/loadingPage";
+import { Button } from "../../../login/loginForm/loginButton";
+import { AddAmenitiesDialog } from "../addNewAmenities/addAmenitiesDialog";
+import { TableContent } from "../hotelAmenities/tableContent";
+import { DeleteConfirmation } from "../../component/deleteConfirmation";
+import { EditAmenitiesDialog } from "../editAmenities/editAmenitiesDialog";
 
 
 export const AmenitiesPageRoom: React.FC<any> = () => {

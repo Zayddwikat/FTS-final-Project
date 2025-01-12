@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import { Button } from "../../../login/loginForm/loginButton";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { useRoomContext } from "../context/roomContext";
 
 export const EditRoomDialog: React.FC<any> = ({
   open,
