@@ -8,6 +8,7 @@ import { LoadingScreen } from "../../../component/loadingPage";
 import { TableContent } from "./tableContent";
 import { useAmenitiesContext } from "../context/amenitiesContext";
 import { AmenitiesInformation } from "../../../data_models/amenitiesInformation";
+import { PaginationControls } from "../../hotelPage/allHotel/paginationControls";
 
 export const AllAmenities: React.FC<any> = () => {
   const { openSnackBar, handleCloseSnackBar, action, setOpenSnackBar } =
@@ -42,13 +43,6 @@ export const AllAmenities: React.FC<any> = () => {
     setOpenDialog(true);
   };
 
-
-
-
-  
-
-  
-
   if (amenitiesQuery.error) return <ErrorPage />;
   if (amenitiesQuery.isLoading) return <LoadingScreen />;
   console.table(amenitiesQuery.data);
@@ -61,50 +55,16 @@ export const AllAmenities: React.FC<any> = () => {
       <div className="flex flex-col items-start justify-between h-[80dvh]">
         <TableContent
           data={data}
-          handleOpenDialog={undefined}
+          handleOpenDialog={handleOpenDialog}
           handleOpenEditDialog={() => {}}
           withEdit={false}
           withDelete={false}
         />
-        <div className="flex justify-end self-end mb-4">
-          <button
-            className={`px-3 py-1 mx-1 ${
-              pageNum === 0
-                ? "text-gray-400 cursor-not-allowed"
-                : "text-blue-400"
-            }`}
-            onClick={() => pageNum > 0 && setPageNum(pageNum - 1)}
-            disabled={pageNum === 0}
-          >
-            Previous
-          </button>
-
-          {[...Array(totalPages)].map((_, index) => (
-            <a
-              key={index}
-              onClick={() => setPageNum(index)}
-              className={`px-3 py-1 mx-1 cursor-pointer ${
-                pageNum === index
-                  ? "text-white bg-blue-500 rounded"
-                  : "text-blue-400"
-              }`}
-            >
-              {index + 1}
-            </a>
-          ))}
-
-          <button
-            className={`px-3 py-1 mx-1 ${
-              pageNum === totalPages - 1
-                ? "text-gray-400 cursor-not-allowed"
-                : "text-blue-400"
-            }`}
-            onClick={() => pageNum < totalPages - 1 && setPageNum(pageNum + 1)}
-            disabled={pageNum === totalPages - 1}
-          >
-            Next
-          </button>
-        </div>
+        <PaginationControls
+          pageNum={pageNum}
+          totalPages={totalPages}
+          setPageNum={setPageNum}
+        />
       </div>
 
       <Snackbar

@@ -1,7 +1,6 @@
 import { AmenitiesInformation } from "../../../data_models/amenitiesInformation";
 import { Button } from "../../../login/loginForm/loginButton";
 
-
 interface TableContentProp {
   data: Array<AmenitiesInformation>;
   handleOpenDialog: (prop: AmenitiesInformation) => void;
@@ -35,37 +34,41 @@ export const TableContent: React.FC<TableContentProp> = ({
             <tr className="border text-center" key={index}>
               <td className="border w-1/5">{index}</td>
               <td className="border w-1/5">{amenity.name}</td>
-              <td className="border truncate line-clamp-1 p-2 w-full overflow-hidden">
+              <td className=" truncate line-clamp-1 p-2 w-full overflow-hidden">
                 <p>{amenity.description}</p>
               </td>
-              <td className="border  text-center">
-                <Button
-                  color={"red"}
-                  size={"small"}
-                  value={"Delete"}
-                  isSubmitting={false}
-                  handleClick={() => {
-                    handleOpenDialog(amenity);
-                  }}
-                  className={"text-red-400"}
-                  children={undefined}
-                  primary={false}
-                />
-                {withEdit ? (
-                  <Button
-                    color={"red"}
-                    size={"small"}
-                    value={"Edit"}
-                    isSubmitting={false}
-                    handleClick={() => {
-                      handleOpenEditDialog(amenity);
-                    }}
-                    className={""}
-                    children={undefined}
-                    primary={false}
-                  />
-                ) : null}
-              </td>
+              {withDelete || withEdit ? (
+                <td className="border text-center">
+                  {withDelete ? (
+                    <Button
+                      color={"red"}
+                      size={"small"}
+                      value={"Delete"}
+                      isSubmitting={false}
+                      handleClick={() => {
+                        handleOpenDialog(amenity);
+                      }}
+                      className={"text-red-400"}
+                      children={undefined}
+                      primary={false}
+                    />
+                  ) : null}
+                  {withEdit ? (
+                    <Button
+                      color={"red"}
+                      size={"small"}
+                      value={"Edit"}
+                      isSubmitting={false}
+                      handleClick={() => {
+                        handleOpenEditDialog(amenity);
+                      }}
+                      className={""}
+                      children={undefined}
+                      primary={false}
+                    />
+                  ) : null}
+                </td>
+              ) : null}
             </tr>
           ))}
         </tbody>

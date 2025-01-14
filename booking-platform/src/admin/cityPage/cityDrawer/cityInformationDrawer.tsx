@@ -15,12 +15,12 @@ import { CityInformation } from "../../../data_models/cities";
 import { getCityPhotos } from "../../hooks/getCityPhotos";
 import { useHotelContext } from "../../hotelPage/context/hotelContext";
 import { HotelCard } from "../../hotelPage/hotelCard";
-import CityPhotos from "./CityPhotos";
-import CityDetails from "./CityDetails";
-import HotelManagement from "./HotelManagement";
-import DeleteCityDialog from "./DeleteCityDialog";
-import IncludeHotelsSelector from "./IncludeHotelsSelector";
-import HotelList from "./HotelList";
+import CityPhotos from "./cityPhotos";
+import CityDetails from "./cityDetails";
+import HotelManagement from "./hotelManagement";
+import DeleteCityDialog from "./deleteCityDialog";
+import IncludeHotelsSelector from "./includeHotelsSelector";
+import HotelList from "./hotelList";
 
 interface CityInformationProps {
   city: CityInformation;
