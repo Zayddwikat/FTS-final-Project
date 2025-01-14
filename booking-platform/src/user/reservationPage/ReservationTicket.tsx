@@ -1,6 +1,6 @@
 import React from "react";
-import { ReservationDetails } from "../../classes/reservationInfo";
-import { Button } from "../../Login/component/LoginButton";
+import { Button } from "../../login/loginForm/loginButton";
+import { ReservationDetails } from "../../data_models/reservationInfo";
 
 interface ReservationTicketProps extends ReservationDetails {
   deleteReservation: (confirmationNumber: string) => void;

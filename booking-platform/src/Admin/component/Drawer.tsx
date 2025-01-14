@@ -1,8 +1,7 @@
 import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import Drawer from "@mui/material/Drawer";
-import { Button } from "../../Login/component/LoginButton";
-import { AdminHotelCard } from "./AdminHotelCard";
-import { ImageProvider } from "../context/imageContext";
+import { Button } from "../../login/loginForm/loginButton";
+import { AdminHotelCard } from "../hotelPage/hotelInformation/adminHotelCard";
 
 export type Anchor = "right";
 

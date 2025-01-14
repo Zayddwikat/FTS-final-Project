@@ -1,12 +1,19 @@
 import { useLocation } from "react-router-dom";
-import Header from "../HomePage/component/header";
-import { SearchBar } from "../HomePage/component/SearchBar";
-import { CheckBoxesGroup } from "./component/checkBoxGroup";
+import Header from "../homePage/component/header/header";
 import { useFormik } from "formik";
 import { BudgetSlider } from "./component/budgetSlider";
-import { Post } from "../HomePage/component/SearchPost";
+import { Post } from "../homePage/component/searchPost";
 import { useQuery } from "@tanstack/react-query";
 import useFilterSelected from "./hooks/filterHooks";
+import { lazy, memo, Suspense } from "react";
+import SearchBarSkeletonLoader from "../homePage/component/SearchBar/component/searchBarSkeletonLoader";
+import SkeletonSearchPage from "./skeletonSearchPage";
+import { ErrorPage } from "../../ErrorPage";
+
+const SearchBar = memo(
+  lazy(() => import("../homePage/component/SearchBar/component/searchBar"))
+);
+const CheckBoxesGroup = memo(lazy(() => import("./component/checkBoxGroup")));
 
 interface PostData {
   id: string;
@@ -55,6 +62,8 @@ export default function SearchPage() {
       return res;
     },
   });
+  if (HotelFiltered.isLoading) return <SkeletonSearchPage />;
+  if (HotelFiltered.error) return <ErrorPage />;
 
   if (HotelFiltered.data) {
     return (
@@ -62,16 +71,20 @@ export default function SearchPage() {
         <Header />
         <main className="flex flex-col justify-center items-center gap-2 w-full md:w-[95vw] lg:w-[90vw] px-4">
           <header className="w-full mb-4">
-            <SearchBar cityTextField={true} data={valuesOfSearchBar} />
+            <Suspense fallback={<SearchBarSkeletonLoader />}>
+              <SearchBar cityTextField={true} data={valuesOfSearchBar} />
+            </Suspense>
           </header>
           <main className="flex flex-col lg:flex-row gap-4 w-full">
             <aside className="flex flex-col items-center gap-4 w-full lg:w-1/5 mb-6">
               <form className="w-full p-4 border border-black rounded-md shadow-lg flex flex-col items-center gap-4">
-                <CheckBoxesGroup
-                  filters={["hotels", "Wifi", "doubleRoom"]}
-                  formik={formik}
-                  data={data}
-                />
+                <Suspense>
+                  <CheckBoxesGroup
+                    filters={["hotels", "Wifi", "doubleRoom"]}
+                    formik={formik}
+                    data={data}
+                  />
+                </Suspense>
                 <BudgetSlider formik={formik} data={data} />
               </form>
             </aside>

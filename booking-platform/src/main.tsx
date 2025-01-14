@@ -1,41 +1,40 @@
 import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import LoginPage from "./Login/LoginPage.js";
-import { LoginProvider } from "./Login/Context/LoginContext.js";
-import IndexPage from "./IndexPage/IndexPage.js";
+import LoginPage from "./login/loginPage.js";
+import { LoginProvider } from "./login/loginForm/Context/loginContext";
+import IndexPage from "./indexPage/indexPage";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./ErrorPage";
-import HomePage from "./user/HomePage/HomePage.js";
-import { SearchProvider } from "./user/Context/SearchContextApi.js";
+import HomePage from "./user/homePage/homePage.js";
+import { SearchProvider } from "./user/homePage/component/SearchBar/component/searchContextApi.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import SearchPage from "./user/SearchPage/SearchPage.js";
-import { HotelPage } from "./user/HotelPage/hotel.js";
-import { CartProvider } from "./user/Context/cartContext.js";
-import { CartPage } from "./user/cartDialog/CartPage.js";
+import SearchPage from "./user/searchPage/searchPage.js";
+import { HotelPage } from "./user/hotelPage/hotel.js";
+import { CartProvider } from "./user/cartDialog/checkOutCheckInPage/cartContext.js";
+import { CartPage } from "./user/cartDialog/cartPage.js";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { AdminHomePage } from "./Admin/adminHomePage.js";
-import { HotelPageAdmin } from "./Admin/component/HotelPageAdmin.js";
-import { AdminHomeCities } from "./Admin/component/AdminHomeCities.js";
-import { HotelProvider } from "./Admin/context/hotelContext.js";
-import { HotelRooms } from "./Admin/component/hotelrooms.js";
-import { RoomProvider } from "./Admin/context/roomcontext.js";
-import { AmenitiesPage } from "./Admin/component/Amenities/amenitiesPage.js";
-import { AmenitiesProvider } from "./Admin/context/amenitiesContext.js";
-import { AmenitiesPageRoom } from "./Admin/component/Amenities/component/AmenitiesPageRoom.js";
-import { AmenitiesOption } from "./Admin/component/Amenities/component/amenitiesOption.js";
-import { TableContent } from "./Admin/component/Amenities/component/tableContent.js";
-import { CityProvider } from "./Admin/context/cityContext.js";
-import { AmenitiesInformation } from "./classes/amenitiesInformation.js";
-import { RoomPhotos } from "./Admin/component/photosSection/component/roomPhoos.js";
-import { PhotoMainPage } from "./Admin/component/photosSection/mainPagePhotos.js";
-import { ImageProvider } from "./Admin/context/imageContext.js";
-import { HotelPhotos } from "./Admin/component/photosSection/component/hotelPhotos.js";
-import { AdminSearch } from "./Admin/component/AdminSearchBar.js";
-import { CityPhotos } from "./Admin/component/photosSection/component/CityPhotos.js";
-import { roomNotFound } from "./const/constantVariables.js";
+import { AdminHomePage } from "./admin/adminHomePage.js";
+import { HotelPageAdmin } from "./admin/hotelPage/hotelPageAdmin.js";
+import { AdminHomeCities } from "./admin/cityPage/adminHomeCities.js";
+import { AmenitiesOption } from "./admin/amenitiesPage/hotelAmenities/amenitiesOption.js";
+import { CityProvider } from "./admin/cityPage/context/cityContext.js";
+import { AdminSearch } from "./admin/component/adminSearchBar.js";
 import { SelectHotelToShowRoom } from "./const/constantJSX.js";
-import { ReservationPage } from "./user/reservationPage/ReservationPage.js";
+import { ReservationPage } from "./user/reservationPage/reservationPage.js";
+import { HotelProvider } from "./admin/hotelPage/context/hotelContext.js";
+import { ImageProvider } from "./admin/photosPage/context/imageContext.js";
+import { RoomProvider } from "./admin/roomPage/context/roomContext.js";
+import { HotelRooms } from "./admin/roomPage/hotelRooms.js";
+import { HotelPhotos } from "./admin/photosPage/hotelPhotos/hotelPhotos.js";
+import { CityPhotos } from "./admin/photosPage/cityPhotos/cityPhotos.js";
+import { AmenitiesProvider } from "./admin/amenitiesPage/context/amenitiesContext.js";
+import { AmenitiesPage } from "./admin/amenitiesPage/roomAmenities/amenitiesPage.js";
+import { TableContent } from "./admin/amenitiesPage/hotelAmenities/tableContent.js";
+import { AmenitiesPageRoom } from "./admin/amenitiesPage/roomAmenities/amenitiesPageRoom.js";
+import { AmenitiesInformation } from "./data_models/amenitiesInformation.js";
+import { PhotoMainPage } from "./admin/photosPage/mainPagePhotos.js";
+import { RoomPhotos } from "./admin/photosPage/roomPhotos/roomPhotos.js";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY!);
 
@@ -171,7 +170,19 @@ const router = createBrowserRouter([
             element: (
               <div className="self-start">
                 <h1>Please select hotel or room to show the amenities</h1>
-                <TableContent data={[]} />
+                <TableContent
+                  data={[]}
+                  handleOpenDialog={function (
+                    prop: AmenitiesInformation
+                  ): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                  handleOpenEditDialog={function (
+                    prop: AmenitiesInformation
+                  ): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                />
               </div>
             ),
           },

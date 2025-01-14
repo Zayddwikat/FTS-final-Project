@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
-import { Button } from "../../Login/component/LoginButton";
-import { useAmenitiesContext } from "../context/amenitiesContext";
-import { useCityContext } from "../context/cityContext";
-import { useHotelContext } from "../context/hotelContext";
+import { Button } from "../../login/loginForm/loginButton";
+import { useCityContext } from "../cityPage/context/cityContext";
+import { useHotelContext } from "../hotelPage/context/hotelContext";
+import { useAmenitiesContext } from "../amenitiesPage/context/amenitiesContext";
 
 export const AdminSearch: React.FC<any> = () => {
   const { searchAmenitiesRoom, searchAmenities } = useAmenitiesContext();
