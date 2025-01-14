@@ -6,7 +6,7 @@ import { FormikProps } from "formik";
 
 interface PasswordFieldProps {
   label: string;
-  error?: boolean;
+  error?: boolean | string;
   formik: FormikProps<any>;
 }
 
@@ -41,9 +41,9 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({
         error={error ? true : false}
         variant="standard"
         onChange={formik.handleChange}
-        helperText={error ? "incorrect password" : ""}
+        helperText={error ? "incorrect password or this input is required" : ""}
       />
     </Box>
   );
-  //   return <TextField id="outlined-basic" label="Outlined" variant="outlined" />;
 };
+export default PasswordField

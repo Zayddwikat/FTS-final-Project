@@ -32,7 +32,7 @@ export const LoginSwiperSection: React.FC<SwiperSectionProps> = ({
 
   return (
     <Swiper
-      className={`w-full ${noTitle ?'h-full': 'h-[90%]' }  `}
+      className={`w-full ${noTitle ? "h-full" : "h-[90%]"}  `}
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
       spaceBetween={1}
       slidesPerView={1}
@@ -55,15 +55,18 @@ export const LoginSwiperSection: React.FC<SwiperSectionProps> = ({
               alt={"Slide image"}
               style={{
                 width: "100%",
-                height: `${noTitle ?'100%' : '80%'}`,
+                height: `${noTitle ? "100%" : "80%"}`,
                 objectFit: "cover",
               }}
               className="rounded-md w-full h-full object-cover"
             />
-            {!noTitle&&img.alt && <p className="text-xl truncate mx-2">{img.alt}</p>}
+            {!noTitle && img.alt && (
+              <p className="text-xl truncate mx-2">{img.alt}</p>
+            )}
           </div>
         </SwiperSlide>
       ))}
     </Swiper>
   );
 };
+export default LoginSwiperSection;

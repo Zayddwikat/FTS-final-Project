@@ -1,8 +1,12 @@
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
-import MainPage from "./component/mainPage";
-import Footer from "./component/footer";
+import React, { Suspense } from "react";
+import { LoadingScreen } from "../component/loadingPage";
+
+const Footer = React.lazy(() => import("./component/footer"));
+const MainPage = React.lazy(() => import("./component/mainPage"));
+
 const Header = () => {
   return (
     <header className=" flex flex-row items-center  justify-between gap-2  p-10 ">
@@ -25,18 +29,6 @@ const Main = () => {
         <span>Welcome to </span>
         <i className="font-extrabold">VBook</i> <span>Hotel Booking </span>
       </h1>
-      {/* <div className=" w-11/12 mx-4 ">
-        <picture className="w-full h-96 object-cover">
-          <source media="(max-width: 799px)" srcSet={`${desktopImage} 800w`} />
-          <source media="(min-width: 800px)" srcSet={`${hotelImage} 400w`} />
-          <img
-            className="w-full"
-            src={desktopImage}
-            alt="Chris standing up holding his daughter Elva"
-          />
-        </picture>
-      </div> */}
-
       <article className="my-20 mx-8">
         <h2 className="text-3xl mx-10 mt-20 font-bold">
           No Matter where you're going to,
@@ -46,7 +38,6 @@ const Main = () => {
     </main>
   );
 };
-
 export default function IndexPage() {
   return (
     <main>
@@ -58,8 +49,10 @@ export default function IndexPage() {
         </div>
       </div>
       <div className="h-[100dvh] flex flex-col  justify-center">
-        <MainPage />
-        <Footer />
+        <Suspense fallback={<LoadingScreen />}>
+          <MainPage />
+          <Footer />
+        </Suspense>
       </div>
     </main>
   );

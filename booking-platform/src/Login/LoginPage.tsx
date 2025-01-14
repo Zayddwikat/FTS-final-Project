@@ -1,8 +1,13 @@
 import { loginImgs } from "../const/loginImg";
-import { LoginForm } from "./loginForm/loginForm";
 import HomeIcon from "@mui/icons-material/Home";
-import { LoginSwiperSection } from "./loginImageSwiper/loginSwiperSection";
 import { Divider } from "@mui/material";
+import { lazy, Suspense } from "react";
+import { LoadingScreen } from "../component/loadingPage";
+
+const LoginForm = lazy(() => import("./loginForm/loginForm"));
+const LoginSwiperSection = lazy(
+  () => import("./loginImageSwiper/loginSwiperSection")
+);
 
 function LoginPage() {
   return (
@@ -27,11 +32,15 @@ function LoginPage() {
               You can sign in using your VBook account to access our service.
             </p>
           </article>
-          <LoginForm passwordError={false} />
+          <Suspense fallback={<LoadingScreen />}>
+            <LoginForm passwordError={false} />
+          </Suspense>
         </div>
 
         <div className="flex flex-row items-center justify-center w-full md:w-[60%] lg:w-[50%] rounded-md p-4 order-1 md:order-2 h-[60dvh]">
-          <LoginSwiperSection imgs={loginImgs} noTitle={false} />
+          <Suspense fallback={<LoadingScreen />}>
+            <LoginSwiperSection imgs={loginImgs} noTitle={false} />
+          </Suspense>
         </div>
       </main>
     </main>

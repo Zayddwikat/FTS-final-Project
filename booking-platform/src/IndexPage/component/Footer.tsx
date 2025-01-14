@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
-import { Button } from "../../login/loginForm/loginButton";
 import Gift from "../assets/Gift.png";
 import { useNavigate } from "react-router-dom";
+import React, { Suspense } from "react";
+import { LoadingScreen } from "../../component/loadingPage";
+
+const Button = React.lazy(() => import("../../login/loginForm/loginButton"));
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -15,16 +18,18 @@ export default function Footer() {
           Genius label
         </p>
         <Box sx={{ pt: 0.5 }}>
-          <Button
-            className=""
-            isSubmitting={false}
-            size=""
-            color="blue"
-            handleClick={() => navigate("/login")}
-            value={"Sign In"}
-            children={undefined}
-            primary={true}
-          />
+          <Suspense fallback={<LoadingScreen />}>
+            <Button
+              className=""
+              isSubmitting={false}
+              size=""
+              color="blue"
+              handleClick={() => navigate("/login")}
+              value={"Sign In"}
+              children={undefined}
+              primary={true}
+            />
+          </Suspense>
         </Box>
       </div>
       <img src={Gift} alt="Gift" />

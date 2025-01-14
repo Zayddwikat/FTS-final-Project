@@ -7,7 +7,7 @@ import { FormikProps } from "formik";
 
 interface userNameFieldProp {
   label: string;
-  error?: string;
+  error?: string | boolean;
   formik: FormikProps<any>;
   primary?: boolean;
   id: string;
@@ -35,8 +35,11 @@ export const UserNameField: React.FC<userNameFieldProp> = ({
         error={error ? true : false}
         variant="standard"
         onChange={formik.handleChange}
-        helperText={error !== null}
+        helperText={
+          error ? "incorrect user name or this input is required" : ""
+        }
       />
     </Box>
   );
 };
+export default UserNameField;
