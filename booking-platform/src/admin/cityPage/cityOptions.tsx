@@ -4,17 +4,16 @@ import { LoadingScreen } from "../../component/loadingPage";
 import { Button } from "../../login/loginForm/loginButton";
 import { useState } from "react";
 import { addCity } from "../hooks/addCity";
-import { CityDrawer } from "./cityDrawer/cityDrawer";
+import CityDrawer from "./cityDrawer/cityDrawer";
 import React from "react";
 import { Snackbar } from "@mui/material";
 
 import { CityInformation } from "../../data_models/cities";
-import { useCityContext } from "./context/cityContext";
 import { useSnakeBar } from "../hooks/useSnackBar";
 import { AddCityDialog } from "./addNewCity/addCityDialog";
+import { useCityContext } from "./context/cityContext";
 
 export const CityOptions: React.FC<any> = () => {
-
   const { cities, getCities, setCities } = useCityContext();
 
   const { openSnackBar, handleCloseSnackBar, action, setOpenSnackBar } =
@@ -48,7 +47,7 @@ export const CityOptions: React.FC<any> = () => {
   };
 
   if (citiesQuery.error) return <ErrorPage />;
-  if (citiesQuery.isLoading) return <LoadingScreen />;
+  // if (citiesQuery.isLoading) return <LoadingScreen />;
   console.table(citiesQuery.data);
   return (
     <>

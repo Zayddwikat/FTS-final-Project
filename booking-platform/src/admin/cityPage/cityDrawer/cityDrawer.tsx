@@ -12,7 +12,7 @@ interface cityDrawerProps {
   setOpenSnackBar: Dispatch<SetStateAction<boolean>>;
 }
 
-export const CityDrawer: React.FC<cityDrawerProps> = ({
+const CityDrawer: React.FC<cityDrawerProps> = ({
   city,
   setCities,
   setOpenSnackBar,
@@ -64,3 +64,5 @@ export const CityDrawer: React.FC<cityDrawerProps> = ({
     </>
   );
 };
+
+export default CityDrawer;

@@ -1,6 +1,9 @@
 import { CityInformation } from "../../../data_models/cities";
-import { CityDrawer } from "../cityDrawer/cityDrawer";
+// import CityDrawer from "../cityDrawer/cityDrawer";
 import Pagination from "./pagination";
+
+import React, { Suspense } from "react";
+const CityDrawer = React.lazy(() => import("../cityDrawer/cityDrawer"));
 
 interface CityTableProps {
   cities: CityInformation[];
@@ -45,11 +48,13 @@ const CityTable: React.FC<CityTableProps> = ({
                 <p className="w-[95%] line-clamp-1">{city.description}</p>
               </td>
               <td className="w-2/12 text-center">
-                <CityDrawer
-                  city={city}
-                  setCities={setCities}
-                  setOpenSnackBar={setOpenSnackBar}
-                />
+                <Suspense fallback={<div>Loading city table...</div>}>
+                  <CityDrawer
+                    city={city}
+                    setCities={setCities}
+                    setOpenSnackBar={setOpenSnackBar}
+                  />
+                </Suspense>
               </td>
             </tr>
           </tbody>
