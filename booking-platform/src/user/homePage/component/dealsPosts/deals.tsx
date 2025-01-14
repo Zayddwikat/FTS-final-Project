@@ -1,9 +1,10 @@
 import { useSearchContext } from "../SearchBar/component/searchContextApi";
-import { Post } from "./post";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import LoadingPost from "../loadingPost";
-import React from "react";
+import React, { lazy, Suspense } from "react";
+
+const Post = lazy(() => import("./post"));
 
 export default function Deals() {
   const { onFeaturedDeals } = useSearchContext();
@@ -30,7 +31,9 @@ export default function Deals() {
         <main className="flex flex-row flex-wrap md:flex-nowrap w-full gap-4">
           {hotelDeals.data.slice(0, 5).map((elem: any, index: number) => (
             <React.Fragment key={index}>
-              <Post key={index} post={elem} />
+              <Suspense fallback={<LoadingPost />}>
+                <Post key={index} post={elem} />
+              </Suspense>
             </React.Fragment>
           ))}
         </main>

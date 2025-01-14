@@ -7,3 +7,4 @@ export const ReviewsSection: React.FC<any> = ({ post }) => {
     </div>
   );
 };
+export default ReviewsSection;

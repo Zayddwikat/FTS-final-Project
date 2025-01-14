@@ -1,8 +1,10 @@
 import SimpleMap from "./googleMaps/googlemaps";
 import { Reviews } from "./drawer";
 
-
-export const HotelSidebar: React.FC<{ post: any; hotelData: any }> = ({ post, hotelData }) => {
+export const HotelSidebar: React.FC<{ post: any; hotelData: any }> = ({
+  post,
+  hotelData,
+}) => {
   const calculateRating = () => {
     const rating = post.starRating || post.hotelStarRating;
     return rating * 2 > 9.5
@@ -38,3 +40,4 @@ export const HotelSidebar: React.FC<{ post: any; hotelData: any }> = ({ post, ho
     </article>
   );
 };
+export default HotelSidebar;

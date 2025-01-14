@@ -1,7 +1,12 @@
 // HotelDetails.tsx
 import Box from "@mui/material/Box";
-import { HotelGalleryContainer } from "./imageContainer/imageContainer";
 import { FacilitiesList } from "./facilitiesList";
+import { lazy, memo, Suspense } from "react";
+import { LoadingScreen } from "../../../../component/loadingPage";
+
+const HotelGalleryContainer = memo(
+  lazy(() => import("./imageContainer/imageContainer"))
+);
 
 export const HotelDetails: React.FC<{ post: any; hotelData: any }> = ({
   post,
@@ -14,10 +19,11 @@ export const HotelDetails: React.FC<{ post: any; hotelData: any }> = ({
           <h1 className="text-2xl font-bold">{hotelData.hotelName}</h1>
         </Box>
       </article>
-
-      <div className="w-full h-[60vh] md:h-[65vh] lg:h-[50vh]">
-        <HotelGalleryContainer post={post} />
-      </div>
+      <Suspense fallback={<LoadingScreen />}>
+        <div className="w-full h-[60vh] md:h-[65vh] lg:h-[50vh]">
+          <HotelGalleryContainer post={post} />
+        </div>
+      </Suspense>
 
       <article className="mx-2 mb-4 text-sm">
         <p>{hotelData.description}</p>
@@ -30,3 +36,4 @@ export const HotelDetails: React.FC<{ post: any; hotelData: any }> = ({
     </div>
   );
 };
+export default HotelDetails;

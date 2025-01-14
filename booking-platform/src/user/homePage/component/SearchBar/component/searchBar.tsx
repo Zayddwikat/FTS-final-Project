@@ -1,5 +1,5 @@
 import { useFormik, FormikHelpers } from "formik";
-import { useState } from "react";
+import { lazy, useState, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -7,11 +7,13 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import BedIcon from "@mui/icons-material/Bed";
 import * as Yup from "yup";
-import { Button } from "../../../../../login/loginForm/loginButton";
-import { PopOver } from "./popOverCalender";
 import { searchResult } from "../hooks/searchHook";
-import { CheckInCheckOutSection } from "./checkInCheckOut";
-import { RoomsAdultChildrenSection } from "./roomInfo";
+import { LoadingScreen } from "../../../../../component/loadingPage";
+
+const Button = lazy(() => import("../../../../../login/loginForm/loginButton"));
+const PopOver = lazy(() => import("./popOverCalender"));
+const CheckInCheckOutSection = lazy(() => import("./checkInCheckOut"));
+const RoomsAdultChildrenSection = lazy(() => import("./roomInfo"));
 
 // Types for form data
 interface SearchFormData {
@@ -131,16 +133,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         />
 
         {/* PopOver for Calendar */}
-        <PopOver
-          anchorElement={calenderOption}
-          setAnchorElement={() => setCalenderOption(null)}
-          position="below"
-        >
-          <CheckInCheckOutSection
-            formik={formik}
-            handleClose={() => setCalenderOption(null)}
-          />
-        </PopOver>
+        <Suspense fallback={<LoadingScreen />}>
+          <PopOver
+            anchorElement={calenderOption}
+            setAnchorElement={() => setCalenderOption(null)}
+            position="below"
+          >
+            <CheckInCheckOutSection
+              formik={formik}
+              handleClose={() => setCalenderOption(null)}
+            />
+          </PopOver>
+        </Suspense>
 
         {/* Room Options */}
         <TextField
@@ -158,26 +162,30 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         />
 
         {/* PopOver for Rooms */}
-        <PopOver
-          anchorElement={roomOptions}
-          setAnchorElement={() => setRoomOption(null)}
-          position="below"
-        >
-          <RoomsAdultChildrenSection formik={formik} />
-        </PopOver>
-
+        <Suspense fallback={<LoadingScreen />}>
+          <PopOver
+            anchorElement={roomOptions}
+            setAnchorElement={() => setRoomOption(null)}
+            position="below"
+          >
+            <RoomsAdultChildrenSection formik={formik} />
+          </PopOver>
+        </Suspense>
         {/* Search Button */}
-        <Button
-          color="primary"
-          size="large"
-          value="Search"
-          isSubmitting={formik.isSubmitting}
-          handleClick={formik.handleSubmit}
-          className="w-full sm:w-auto px-6 py-2 text-base sm:text-lg md:text-xl font-semibold bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-all duration-300"
-          primary={true}
-          children={undefined}
-        />
+        <Suspense fallback={<LoadingScreen />}>
+          <Button
+            color="primary"
+            size="large"
+            value="Search"
+            isSubmitting={formik.isSubmitting}
+            handleClick={formik.handleSubmit}
+            className="w-full sm:w-auto px-6 py-2 text-base sm:text-lg md:text-xl font-semibold bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-all duration-300"
+            primary={true}
+            children={undefined}
+          />
+        </Suspense>
       </form>
     </main>
   );
 };
+export default SearchBar;

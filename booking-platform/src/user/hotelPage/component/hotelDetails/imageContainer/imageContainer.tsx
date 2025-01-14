@@ -86,3 +86,4 @@ export const HotelGalleryContainer: React.FC<any> = ({
     </div>
   );
 };
+export default HotelGalleryContainer;

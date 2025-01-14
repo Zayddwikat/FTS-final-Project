@@ -81,3 +81,4 @@ export const ReviewPostPrimary: React.FC<PostObjectInformation> = (post) => {
     </div>
   );
 };
+export default ReviewPostPrimary;

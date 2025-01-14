@@ -3,7 +3,29 @@ import { useSearchContext } from "../SearchBar/component/searchContextApi";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-import { TrendingPost } from "./trendingPost";
+import { lazy, Suspense } from "react";
+
+const TrendingPost = lazy(() => import("./trendingPost"));
+
+const LoadingTrendingPost = () => {
+  return (
+    <div className="flex flex-wrap gap-4 md:flex-row justify-start">
+      {[1, 2, 3, 4].map((elem, index) => (
+        <div className="w-full sm:w-[45%] md:w-[22%]" key={index}>
+          <Skeleton
+            className="m-4 rounded-md"
+            variant="rectangular"
+            height={250}
+          />
+          <Box className="mx-2" sx={{ pt: 0.5 }}>
+            <Skeleton width={300} />
+            <Skeleton width={300} />
+          </Box>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default function TrendingHotels() {
   const { onDestinationTrending } = useSearchContext();
@@ -16,25 +38,7 @@ export default function TrendingHotels() {
     },
   });
 
-  if (HotelsTrending.isLoading)
-    return (
-      <div className="flex flex-wrap gap-4 md:flex-row justify-start">
-        {[1, 2, 3, 4].map((elem, index) => (
-          <div className="w-full sm:w-[45%] md:w-[22%]" key={index}>
-            <Skeleton
-              className="m-4 rounded-md"
-              variant="rectangular"
-              height={250}
-            />
-            <Box className="mx-2" sx={{ pt: 0.5 }}>
-              <Skeleton width={300} />
-              <Skeleton width={300} />
-            </Box>
-          </div>
-        ))}
-      </div>
-    );
-
+  if (HotelsTrending.isLoading) return <LoadingTrendingPost />;
   if (HotelsTrending.isError)
     return <pre>{JSON.stringify(HotelsTrending.error)}</pre>;
 
@@ -49,7 +53,9 @@ export default function TrendingHotels() {
       <div className="flex flex-wrap gap-1 w-full justify-start">
         {HotelsTrending.data.slice(0, 5).map((elem: any, index: number) => (
           <div className="w-full sm:w-[45%] md:w-[19%]" key={index}>
-            <TrendingPost post={elem} />
+            <Suspense fallback={<LoadingTrendingPost />}>
+              <TrendingPost post={elem} />
+            </Suspense>
           </div>
         ))}
       </div>

@@ -29,7 +29,9 @@ export const TrendingPost: React.FC<TrendingPostProps> = ({ post }) => {
         <article className="flex flex-col items-start w-full mt-2">
           <span className="flex flex-row flex-wrap">
             <p className="text-sm font-semibold">{post.cityName},</p>
-            <p className="text-sm font-bold text-gray-700 ml-1">{post.countryName}</p>
+            <p className="text-sm font-bold text-gray-700 ml-1">
+              {post.countryName}
+            </p>
           </span>
 
           <div className="w-full mt-1">
@@ -40,3 +42,4 @@ export const TrendingPost: React.FC<TrendingPostProps> = ({ post }) => {
     </div>
   );
 };
+export default TrendingPost;

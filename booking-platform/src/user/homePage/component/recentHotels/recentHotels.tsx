@@ -4,7 +4,9 @@ import LoadingPost from "../loadingPost";
 import { ErrorPage } from "../../../../ErrorPage";
 import { Link } from "react-router-dom";
 import { recentHotelsInformation } from "../../../../data_models/recentHotelsPost";
-import { RecentViewedPost } from "./recentViewedPost";
+import { lazy, Suspense } from "react";
+
+const RecentViewedPost = lazy(() => import("./recentViewedPost"));
 
 export const RecentHotels: React.FC = () => {
   const {
@@ -36,10 +38,13 @@ export const RecentHotels: React.FC = () => {
             key={index}
             className="w-full sm:w-[48%] lg:w-[30%] xl:w-[19%] mb-4"
           >
-            <RecentViewedPost post={post} />
+            <Suspense fallback={<LoadingPost />}>
+              <RecentViewedPost post={post} />
+            </Suspense>
           </div>
         ))}
       </main>
     </section>
   );
 };
+export default RecentHotels;

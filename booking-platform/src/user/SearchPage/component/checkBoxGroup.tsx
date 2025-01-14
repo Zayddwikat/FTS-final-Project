@@ -58,3 +58,4 @@ export const CheckBoxesGroup: React.FC<CheckBoxProps> = ({
     </Box>
   );
 };
+export default CheckBoxesGroup;

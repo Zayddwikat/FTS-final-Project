@@ -15,3 +15,4 @@ export const RoomsAdultChildrenSection = ({ formik }) => (
     </div>
   </main>
 );
+export default RoomsAdultChildrenSection;

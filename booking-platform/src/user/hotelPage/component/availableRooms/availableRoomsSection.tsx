@@ -1,5 +1,3 @@
-// AvailableRoomsSection.tsx
-
 import { AvailableRooms } from "./availableRooms";
 
 export const AvailableRoomsSection: React.FC<any> = ({
@@ -18,3 +16,4 @@ export const AvailableRoomsSection: React.FC<any> = ({
     </div>
   );
 };
+export default AvailableRoomsSection;

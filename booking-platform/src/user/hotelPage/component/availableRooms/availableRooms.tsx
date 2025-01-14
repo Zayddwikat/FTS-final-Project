@@ -1,13 +1,15 @@
 import { useGetAvailableRooms } from "./useAvailableRooms";
-import { useState } from "react";
+import { lazy, memo, Suspense, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { DialogDemo } from "./roomInfoDialog/roomDialog";
-import { Button } from "../../../../login/loginForm/loginButton";
-import { useCartContext } from "../../../cartDialog/checkOutCheckInPage/cartContext";
-import { CartPage } from "../../../cartDialog/cartPage";
 import { LoadingScreen } from "../../../../component/loadingPage";
 import { ErrorPage } from "../../../../ErrorPage";
 import { roomInformation } from "../../../../data_models/roomInformation";
+
+const Button = memo(
+  lazy(() => import("../../../../login/loginForm/loginButton"))
+);
+const CartPage = memo(lazy(() => import("../../../cartDialog/cartPage")));
 
 export const AvailableRooms: React.FC<any> = ({
   hotel,
@@ -17,7 +19,6 @@ export const AvailableRooms: React.FC<any> = ({
 }) => {
   const [openIndex, setOpenIndex] = useState<number>(-1);
   const [openCheckOut, setOpenCheckOut] = useState<number>(-1);
- 
 
   const handleOpenCheckOut = (index: number) => {
     setOpenCheckOut(index);
@@ -81,7 +82,6 @@ export const AvailableRooms: React.FC<any> = ({
                   element={element}
                   handleOpenCheckOut={handleOpenCheckOut}
                   index={index}
-
                 />
               </td>
               <td className="border border-gray-300 px-2 py-1 text-xs md:text-sm">
@@ -100,26 +100,30 @@ export const AvailableRooms: React.FC<any> = ({
               </td>
               <td className="border border-gray-300 px-2 py-1 text-xs md:text-sm">
                 <div className="flex justify-center">
-                  <Button
-                    className="px-2 py-1 text-xs md:text-sm"
-                    color="blue"
-                    handleClick={() => handleOpenCheckOut(index)}
-                    size="small"
-                    value="Reserve"
-                    primary={false}
-                    isSubmitting={false}
-                    children={undefined}
-                  />
+                  <Suspense fallback={<LoadingScreen />}>
+                    <Button
+                      className="px-2 py-1 text-xs md:text-sm"
+                      color="blue"
+                      handleClick={() => handleOpenCheckOut(index)}
+                      size="small"
+                      value="Reserve"
+                      primary={false}
+                      isSubmitting={false}
+                      children={undefined}
+                    />
+                  </Suspense>
                 </div>
-                <CartPage
-                  handleClose={handleCloseCheckOut}
-                  open={openCheckOut === index}
-                  room={element}
-                  hotel={hotel}
-                  checkIn={checkIn}
-                  checkOut={checkOut}
-                  searchOption={searchOption}
-                />
+                <Suspense fallback={<LoadingScreen />}>
+                  <CartPage
+                    handleClose={handleCloseCheckOut}
+                    open={openCheckOut === index}
+                    room={element}
+                    hotel={hotel}
+                    checkIn={checkIn}
+                    checkOut={checkOut}
+                    searchOption={searchOption}
+                  />
+                </Suspense>
               </td>
             </tr>
           ))}

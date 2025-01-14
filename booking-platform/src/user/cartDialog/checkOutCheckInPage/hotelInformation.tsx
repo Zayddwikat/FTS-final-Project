@@ -1,6 +1,4 @@
 import { Divider } from "@mui/material";
-import { hotelInformation } from "../../../data_module/hotelInformation";
-import { roomInformation } from "../../../data_module/roomInformation";
 import { CheckInCheckOutSection } from "./checkInCheckOutSection";
 import { SelectionSection } from "./yourSelectionSection";
 import * as React from "react";
@@ -15,6 +13,8 @@ import { CheckOutPage } from "./checkOutPage";
 import { ConformationBooking } from "./confirmationOfBooking";
 import { useFormik } from "formik";
 import { useCartContext } from "./cartContext";
+import { roomInformation } from "../../../data_models/roomInformation";
+import { hotelInformation } from "../../../data_models/hotelInformation";
 
 interface hotelInformationProps {
   roomInformationObject: roomInformation;
@@ -164,3 +164,4 @@ export const HotelInformationDialog: React.FC<hotelInformationProps> = ({
     </Box>
   );
 };
+export default HotelInformationDialog;

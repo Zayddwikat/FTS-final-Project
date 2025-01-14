@@ -79,3 +79,4 @@ export const RecentViewedPost: React.FC<RecentViewedProps> = ({ post }) => {
     </div>
   );
 };
+export default RecentViewedPost

@@ -2,8 +2,13 @@ import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import { CloseDialogBtn } from "../hotelPage/component/availableRooms/roomInfoDialog/roomDialog";
 // import { HotelInformationDialog } from "./checkOutCheckInPage/hotelInformation";
 import { roomInformation } from "../../data_models/roomInformation";
-import { HotelInformationDialog } from "./checkOutCheckInPage/hotelInformation";
 import { hotelInformation } from "../../data_models/hotelInformation";
+import { lazy, memo, Suspense } from "react";
+import CartPageSkeleton from "./skeletonCartPage";
+
+const HotelInformationDialog = memo(
+  lazy(() => import("./checkOutCheckInPage/hotelInformation"))
+);
 
 export const CartPage: React.FC<any> = ({
   handleClose,
@@ -40,13 +45,19 @@ export const CartPage: React.FC<any> = ({
         <DialogContentText className="w-full" id="alert-dialog-description">
           <div className="flex flex-row items-start">
             <article className="w-full flex flex-row gap-2">
-              <HotelInformationDialog
-                roomInformationObject={room}
-                hotel={hotel}
-                checkIn={checkIn}
-                checkOut={checkOut}
-                searchOption={searchOption}
-              />
+              <Suspense
+                fallback={
+                  <CartPageSkeleton open={open} handleClose={handleClose} />
+                }
+              >
+                <HotelInformationDialog
+                  roomInformationObject={room}
+                  hotel={hotel}
+                  checkIn={checkIn}
+                  checkOut={checkOut}
+                  searchOption={searchOption}
+                />
+              </Suspense>
             </article>
             <CloseDialogBtn handleClose={handleClose} />
           </div>
@@ -55,3 +66,4 @@ export const CartPage: React.FC<any> = ({
     </Dialog>
   );
 };
+export default CartPage;

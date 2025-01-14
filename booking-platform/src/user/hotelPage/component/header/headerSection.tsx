@@ -1,11 +1,27 @@
+import { lazy, memo, Suspense } from "react";
 import Header from "../../../homePage/component/header/header";
-import { SearchBar } from "../../../homePage/component/SearchBar/component/searchBar";
+import SearchBarSkeletonLoader from "../../../homePage/component/SearchBar/component/searchBarSkeletonLoader";
 
-export const HeaderSection: React.FC<{ searchValue: any }> = ({ searchValue }) => {
+const SearchBar = memo(
+  lazy(
+    () => import("../../../homePage/component/SearchBar/component/searchBar")
+  )
+);
+
+export const HeaderSection: React.FC<{ searchValue: any }> = ({
+  searchValue,
+}) => {
   return (
     <>
       <Header />
-      <SearchBar cityTextField={true} data={undefined} searchValues={searchValue} />
+      <Suspense fallback={<SearchBarSkeletonLoader />}>
+        <SearchBar
+          cityTextField={true}
+          data={undefined}
+          searchValues={searchValue}
+        />
+      </Suspense>
     </>
   );
 };
+export default HeaderSection;
