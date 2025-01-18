@@ -4,7 +4,40 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>VBook</title>
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "urls": [
+              "/",
+              "/login",
+              "/Home",
+              "/show-more",
+              "/search-result",
+              "/reservation",
+              "/search-result/Hotels/:hotelId",
+              "/AdminHome",
+              "/AdminHome/Hotels",
+              "/AdminHome/Hotels/:city",
+              "/AdminHome/photos/",
+              "/AdminHome/photos/:hotelId",
+              "/AdminHome/photos/city/:cityId",
+              "/AdminHome/:hotelId/Rooms",
+              "/AdminHome/Cities",
+              "/AdminHome/amenities",
+              "/AdminHome/amenities",
+              "/AdminHome/amenities/room/:roomId",
+              "/AdminHome/amenities/hotel/:Hotel",
+              "/AdminHome/:hotelId/Rooms/:roomId",
+              "/AdminHome/:hotelId/Rooms/:roomId/photos",
+              "/AdminHome/Rooms"
+            ],
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
