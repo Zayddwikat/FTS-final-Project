@@ -4,7 +4,6 @@ import { hotelObject } from "../../cityPage/cityDrawer/cityInformationDrawer";
 import { useAmenitiesContext } from "../context/amenitiesContext";
 import { Button } from "../../../login/loginForm/loginButton";
 
-
 interface AddCityFormProps {
   hotel: hotelObject;
   handleClose: () => void;
@@ -84,3 +83,5 @@ export const AddAmenitiesHotelForm: React.FC<AddCityFormProps> = ({
     </Formik>
   );
 };
+
+export default AddAmenitiesHotelForm;

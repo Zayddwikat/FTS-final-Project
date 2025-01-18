@@ -6,7 +6,6 @@ import { CityInformation } from "../../../data_models/cities";
 import { Button } from "../../../login/loginForm/loginButton";
 import { useImageContext } from "../context/imageContext";
 
-
 interface AddCityFormProps {
   handleClose: () => void;
   room?: roomInformation;
@@ -76,3 +75,4 @@ export const AddImgForm: React.FC<AddCityFormProps> = ({
     </Formik>
   );
 };
+export default AddImgForm;

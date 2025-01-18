@@ -1,9 +1,11 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { AddAmenitiesForm } from "./addAmenitiesForm";
-import { AddAmenitiesHotelForm } from "./addAmenitiesHotelForm";
+import { lazy, memo } from "react";
 
-
+const AddAmenitiesForm = memo(lazy(() => import("./addAmenitiesForm")));
+const AddAmenitiesHotelForm = memo(
+  lazy(() => import("./addAmenitiesHotelForm"))
+);
 
 export const CloseDialogBtn = ({
   handleClose,
@@ -56,3 +58,4 @@ export const AddAmenitiesDialog: React.FC<any> = ({
     </Dialog>
   );
 };
+export default AddAmenitiesDialog;

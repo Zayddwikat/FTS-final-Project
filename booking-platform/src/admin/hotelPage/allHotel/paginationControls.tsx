@@ -47,3 +47,4 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
     </div>
   );
 };
+export default PaginationControls;

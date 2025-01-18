@@ -61,3 +61,5 @@ export const DeleteConfirmation: React.FC<any> = ({
     </>
   );
 };
+
+export default DeleteConfirmation

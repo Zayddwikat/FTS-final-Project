@@ -4,7 +4,6 @@ import { AmenitiesInformation } from "../../../data_models/amenitiesInformation"
 import { useAmenitiesContext } from "../context/amenitiesContext";
 import { Button } from "../../../login/loginForm/loginButton";
 
-
 interface AddCityFormProps {
   handleClose: () => void;
   amenity: AmenitiesInformation;
@@ -88,3 +87,5 @@ export const EditAmenitiesForm: React.FC<AddCityFormProps> = ({
     </Formik>
   );
 };
+
+export default EditAmenitiesForm;

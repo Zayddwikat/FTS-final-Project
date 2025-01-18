@@ -1,8 +1,9 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { AdminSearch } from "../../component/adminSearchBar";
 import { AmenitiesProvider } from "../context/amenitiesContext";
-import { AllAmenities } from "../hotelAmenities/allAmenities";
+import { lazy, memo } from "react";
 
+const AllAmenities = memo(lazy(() => import("../hotelAmenities/allAmenities")));
 
 export const AmenitiesPage: React.FC<any> = () => {
   const { state } = useLocation();
@@ -18,7 +19,6 @@ export const AmenitiesPage: React.FC<any> = () => {
           <AllAmenities />
         </AmenitiesProvider>
       )}
-     
     </main>
   );
 };

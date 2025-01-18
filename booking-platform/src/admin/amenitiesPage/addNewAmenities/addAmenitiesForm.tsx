@@ -83,3 +83,4 @@ export const AddAmenitiesForm: React.FC<AddCityFormProps> = ({
     </Formik>
   );
 };
+export default AddAmenitiesForm

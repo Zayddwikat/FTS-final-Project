@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { lazy, memo, useState } from "react";
 import React from "react";
 import { Snackbar } from "@mui/material";
 import { useSnakeBar } from "../../hooks/useSnackBar";
 import { ErrorPage } from "../../../ErrorPage";
 import { LoadingScreen } from "../../../component/loadingPage";
-import { TableContent } from "./tableContent";
 import { useAmenitiesContext } from "../context/amenitiesContext";
 import { AmenitiesInformation } from "../../../data_models/amenitiesInformation";
-import { PaginationControls } from "../../hotelPage/allHotel/paginationControls";
+
+const TableContent = memo(lazy(() => import("./tableContent")));
+const PaginationControls = memo(
+  lazy(() => import("../../hotelPage/allHotel/paginationControls"))
+);
 
 export const AllAmenities: React.FC<any> = () => {
   const { openSnackBar, handleCloseSnackBar, action, setOpenSnackBar } =
@@ -77,3 +80,4 @@ export const AllAmenities: React.FC<any> = () => {
     </>
   );
 };
+export default AllAmenities;

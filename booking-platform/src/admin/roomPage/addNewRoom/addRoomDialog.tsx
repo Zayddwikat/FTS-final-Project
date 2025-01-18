@@ -134,3 +134,4 @@ export const AddRoomDialog: React.FC<any> = ({
     </>
   );
 };
+export default AddRoomDialog;

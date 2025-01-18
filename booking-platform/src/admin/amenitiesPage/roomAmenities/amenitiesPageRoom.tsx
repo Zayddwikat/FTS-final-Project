@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { lazy, memo, useState } from "react";
 import React from "react";
 import { Snackbar } from "@mui/material";
 import { useLocation } from "react-router-dom";
@@ -9,11 +9,20 @@ import { AmenitiesInformation } from "../../../data_models/amenitiesInformation"
 import { ErrorPage } from "../../../ErrorPage";
 import { LoadingScreen } from "../../../component/loadingPage";
 import { Button } from "../../../login/loginForm/loginButton";
-import { AddAmenitiesDialog } from "../addNewAmenities/addAmenitiesDialog";
-import { TableContent } from "../hotelAmenities/tableContent";
-import { DeleteConfirmation } from "../../component/deleteConfirmation";
-import { EditAmenitiesDialog } from "../editAmenities/editAmenitiesDialog";
 
+const PaginationControls = memo(
+  lazy(() => import("../../hotelPage/allHotel/paginationControls"))
+);
+const AddAmenitiesDialog = memo(
+  lazy(() => import("../addNewAmenities/addAmenitiesDialog"))
+);
+const TableContent = memo(lazy(() => import("../hotelAmenities/tableContent")));
+const DeleteConfirmation = memo(
+  lazy(() => import("../../component/deleteConfirmation"))
+);
+const EditAmenitiesDialog = memo(
+  lazy(() => import("../editAmenities/editAmenitiesDialog"))
+);
 
 export const AmenitiesPageRoom: React.FC<any> = () => {
   const { state } = useLocation();
@@ -136,7 +145,12 @@ export const AmenitiesPageRoom: React.FC<any> = () => {
           label="Amenity"
           amenity={selectedAmenity}
         />
-        <div className="flex justify-end self-end mb-4">
+        <PaginationControls
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          totalPages={totalPages}
+        />
+        {/* <div className="flex justify-end self-end mb-4">
           <button
             className={`px-3 py-1 mx-1 ${
               pageNum === 0
@@ -174,7 +188,7 @@ export const AmenitiesPageRoom: React.FC<any> = () => {
           >
             Next
           </button>
-        </div>
+        </div> */}
       </div>
 
       <Snackbar
