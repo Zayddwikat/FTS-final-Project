@@ -1,7 +1,7 @@
 # FTS Final Project
 
+![Logo](https://github.com/user-attachments/assets/ce067b59-b163-42d8-9379-b16724cc3e2b)
 
-![VBook (2)](https://github.com/user-attachments/assets/ed2ebb32-a096-4cfa-878f-dee72685384d)
 
 
 ![Static Badge](https://img.shields.io/badge/React-61dbfb?style=for-the-badge&logo=react&logoColor=61dbfb&labelColor=black)    
