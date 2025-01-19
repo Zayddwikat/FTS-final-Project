@@ -1,18 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import React from "react";
+import React, { memo, lazy } from "react";
 import { Snackbar } from "@mui/material";
 import { useSnakeBar } from "../../hooks/useSnackBar";
 import { Button } from "../../../login/loginForm/loginButton";
 import { useLocation } from "react-router-dom";
 import { ErrorPage } from "../../../ErrorPage";
 import { LoadingScreen } from "../../../component/loadingPage";
-import { DeleteConfirmation } from "../../component/deleteConfirmation";
-import { TableContent } from "./tableContent";
-import { EditAmenitiesDialog } from "../editAmenities/editAmenitiesDialog";
 import { useAmenitiesContext } from "../context/amenitiesContext";
 import { AmenitiesInformation } from "../../../data_models/amenitiesInformation";
-import { AddAmenitiesDialog } from "../addNewAmenities/addAmenitiesDialog";
+import PaginationControls from "../../hotelPage/allHotel/paginationControls";
+
+const TableContent = memo(lazy(() => import("./tableContent")));
+const DeleteConfirmation = memo(
+  lazy(() => import("../../component/deleteConfirmation"))
+);
+const EditAmenitiesDialog = memo(
+  lazy(() => import("../editAmenities/editAmenitiesDialog"))
+);
+const AddAmenitiesDialog = memo(lazy(()=> import("../addNewAmenities/addAmenitiesDialog")))
 
 export const AmenitiesOption: React.FC<any> = () => {
   const { state } = useLocation();
@@ -126,8 +132,8 @@ export const AmenitiesOption: React.FC<any> = () => {
           label="Amenity"
           amenity={selectedAmenity}
         />
-
-        <div className="flex justify-end self-end mb-4">
+        <PaginationControls pageNum={pageNum} setPageNum={setPageNum} totalPages={totalPages} />
+        {/* <div className="flex justify-end self-end mb-4">
           <button
             className={`px-3 py-1 mx-1 ${
               pageNum === 0
@@ -165,7 +171,7 @@ export const AmenitiesOption: React.FC<any> = () => {
           >
             Next
           </button>
-        </div>
+        </div> */}
       </div>
 
       <Snackbar

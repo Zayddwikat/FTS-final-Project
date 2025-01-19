@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { lazy, memo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "../../login/loginForm/loginButton";
-import { AddRoomDialog } from "./addNewRoom/addRoomDialog";
 import { useSnakeBar } from "../hooks/useSnackBar";
 import { hotelObject } from "../cityPage/cityDrawer/cityInformationDrawer";
 import { RoomDrawer } from "./roomDrawer/roomDrawer";
@@ -10,6 +9,10 @@ import { Snackbar } from "@mui/material";
 import { roomInformation } from "../../data_models/roomInformation";
 import { AdminSearch } from "../component/adminSearchBar";
 import { useRoomContext } from "./context/roomContext";
+
+
+const PaginationControls = memo(lazy(()=>import("../hotelPage/allHotel/paginationControls")))
+const AddRoomDialog = memo(lazy(()=>import("./addNewRoom/addRoomDialog")))
 
 export const HotelRooms: React.FC = () => {
   const { state } = useLocation();
@@ -148,7 +151,8 @@ export const HotelRooms: React.FC = () => {
           );
         })}
       </table>
-      <div className="flex justify-center self-end mb-4">
+      <PaginationControls pageNum={pageNum} setPageNum={setPageNum} totalPages={totalPages}/>
+      {/* <div className="flex justify-center self-end mb-4">
         <button
           className={`px-3 py-1 mx-1 ${
             pageNum === 0 ? "text-gray-400 cursor-not-allowed" : "text-blue-400"
@@ -184,7 +188,7 @@ export const HotelRooms: React.FC = () => {
         >
           Next
         </button>
-      </div>
+      </div> */}
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}

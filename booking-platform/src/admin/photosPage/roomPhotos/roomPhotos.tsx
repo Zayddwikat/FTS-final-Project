@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 import "../../../tailwindCss.css";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { Snackbar } from "@mui/material";
@@ -10,9 +9,12 @@ import { ImgObject } from "../../../user/hotelPage/component/hotelDetails/imageC
 import { LoadingScreen } from "../../../component/loadingPage";
 import { ErrorPage } from "../../../ErrorPage";
 import { Button } from "../../../login/loginForm/loginButton";
-import { AddImgDialog } from "../addNewPhoto/addImageDialog";
-import { DeleteConfirmation } from "../../component/deleteConfirmation";
 import { useImageContext } from "../context/imageContext";
+import {lazy,memo , useState} from 'react'
+
+
+const DeleteConfirmation = memo(lazy(()=> import("../../component/deleteConfirmation")))
+const AddImgDialog = memo(lazy(()=> import("../addNewPhoto/addImageDialog")))
 
 export const RoomPhotos: React.FC<any> = () => {
   const { state } = useLocation();

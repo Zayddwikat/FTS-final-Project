@@ -88,3 +88,4 @@ export const TableOfContent: React.FC = () => {
     </div>
   );
 };
+export default TableOfContent

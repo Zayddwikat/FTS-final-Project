@@ -76,3 +76,4 @@ export const TableContent: React.FC<TableContentProp> = ({
     </>
   );
 };
+export default TableContent;

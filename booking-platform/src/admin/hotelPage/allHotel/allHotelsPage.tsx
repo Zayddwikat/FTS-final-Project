@@ -52,3 +52,4 @@ export const AllHotelsPage: React.FC = () => {
     </div>
   );
 };
+export default AllHotelsPage

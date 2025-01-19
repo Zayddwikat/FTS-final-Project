@@ -10,10 +10,14 @@ import { ImgObject } from "../../../user/hotelPage/component/hotelDetails/imageC
 import { LoadingScreen } from "../../../component/loadingPage";
 import { ErrorPage } from "../../../ErrorPage";
 import { Button } from "../../../login/loginForm/loginButton";
-import { AddImgDialog } from "../addNewPhoto/addImageDialog";
-import { DeleteConfirmation } from "../../component/deleteConfirmation";
 import { useImageContext } from "../context/imageContext";
+import { lazy, memo } from "react";
+import PaginationControls from "../../hotelPage/allHotel/paginationControls";
 
+const AddImgDialog = memo(lazy(() => import("../addNewPhoto/addImageDialog")));
+const DeleteConfirmation = memo(
+  lazy(() => import("../../component/deleteConfirmation"))
+);
 
 export const HotelPhotos: React.FC<any> = () => {
   const { state } = useLocation();
@@ -166,45 +170,11 @@ export const HotelPhotos: React.FC<any> = () => {
             label="Photo"
           />
         </div>
-        <div className="flex-1 justify-end self-end mr-10 mb-10">
-          <button
-            className={`px-3 py-1 mx-1 ${
-              pageNum === 0
-                ? "text-gray-400 cursor-not-allowed"
-                : "text-blue-400"
-            }`}
-            onClick={() => pageNum > 0 && setPageNum(pageNum - 1)}
-            disabled={pageNum === 0}
-          >
-            Previous
-          </button>
-
-          {[...Array(totalPages)].map((_, index) => (
-            <a
-              key={index}
-              onClick={() => setPageNum(index)}
-              className={`px-3 py-1 mx-1 cursor-pointer ${
-                pageNum === index
-                  ? "text-white bg-blue-500 rounded"
-                  : "text-blue-400"
-              }`}
-            >
-              {index + 1}
-            </a>
-          ))}
-
-          <button
-            className={`px-3 py-1 mx-1 ${
-              pageNum === totalPages - 1
-                ? "text-gray-400 cursor-not-allowed"
-                : "text-blue-400"
-            }`}
-            onClick={() => pageNum < totalPages - 1 && setPageNum(pageNum + 1)}
-            disabled={pageNum === totalPages - 1}
-          >
-            Next
-          </button>
-        </div>
+        <PaginationControls
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          totalPages={totalPages}
+        />
       </div>
 
       <Snackbar

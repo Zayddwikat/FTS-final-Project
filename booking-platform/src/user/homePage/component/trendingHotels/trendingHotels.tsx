@@ -44,15 +44,15 @@ export default function TrendingHotels() {
 
   return (
     <main className="flex flex-col my-4 items-start w-full gap-4">
-      <header className="flex flex-row items-center w-full justify-between">
+      <header className="flex flex-row items-center w-full justify-start">
         <h1 className="text-3xl">Trending Hotels</h1>
-        <Link className="" to={"/Show-more"}>
-          <h1 className="text-sm text-blue-600 underline">show more</h1>
-        </Link>
       </header>
       <div className="flex flex-wrap gap-1 w-full justify-start">
         {HotelsTrending.data.slice(0, 5).map((elem: any, index: number) => (
-          <div className="w-full sm:w-[45%] md:w-[19%]" key={index}>
+          <div
+            className="flex flex-wrap w-full sm:w-[45%] md:w-[19%]"
+            key={index}
+          >
             <Suspense fallback={<LoadingTrendingPost />}>
               <TrendingPost post={elem} />
             </Suspense>

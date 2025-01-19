@@ -1,7 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { AdminSearch } from "../component/adminSearchBar";
-import { TableOfContent } from "../component/tableOfContent";
-import { AllHotelsPage } from "./allHotel/allHotelsPage";
+import { lazy, memo } from "react";
+
+const AllHotelsPage = memo(lazy(() => import("./allHotel/allHotelsPage")));
+const TableOfContent = memo(lazy(() => import("../component/tableOfContent")));
 
 export const HotelPageAdmin: React.FC<any> = () => {
   const { state } = useLocation();

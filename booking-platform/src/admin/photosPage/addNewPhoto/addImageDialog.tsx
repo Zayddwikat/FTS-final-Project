@@ -1,6 +1,8 @@
 import { Dialog, DialogContent, DialogContentText } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { AddImgForm } from "./addImgForm";
+import { lazy, memo } from "react";
+
+const AddImgForm = memo(lazy(() => import("./addImgForm")));
 
 
 export const CloseDialogBtn = ({
@@ -53,3 +55,4 @@ export const AddImgDialog: React.FC<any> = ({
     </Dialog>
   );
 };
+export default AddImgDialog
