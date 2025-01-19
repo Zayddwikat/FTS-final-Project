@@ -32,7 +32,7 @@ export const RecentHotels: React.FC = () => {
         {limitedHotels?.map((post: recentHotelsInformation, index: number) => (
           <div
             key={index}
-            className="w-full sm:w-[48%] lg:w-[30%] xl:w-[19%] mb-4"
+            className="flex flex-wrap w-full sm:w-[48%] lg:w-[30%] xl:w-[19%] mb-4"
           >
             <Suspense fallback={<LoadingPost />}>
               <RecentViewedPost post={post} />
