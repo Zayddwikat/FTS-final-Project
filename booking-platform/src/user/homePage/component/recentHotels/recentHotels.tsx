@@ -27,11 +27,7 @@ export const RecentHotels: React.FC = () => {
     <section className="flex flex-col gap-4 p-4 mt-4 w-full">
       <header className="flex justify-between items-center w-full">
         <h1 className="text-2xl md:text-3xl">Recent Hotels</h1>
-        <Link to="/Show-more" className="text-sm text-blue-600 underline">
-          Show more
-        </Link>
       </header>
-
       <main className="flex flex-wrap justify-start gap-2 w-full">
         {limitedHotels?.map((post: recentHotelsInformation, index: number) => (
           <div
