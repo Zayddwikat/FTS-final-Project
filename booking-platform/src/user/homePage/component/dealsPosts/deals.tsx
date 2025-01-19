@@ -22,13 +22,10 @@ export default function Deals() {
   return (
     <>
       <main className="flex flex-col items-start w-full gap-4 items-start ">
-        <header className="flex flex-row items-center w-full justify-between ">
+        <header className="flex flex-row items-center w-full justify-start ">
           <h1 className="text-3xl">Deals</h1>
-          <Link className="  " to={"/Show-more"}>
-            <h1 className="text-sm text-blue-600 underline">show more</h1>
-          </Link>
         </header>
-        <main className="flex flex-row flex-wrap md:flex-nowrap w-full gap-4">
+        <main className="flex flex-row flex-wrap w-full gap-2">
           {hotelDeals.data.slice(0, 5).map((elem: any, index: number) => (
             <React.Fragment key={index}>
               <Suspense fallback={<LoadingPost />}>
