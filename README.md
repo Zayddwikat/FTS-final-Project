@@ -43,13 +43,29 @@ This project is a hotel booking platform designed to save users time and provide
    ```bash
    cd FTS-final-Project
    ```
-3. Install dependencies:
+3. Navigate to front-end directory:
+   ```bash
+   cd booking-platform
+   ```  
+4. Install dependencies:
    ```bash
    npm install
    ```
-4. Start the development server:
-   ```bash
+5. Start the development server:
+     ```bash
    npm run start
+   ```
+7. Navigate to Back-end server:
+    ```bash
+   cd node
+   ```
+8. Install dependencies:
+    ```bash
+   npm install
+   ```
+9. Start the server:
+   ```bash
+   node index.js
    ```
 
 ## Usage
