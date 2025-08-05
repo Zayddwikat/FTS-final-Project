@@ -76,7 +76,7 @@ Explain how to use the application:
 
 ## Acknowledgments
 -Mohammed Abu Sa'a  
--Mohammed Abu Samaha 
+-Mahmoud Abu Samaha 
 
 - Foothill Office fourth-floor members ( Palestine-Nablus branch )
 
